@@ -86,29 +86,7 @@
                           <a href="/online-policies" >  
                           <b class="badge bg-gavel pull-right"></b>                                                           
                             <i class="fa fa-angle-right"></i>
-                            <span>New Policy</span>
-                          </a>
-                        </li>
-                        <li >
-                          <a href="#" >  
-                          <b class="badge bg-info pull-right"></b>                                                           
-                            <i class="fa fa-angle-right"></i>
-                            <span>Renewals</span>
-                          </a>
-                        </li>
-
-                        <li >
-                          <a href="#" >  
-                          <b class="badge bg-info pull-right"></b>                                                           
-                            <i class="fa fa-angle-right"></i>
-                            <span>Endorsements</span>
-                          </a>
-                        </li>
-                        <li >
-                          <a href="#" >  
-                          <b class="badge bg-info pull-right"></b>                                                           
-                            <i class="fa fa-angle-right"></i>
-                            <span>Policy History</span>
+                            <span>Department List</span>
                           </a>
                         </li>
                        

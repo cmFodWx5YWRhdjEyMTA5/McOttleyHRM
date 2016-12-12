@@ -27,6 +27,8 @@
                                         <li><a href="#membershipsdetails" data-toggle="tab"><i class="fa fa-certificate text-default"></i> Memberships </a></li>
                                       <li><a href="#accountinformation" data-toggle="tab"><i class="fa fa-money text-default"></i> Salary </a></li>
                                        <li><a href="#emergencycontacts" data-toggle="tab"><i class="fa fa-user text-default"></i> Emergency Contact </a></li>
+                                        <li><a href="#getguarantor" data-toggle="tab"><i class="fa fa-male text-default"></i> Guarantor </a></li>
+                                         <li><a href="#getbeneficairy" data-toggle="tab"><i class="fa fa-heart text-default"></i> Beneficiary / Kin Details </a></li>
                                        <li><a href="#dependents" data-toggle="tab"><i class="fa fa-users text-default"></i> Dependents </a></li>
                                         <li><a href="#immigrationrecords" data-toggle="tab"><i class="fa fa-plane text-default"></i> Immigration </a></li>
                                          <li><a href="#employee_reportto" data-toggle="tab"><i class="fa fa-gavel text-default"></i> Report-to </a></li>
@@ -127,7 +129,7 @@
                           <label>Gender</label>
                            <select id="gender" name="gender" rows="3" tabindex="1" data-placeholder="Select here.." class="form-control sm-3">
                            <option value="{{ $employees->gender }}">{{ $employees->gender }}</option>
-                         @foreach($gender as $gender)
+                         @foreach($genders as $gender)
                         <option value="{{ $gender->type }}">{{ $gender->type }}</option>
                           @endforeach 
                         </select>                         
@@ -136,6 +138,17 @@
                            @endif           
                         </div>
                         </div>
+                  
+                           <div class="form-group">
+                         <div class="form-group{{ $errors->has('place_of_birth') ? ' has-error' : ''}}">
+                          <label>Place of Birth </label>
+                          <input type="text" class="form-control" id="place_of_birth" value="{{ $employees->place_of_birth }}"  name="place_of_birth">
+                          @if ($errors->has('place_of_birth'))
+                          <span class="help-block">{{ $errors->first('place_of_birth') }}</span>
+                           @endif                        
+                        </div>
+                        </div>
+
                         </div>
                         </section>
 
@@ -901,6 +914,65 @@
                             <th>Home Telephone</th>
                             <th>Mobile</th>
                             <th>Work Telephone</th>
+                            <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            
+                          </tbody>
+                        </table>
+                    </div>           
+                </div>
+                </section>
+                </div>
+
+                 {{-- Start guarantor --}}
+                           <div class="tab-pane" id="getguarantor">
+                            <section class="panel panel-default">
+                                <header class="panel-heading font-bold">Guarantor
+                                 <a href="#new-guarantor" class="bootstrap-modal-form-open" data-toggle="modal"><span class="badge bg-info pull-right">+</span></a>
+                                </header>
+                                <div class="panel-body">
+                                      <div class="table-responsive">
+             
+                        <table id="EmergencyTable" cellpadding="0" cellspacing="0" border="0" class="table table-striped m-b-none text-sm" width="100%">
+                          <thead>
+                            <tr>
+                            <th>Name</th>
+                            <th>Postal Address</th>
+                            <th>Residential Address</th>
+                            <th>Mobile</th>
+                            <th>Home Telephone</th>
+                            <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            
+                          </tbody>
+                        </table>
+                    </div>           
+                </div>
+                </section>
+                </div>
+
+
+                {{-- Start beneficiary --}}
+                           <div class="tab-pane" id="getbeneficairy">
+                            <section class="panel panel-default">
+                                <header class="panel-heading font-bold">Beneficiary
+                                 <a href="#new-beneficiary" class="bootstrap-modal-form-open" data-toggle="modal"><span class="badge bg-info pull-right">+</span></a>
+                                </header>
+                                <div class="panel-body">
+                                      <div class="table-responsive">
+             
+                        <table id="EmergencyTable" cellpadding="0" cellspacing="0" border="0" class="table table-striped m-b-none text-sm" width="100%">
+                          <thead>
+                            <tr>
+                              <th>Name</th>
+                            <th>Relationship</th>
+                            <th>Home Telephone</th>
+                            <th>Mobile</th>
+                            <th>Address</th>
                             <th></th>
                             </tr>
                           </thead>
@@ -2128,6 +2200,39 @@ $(function () {
 
 <script type="text/javascript">
 $(function () {
+  $('#emergency_dob').daterangepicker({
+     "minDate": moment('1950-06-14'),
+      "maxDate": moment(),
+    "singleDatePicker":true,
+    "autoApply": true,
+    "showDropdowns": true,
+    "locale": {
+      "format": "DD/MM/YYYY",
+      "separator": " - ",
+    }
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(function () {
+  $('#kin_dob').daterangepicker({
+     "minDate": moment('1950-06-14'),
+      "maxDate": moment(),
+    "singleDatePicker":true,
+    "autoApply": true,
+    "showDropdowns": true,
+    "locale": {
+      "format": "DD/MM/YYYY",
+      "separator": " - ",
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(function () {
   $('#salary_start_date').daterangepicker({
      "minDate": moment('1950-06-14'),
       "maxDate": moment(),
@@ -2442,6 +2547,64 @@ $(function () {
         
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
+
+
+<div class="modal fade" id="new-beneficiary" style="height:700px">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Beneficiary</h4>
+        </div>
+        <div class="modal-body">
+          <p></p>
+                      <section class="vbox">
+                    <section class="scrollable">
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="individual">
+                           <form  class="bootstrap-modal-form" method="post" action="/create-beneficiary" class="panel-body wrapper-lg">
+                           @include('staff/beneficiary')
+                        <input type="hidden" name="_token" value="{{ Session::token() }}">
+                      </form>
+                        </div>                  
+                        </div>
+                        </section>
+                </section>
+         </div>        
+        </div>
+        
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+
+
+    <div class="modal fade" id="new-guarantor" style="height:700px">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Guarantor</h4>
+        </div>
+        <div class="modal-body">
+          <p></p>
+                      <section class="vbox">
+                    <section class="scrollable">
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="individual">
+                           <form  class="bootstrap-modal-form" method="post" action="/create-beneficiary" class="panel-body wrapper-lg">
+                           @include('staff/guarantor')
+                        <input type="hidden" name="_token" value="{{ Session::token() }}">
+                      </form>
+                        </div>                  
+                        </div>
+                        </section>
+                </section>
+         </div>        
+        </div>
+        
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+
+
 
 
 

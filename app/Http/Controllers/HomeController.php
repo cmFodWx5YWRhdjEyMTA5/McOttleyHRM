@@ -11,6 +11,7 @@ use OrionMedical\Models\Customer;
 use OrionMedical\Models\Event;
 use OrionMedical\Models\Bill;
 use OrionMedical\Models\Policy;
+use OrionMedical\Models\Employee;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -23,8 +24,8 @@ class HomeController extends Controller
 
     public function index()
     {
-       
-        return View('pages.dashboard');
+        $employees = Employee::count();
+        return view('pages.dashboard',compact('employees'));
     }
 
 

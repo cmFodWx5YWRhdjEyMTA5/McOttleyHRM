@@ -18,8 +18,8 @@
                       <i class="fa fa-circle fa-stack-2x text-info"></i>
                       <i class="fa fa-gavel fa-stack-1x text-white"></i>
                     </span>
-                    <a class="clear" href="/active-customer">
-                      <span class="h3 block m-t-xs"><strong></strong></span>
+                    <a class="clear" href="/employees">
+                      <span class="h3 block m-t-xs"><strong>{{ $employees }}</strong></span>
                       <small class="text-muted text-uc">Total Employees</small>
                     </a>
                   </div>

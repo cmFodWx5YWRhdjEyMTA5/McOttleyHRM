@@ -31,9 +31,52 @@
                           </div>
                           </div>
 
-                      
-                         <div class="form-group pull-in clearfix">
-                          <div class="col-sm-4">
+                           <div class="form-group pull-in clearfix">
+                        <div class="col-sm-6">
+                       <div class="form-group @if($errors->has('emergency_dob')) has-error @endif">
+                        <label for="emergency_dob">Date of Birth</label>
+                        <div class="input-group">
+                        <input type="text" class="form-control" name="emergency_dob" id="emergency_dob" placeholder="Select your time" value="{{ old('emergency_dob') }}">
+                         <span class="input-group-addon">
+                      <span class="fa fa-calendar"></span>
+                      </span>
+                      </div>
+                        @if ($errors->has('emergency_dob'))
+                        <p class="help-block"><span class="glyphicon glyphicon-exclamation-sign"></span> 
+                        {{ $errors->first('emergency_dob') }}
+                       </p>
+                        @endif
+                      </div>
+                      </div>
+                      </div>
+
+                    
+
+                        <div class="form-group pull-in clearfix">
+                          <div class="col-sm-6">
+                            <label>Postal Address</label> 
+                            <div class="form-group{{ $errors->has('kin_home_phone') ? ' has-error' : ''}}">
+                           <textarea type="text" rows="3" class="form-control" id="kin_home_phone" name="kin_home_phone" value="{{ Request::old('kin_home_phone') ?: '' }}"></textarea>
+                           @if ($errors->has('kin_home_phone'))
+                          <span class="help-block">{{ $errors->first('kin_home_phone') }}</span>
+                           @endif    
+                          </div>
+                          </div>
+
+                         
+                         <div class="col-sm-6">
+                            <label>Residential Address</label> 
+                            <div class="form-group{{ $errors->has('kin_home_phone') ? ' has-error' : ''}}">
+                           <textarea type="text" rows="3" class="form-control" id="kin_home_phone" name="kin_home_phone" value="{{ Request::old('kin_home_phone') ?: '' }}"></textarea>
+                           @if ($errors->has('kin_home_phone'))
+                          <span class="help-block">{{ $errors->first('kin_home_phone') }}</span>
+                           @endif    
+                          </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group pull-in clearfix">
+                          <div class="col-sm-6">
                             <label>Home Telephone</label> 
                             <div class="form-group{{ $errors->has('kin_home_phone') ? ' has-error' : ''}}">
                            <input type="text" rows="3" class="form-control" id="kin_home_phone" name="kin_home_phone" value="{{ Request::old('kin_home_phone') ?: '' }}">   
@@ -43,21 +86,12 @@
                           </div>
                           </div>
 
-                          <div class="col-sm-4">
+                          <div class="col-sm-6">
                           <div class="form-group{{ $errors->has('kin_mobile') ? ' has-error' : ''}}">
                             <label>Mobile</label>
                             <input type="number" rows="3" class="form-control" id="kin_mobile" name="kin_mobile" value="{{ Request::old('kin_mobile') ?: '' }}">          
                            @if ($errors->has('kin_mobile'))
                           <span class="help-block">{{ $errors->first('kin_mobile') }}</span>
-                           @endif    
-                          </div>   
-                        </div>
-                        <div class="col-sm-4">
-                          <div class="form-group{{ $errors->has('kin_office_phone') ? ' has-error' : ''}}">
-                            <label>Office Phone</label>
-                           <input type="text" rows="3" class="form-control" id="kin_office_phone" name="kin_office_phone" value="{{ Request::old('kin_office_phone') ?: '' }}">        
-                           @if ($errors->has('kin_office_phone'))
-                          <span class="help-block">{{ $errors->first('kin_office_phone') }}</span>
                            @endif    
                           </div>   
                         </div>

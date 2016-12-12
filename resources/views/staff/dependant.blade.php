@@ -12,7 +12,23 @@
                           </div>   
                         </div>
                         </div>
-
+                        
+                        <div class="form-group pull-in clearfix">
+                          <div class="col-sm-6">
+                            <label>Gender</label> 
+                            <div class="form-group{{ $errors->has('dependant_relationship') ? ' has-error' : ''}}">
+                             <select id="dependant_relationship" name="dependant_relationship" rows="3" tabindex="1" data-placeholder="Select here.." class="form-control m-b">
+                          <option value="">-- Not set --</option>
+                          @foreach($genders as $gender)
+                            <option value="{{ $gender->type }}">{{ $gender->type }}</option>
+                          @endforeach
+                        </select>            
+                           @if ($errors->has('dependant_relationship'))
+                          <span class="help-block">{{ $errors->first('dependant_relationship') }}</span>
+                           @endif    
+                          </div>
+                          </div>
+                          </div>
 
                         <div class="form-group pull-in clearfix">
                           <div class="col-sm-6">

@@ -68,26 +68,6 @@ Route::get('/signout', function(){
   return Redirect::to('login'); //redirect to login page
 });
 
-//Client Registration and Management routes
-
-Route::get('/find-customer', 
-	['uses' => '\OrionMedical\Http\Controllers\KYCController@getSearchResults', 
-	'as' => 'find-customer', ]);
-Route::get('/active-customer',
-	['uses' => '\OrionMedical\Http\Controllers\KYCController@activepatients',
-	 'as' => 'active-customer', ]);
-Route::get('/customer-profile/{id}', 
-	['uses' => '\OrionMedical\Http\Controllers\KYCController@getPatientProfile',
-	'as' => 'customer-profile',]);
-Route::post('/create-customer',
-	['uses' => '\OrionMedical\Http\Controllers\KYCController@postNewCustomer',]);
-Route::get('/edit-customer', 
-	['uses' => '\OrionMedical\Http\Controllers\KYCController@editCustomer',
-	'as' => 'edit-patient',]);
-Route::post('/update-customer', 
-	['uses' => '\OrionMedical\Http\Controllers\KYCController@updateCustomer',
-	'as' => 'update-customer',]);
-
 
 // Staff Details
 Route::get('/new-employee/{id}', 

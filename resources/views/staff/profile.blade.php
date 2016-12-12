@@ -14,10 +14,16 @@
                           <a href="/images/{{ $employee->image }}" class="pull-left thumb m-r">
                             <img src="/images/{{ $employee->image }}" class="img-circle">
                           </a>
+                          <div id="staff_id" name="staff_id" value="{{ $employee->staff_id }}">
+                            
+                          </div>
                           <div class="clear">
                             <div class="h3 m-t-xs m-b-xs">{{ $employee->fullname }} </div>
                             <small class="text-muted"><i class="fa fa-map-marker"></i>Staff ID : {{ $employee->staff_id }} </small>
                           </div>                
+                        </div>
+                        <div id="staff_id" name="staff_id" value="{{ $employee->staff_id }}">
+                          
                         </div>
                         <div class="panel wrapper panel-success">
                           <div class="row">
@@ -95,28 +101,36 @@
                                         <li><a href="#socialmedia" data-toggle="tab"><i class="fa  fa-facebook-square text-default"></i> Social Media Details </a></li>
                       </ul>
                     </header>
+
                     <section class="scrollable">
                       <div class="tab-content">
                         <div class="tab-pane active" id="consultation_tab">
-                          <ul class="list-group no-radius m-b-none m-t-n-xxs list-group-lg no-border">
-                         {{--  @foreach($consultations as $consult)
-                            @if($consult->consultation_type != null)
-                            <li class="list-group-item animated fadeInRightBig">
-                              <a href="#" class="thumb-sm pull-left m-r-sm" data-toggle="class:show,hide">
-                                <img src="/images/avatar_default.jpg" class="img-circle">
-                              </a>
-                              <a href="#" class="clear">
-                                <small class="pull-right">{{ $consult->date }}</small>
-                                <strong class="block">{{ $consult->consultation_type }}</strong>
-                                <small>{{ $consult->doctorid }}</small>
-                              </a>
-                            </li>
-                            @else
+                             <section class="panel panel-default">
+                                <header class="panel-heading font-bold">Job History</header>
+                                <div class="panel-body">
+                                      <div class="table-responsive">
+                       <table id="JobTable" cellpadding="0" cellspacing="0" border="0" class="table table-striped m-b-none text-sm" width="100%">
+                          <thead>
+                            <tr>
                             
-
-                            @endif
-                            @endforeach --}}
-                          </ul>
+                            <th>Event</th>
+                            <th>Effective From</th>
+                            <th>Effective To</th>
+                            <th>Job Title</th>
+                            <th>Employment Status</th>
+                            <th>Job Category</th>
+                            <th>Department</th>
+                            <th>Location</th>
+                            <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            
+                          </tbody>
+                        </table>
+                    </div>           
+                  </div>
+                </section>
                         </div>
                         <div class="tab-pane" id="diagnosis_tab">
                           <ul class="list-group no-radius m-b-none m-t-n-xxs list-group-lg no-border">
@@ -161,124 +175,14 @@
                           </ul>
                         </div>
                         <div class="tab-pane" id="document_tab">
-                          <ul class="list-group no-radius m-b-none m-t-n-xxs list-group-lg no-border">
-                                  <header class="panel-heading">
-                      <a href="#attach_document" class="bootstrap-modal-form-open" data-toggle="modal"><span class="label bg-success pull-right">Add New Document</span></a>
-                      
-                    </header>
-                 <div class="table-responsive">
-                      {{-- <table cellpadding="0" cellspacing="0" border="0" class="table table-striped m-b-none text-sm" width="100%">
-                        <thead>
-                          <tr>
-                            <th>Document</th>
-                            <th>Comment</th>
-                            <th>Added</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        
-                        @foreach($images as $image)
-                         <tr>
-                        <td>{{ $image->filename }}</td>
-                        <td>{{ $image->created_by }}</td>
-                        <td>{{ $image->created_on }}</td>
-                        <td>
-                            <a href="{!! '/uploads/images/'.$image->filepath !!}" class="bootstrap-modal-form-open"   id="edit" name="edit" data-toggle="modal" alt="edit"><i class="fa fa-eye"></i></a>
-                        </td>
-                         <td>
-                            <a href="#" class="bootstrap-modal-form-open"   id="edit" name="edit" data-toggle="modal" alt="edit"><i class="fa fa-trash"></i></a>
-                        </td>
                           
-                        </tr>
-                        @endforeach
-
-                        </tbody> --}}
-                      </table>
-                    </div>
-                          </ul>
+                          </div>
+                  
                         </div>
+                      </section>
 
-                         <div class="tab-pane" id="allergy_tab">
- <ul class="list-group no-radius m-b-none m-t-n-xxs list-group-lg no-border">
-                                  <header class="panel-heading">
-                      <a href="#attach_document" class="bootstrap-modal-form-open" data-toggle="modal"><span class="label bg-info pull-right">Add New Image</span></a>
-                      
-                    </header>
-                          <div class="table-responsive">
-                     {{--  <table cellpadding="0" cellspacing="0" border="0" class="table table-striped m-b-none text-sm" width="100%">
-                        <thead>
-                          <tr>
-                            <th>Image Name</th>
-                            <th>Comment</th>
-                            <th>Added</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        
-                        @foreach($images as $image)
-                         <tr>
-                        <td>{{ $image->filename }}</td>
-                        <td>{{ $image->created_by }}</td>
-                        <td>{{ $image->created_on }}</td>
-                        <td>
-                            <a href="{!! '/uploads/images/'.$image->filepath !!}" class="bootstrap-modal-form-open"   id="edit" name="edit" data-toggle="modal" alt="edit"><i class="fa fa-eye"></i></a>
-                        </td>
-                         <td>
-                            <a href="#" class="bootstrap-modal-form-open"   id="edit" name="edit" data-toggle="modal" alt="edit"><i class="fa fa-trash"></i></a>
-                        </td>
-                          
-                        </tr>
-                        @endforeach
-
-                        </tbody>
-                      </table> --}}
-                    </div>
-                          </ul>
-                        </div>
-
-                        <div class="tab-pane" id="treatment_tab">
-                          <ul class="list-group no-radius m-b-none m-t-n-xxs list-group-lg no-border">
-     {{--                       @foreach($consultations as $consult)
-                           @if($consult->procedures != null)
-                            <li class="list-group-item">
-                              <a href="#" class="thumb-sm pull-left m-r-sm">
-                                <img src="/images/avatar_default.jpg" class="img-circle">
-                              </a>
-                              <a href="#" class="clear">
-                                <small class="pull-right">{{ $consult->date }}</small>
-                                <strong class="block">{{ $consult->procedures }}</strong>
-                                <small>{{ $consult->doctorid }}</small>
-                              </a>
-                            </li>
-                            @else
-                            
-
-                            @endif
-                            @endforeach --}}
-                          </ul>
-                        </div>
-
-                        <div class="tab-pane" id="surgeries_tab">
-                          <ul class="list-group no-radius m-b-none m-t-n-xxs list-group-lg no-border">
-                          {{--  @foreach($consultations as $consult)
-                            <li class="list-group-item">
-                              <a href="#" class="thumb-sm pull-left m-r-sm">
-                                <img src="/images/avatar_default.jpg" class="img-circle">
-                              </a>
-                              <a href="#" class="clear">
-                                <small class="pull-right">{{ $consult->date }}</small>
-                                <strong class="block">{{ $consult->medication }}</strong>
-                                <small>{{ $consult->doctorid }}</small>
-                              </a>
-                            </li>
-                            @endforeach --}}
-                          </ul>
-                        </div>
-
-
-                      </div>
                     </section>
-                  </section>
+
                 </aside>
                 <aside class="col-lg-4 b-l">
                   <section class="vbox">
@@ -327,8 +231,10 @@
   <script src="{{ asset('/event_components/moment.min.js')}}"></script>
 
 
+
 <script type="text/javascript">
   $(document).ready(function() {
+
     
     var base_url = '{{ url('/') }}';
 
