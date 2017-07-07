@@ -2,7 +2,7 @@
 <html lang="en" class="">
 <head>
   <meta charset="utf-8" />
-  <title>OrionMD | Page Not Found</title>
+  <title>McPersona | Page Not Found</title>
   <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
 @include('includes.head')
   <!--[if lt IE 9]>
@@ -21,11 +21,11 @@
         <div class="list-group m-b-sm bg-white m-b-lg">
           <a href="{{ route('dashboard') }}" class="list-group-item">
             <i class="fa fa-chevron-right icon-muted"></i>
-            <i class="fa fa-fw fa-home icon-muted"></i> Goto homepage
+            <i class="fa fa-fw fa-home icon-muted"></i> Go to homepage
           </a>
-          <a href="#" class="list-group-item">
+          <a href="{{ route('/auth/login') }}" class="list-group-item">
             <i class="fa fa-chevron-right icon-muted"></i>
-            <i class="fa fa-fw fa-question icon-muted"></i> Send us a tip
+            <i class="fa fa-fw fa-question icon-muted"></i> Go to Login
           </a>
           <a href="#" class="list-group-item">
             <i class="fa fa-chevron-right icon-muted"></i>

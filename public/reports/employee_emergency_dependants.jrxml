@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="employee_emergency_dependants" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5c4c5480-6c78-4df3-8095-9ef42aac66e5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.jasperserver.reportUnit" value="/mcottleyhrm/Employee_Dependants"/>
+	<property name="ireport.jasperserver.url" value="http://localhost:8080/jasperserver/services/repository"/>
+	<queryString>
+		<![CDATA[SELECT
+     view_emergency.`staff_id` AS view_emergency_staff_id,
+     view_emergency.`staff_type` AS view_emergency_staff_type,
+     view_emergency.`fullname` AS view_emergency_fullname,
+     view_emergency.`mobile_number` AS view_emergency_mobile_number,
+     view_emergency.`ssn` AS view_emergency_ssn,
+     view_emergency.`email` AS view_emergency_email,
+     view_emergency.`residential_address` AS view_emergency_residential_address,
+     view_emergency.`postal_address` AS view_emergency_postal_address,
+     view_emergency.`marital_status` AS view_emergency_marital_status,
+     view_emergency.`status` AS view_emergency_status,
+     view_emergency.`location` AS view_emergency_location,
+     view_emergency.`department` AS view_emergency_department,
+     view_emergency.`subsidiary` AS view_emergency_subsidiary,
+     view_emergency.`kin_name` AS view_emergency_kin_name,
+     view_emergency.`kin_relationship` AS view_emergency_kin_relationship,
+     view_emergency.`kin_home_phone` AS view_emergency_kin_home_phone,
+     view_emergency.`kin_office_phone` AS view_emergency_kin_office_phone,
+     view_emergency.`kin_mobile` AS view_emergency_kin_mobile,
+     view_emergency.`kin_postal` AS view_emergency_kin_postal,
+     view_emergency.`kin_residential` AS view_emergency_kin_residential,
+     view_emergency.`name` AS view_emergency_name,
+     view_emergency.`relationship` AS view_emergency_relationship,
+     view_emergency.`dob` AS view_emergency_dob
+FROM
+     `view_emergency`]]>
+	</queryString>
+	<field name="view_emergency_staff_id" class="java.lang.String"/>
+	<field name="view_emergency_staff_type" class="java.lang.String"/>
+	<field name="view_emergency_fullname" class="java.lang.String"/>
+	<field name="view_emergency_mobile_number" class="java.lang.Integer"/>
+	<field name="view_emergency_ssn" class="java.lang.String"/>
+	<field name="view_emergency_email" class="java.lang.String"/>
+	<field name="view_emergency_residential_address" class="java.lang.String"/>
+	<field name="view_emergency_postal_address" class="java.lang.String"/>
+	<field name="view_emergency_marital_status" class="java.lang.String"/>
+	<field name="view_emergency_status" class="java.lang.String"/>
+	<field name="view_emergency_location" class="java.lang.String"/>
+	<field name="view_emergency_department" class="java.lang.String"/>
+	<field name="view_emergency_subsidiary" class="java.lang.String"/>
+	<field name="view_emergency_kin_name" class="java.lang.String"/>
+	<field name="view_emergency_kin_relationship" class="java.lang.String"/>
+	<field name="view_emergency_kin_home_phone" class="java.lang.Integer"/>
+	<field name="view_emergency_kin_office_phone" class="java.lang.Integer"/>
+	<field name="view_emergency_kin_mobile" class="java.lang.Integer"/>
+	<field name="view_emergency_kin_postal" class="java.lang.String"/>
+	<field name="view_emergency_kin_residential" class="java.lang.String"/>
+	<field name="view_emergency_name" class="java.lang.String"/>
+	<field name="view_emergency_relationship" class="java.lang.String"/>
+	<field name="view_emergency_dob" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="84" splitType="Stretch">
+			<image>
+				<reportElement x="608" y="4" width="189" height="71" uuid="ba44c1c0-3275-42e0-b2c1-c925422190b7"/>
+				<imageExpression><![CDATA["repo:IMG-20160817-WA0003.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="6" y="6" width="404" height="20" uuid="f2d558f2-0522-4215-b7cf-a98282c1ef47"/>
+				<textElement>
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Employee emergency contacts & dependents]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="-83" width="114" height="20" uuid="da004930-cd57-470e-9376-f36547427543"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="17" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="41" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="69e06e0c-14df-49b7-8b81-bff775755fe8"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="30" width="802" height="1" uuid="c9a5b7a8-2e1e-481c-9fce-702f27b7aaa9"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="33" y="11" width="57" height="20" uuid="27af3921-4c93-4632-933c-6d7ce1f7a193"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Staff ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="10" width="93" height="20" uuid="03a760b3-e5a4-47cd-a65d-f22c96a83cfd"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="193" y="11" width="45" height="20" uuid="4c778397-48b3-432a-a13f-b8177b143469"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mobile No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="248" y="10" width="93" height="20" uuid="a9e3a388-627d-415a-a4df-4eae9a6753aa"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="353" y="10" width="71" height="20" uuid="ce309695-039c-4bae-8962-52af8cceffb2"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emergency Contact Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="426" y="11" width="71" height="20" uuid="e66b706d-f60f-401e-aa00-87df7e742631"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emegency Contact Relationship]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="501" y="10" width="71" height="20" uuid="7209f5bd-c043-44b5-bef9-143bd4cad10e"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emegency Contact Mobile]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="574" y="10" width="83" height="20" uuid="57075c66-7051-4ba9-9a77-afbb6b95bfdf"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dependent Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="657" y="10" width="79" height="20" uuid="e21450fe-0c13-4ff6-87bb-21adb5d9807e"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relationship]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="736" y="10" width="61" height="20" uuid="fb715ec4-7a20-42a9-b776-bc911931be00"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DOB]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<line>
+				<reportElement x="2" y="23" width="802" height="1" uuid="07b2dff5-fdc7-49df-8ee0-f6aeff3983f5"/>
+				<graphicElement>
+					<pen lineStyle="Dashed" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="2" y="4" width="25" height="20" uuid="73cbb417-d0a0-4548-8f80-3305da56d6c3"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="33" y="4" width="57" height="20" uuid="422cce1b-a9c5-4076-bc58-42c30cb3b9ab"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{view_emergency_staff_id}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="100" y="4" width="93" height="20" uuid="7c58d2a4-7a97-4871-8553-9c679158e52e"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{view_emergency_fullname}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="193" y="4" width="45" height="20" uuid="56e8414e-a0fa-4329-906b-dff2115384bd"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{view_emergency_mobile_number}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="248" y="4" width="93" height="20" uuid="ec17de7c-2987-40c6-b228-3173c2ea4952"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{view_emergency_email}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="353" y="4" width="71" height="20" uuid="2f67f32a-aebe-49dc-813b-96e14a6c2d94"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{view_emergency_kin_name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="426" y="4" width="71" height="20" uuid="c8654507-b985-4b8b-9e1f-b2ec92ceedb6"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{view_emergency_kin_relationship}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="497" y="4" width="75" height="20" uuid="4bb9b0c2-a6c5-405c-b7b0-005e7b10d8db"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{view_emergency_kin_mobile}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="574" y="4" width="83" height="20" uuid="3b5fe7cb-8244-4f65-8397-3a3d1db8cba9"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{view_emergency_name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="657" y="4" width="79" height="20" uuid="da00bf9a-0686-47f2-80fc-f9e0fe4acfd4"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{view_emergency_relationship}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy" isBlankWhenNull="true">
+				<reportElement x="736" y="4" width="66" height="20" uuid="bddac475-0793-4f03-97e5-3b22dc20b41a"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{view_emergency_dob}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="26" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement x="674" y="13" width="80" height="20" uuid="68c76b04-7204-41a2-a3cc-b1f9db7d9e6a"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="754" y="13" width="40" height="20" uuid="870a0ae1-4a66-429d-adfa-399921a2b4ca"/>
+				<textElement>
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="105" splitType="Stretch">
+			<textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
+				<reportElement x="5" y="58" width="142" height="17" uuid="90e39d0f-4b82-4836-b858-bfb959d55ace"/>
+				<textElement>
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="77" width="41" height="20" uuid="210d3f1e-6510-449f-9eaf-3511004bab44"/>
+				<textElement>
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<text><![CDATA[Printed By :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="53" width="802" height="1" uuid="1d23dcee-b7a6-4cce-85d3-d05aa33c2d16"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="278" y="85" width="219" height="20" uuid="be544574-7d05-4e38-8c37-8b60f139b1ff"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[End of Report]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

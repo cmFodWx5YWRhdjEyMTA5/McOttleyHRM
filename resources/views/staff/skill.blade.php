@@ -6,12 +6,7 @@
                         <div class="col-sm-6">
                           <div class="form-group{{ $errors->has('special_skill') ? ' has-error' : ''}}">
                             <label>Skill</label>
-                            <select id="special_skill" name="special_skill" rows="3" tabindex="1" data-placeholder="Select here.." class="form-control m-b">
-                          <option value="">-- Select skill --</option>
-                          @foreach($skills as $skill)
-                            <option value="{{ $skill->type }}">{{ $skill->type }}</option>
-                          @endforeach
-                        </select>         
+                           <input type="text" rows="3" class="form-control" id="special_skill" name="special_skill" value="{{ Request::old('special_skill') ?: '' }}"> 
                            @if ($errors->has('special_skill'))
                           <span class="help-block">{{ $errors->first('special_skill') }}</span>
                            @endif    
@@ -47,6 +42,7 @@
                       </div>
                      
                       <footer class="panel-footer text-right bg-light lter">
-                        <button type="button" onclick="saveSkillDetails()" class="btn btn-success btn-s-xs">Save</button>
+                        <button type="button" onclick="saveSkillDetails()" name="btnskill" class="btn btn-success btn-s-xs">Save</button>
+                          <input type="hidden" name="skill_id" id="skill_id" value="{{ Request::old('skill_id') ?: '' }}">
                       </footer>
                     </section>

@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model'  => OrionMedical\User::class,
+        'model'  => McPersona\User::class,
         'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

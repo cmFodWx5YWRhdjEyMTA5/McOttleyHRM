@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="job_detail_subreport" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="246a092b-68a2-4c34-b7ad-777ba06138f1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="staff_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     employee_job_detail.`id` AS employee_job_detail_id,
+     employee_job_detail.`staff_id` AS employee_job_detail_staff_id,
+     employee_job_detail.`date_join` AS employee_job_detail_date_join,
+     employee_job_detail.`probation_end_date` AS employee_job_detail_probation_end_date,
+     employee_job_detail.`permanency_date` AS employee_job_detail_permanency_date,
+     employee_job_detail.`job_title` AS employee_job_detail_job_title,
+     employee_job_detail.`employment_status` AS employee_job_detail_employment_status,
+     employee_job_detail.`job_specification` AS employee_job_detail_job_specification,
+     employee_job_detail.`job_category` AS employee_job_detail_job_category,
+     employee_job_detail.`department` AS employee_job_detail_department,
+     employee_job_detail.`location` AS employee_job_detail_location,
+     employee_job_detail.`work_shift` AS employee_job_detail_work_shift,
+     employee_job_detail.`comment` AS employee_job_detail_comment,
+     employee_job_detail.`created_on` AS employee_job_detail_created_on,
+     employee_job_detail.`created_by` AS employee_job_detail_created_by,
+     employee_job_detail.`last_updated_on` AS employee_job_detail_last_updated_on,
+     employee_job_detail.`contract_start` AS employee_job_detail_contract_start,
+     employee_job_detail.`contract_end` AS employee_job_detail_contract_end,
+     employee_job_detail.`subsidiary` AS employee_job_detail_subsidiary
+FROM
+     `employee_job_detail` employee_job_detail
+where employee_job_detail.`staff_id` = $P{staff_id}
+limit 1]]>
+	</queryString>
+	<field name="employee_job_detail_id" class="java.lang.Long"/>
+	<field name="employee_job_detail_staff_id" class="java.lang.String"/>
+	<field name="employee_job_detail_date_join" class="java.sql.Timestamp"/>
+	<field name="employee_job_detail_probation_end_date" class="java.sql.Timestamp"/>
+	<field name="employee_job_detail_permanency_date" class="java.sql.Timestamp"/>
+	<field name="employee_job_detail_job_title" class="java.lang.String"/>
+	<field name="employee_job_detail_employment_status" class="java.lang.String"/>
+	<field name="employee_job_detail_job_specification" class="java.lang.String"/>
+	<field name="employee_job_detail_job_category" class="java.lang.String"/>
+	<field name="employee_job_detail_department" class="java.lang.String"/>
+	<field name="employee_job_detail_location" class="java.lang.String"/>
+	<field name="employee_job_detail_work_shift" class="java.lang.String"/>
+	<field name="employee_job_detail_comment" class="java.lang.String"/>
+	<field name="employee_job_detail_created_on" class="java.sql.Timestamp"/>
+	<field name="employee_job_detail_created_by" class="java.lang.String"/>
+	<field name="employee_job_detail_last_updated_on" class="java.sql.Timestamp"/>
+	<field name="employee_job_detail_contract_start" class="java.sql.Date"/>
+	<field name="employee_job_detail_contract_end" class="java.sql.Date"/>
+	<field name="employee_job_detail_subsidiary" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="6" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="4" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="123" splitType="Stretch">
+			<textField>
+				<reportElement x="13" y="0" width="100" height="20" uuid="931ef7f2-13bf-4210-b81e-47bcde6fa6b7"/>
+				<textFieldExpression><![CDATA[$F{employee_job_detail_date_join}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="13" y="20" width="100" height="20" uuid="d4c2b8d3-21ed-4c8f-98cf-5dcdb72838c4"/>
+				<textFieldExpression><![CDATA[$F{employee_job_detail_job_title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="13" y="40" width="100" height="20" uuid="9ccce786-c6f6-4a13-8cda-33fe3f37952b"/>
+				<textFieldExpression><![CDATA[$F{employee_job_detail_employment_status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="13" y="60" width="100" height="20" uuid="f1531322-044c-438e-9d5f-039e7eb485ed"/>
+				<textFieldExpression><![CDATA[$F{employee_job_detail_job_specification}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="13" y="80" width="100" height="20" uuid="5535a2df-fece-46b7-999c-a71fd14c7eef"/>
+				<textFieldExpression><![CDATA[$F{employee_job_detail_location}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="13" y="100" width="100" height="20" uuid="0d189536-39fd-488e-8374-bc97ea0cb339"/>
+				<textFieldExpression><![CDATA[$F{employee_job_detail_subsidiary}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="2" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

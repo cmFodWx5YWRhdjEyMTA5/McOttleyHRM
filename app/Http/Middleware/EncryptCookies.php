@@ -1,6 +1,6 @@
 <?php
 
-namespace OrionMedical\Http\Middleware;
+namespace McPersona\Http\Middleware;
 
 use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncrypter;
 

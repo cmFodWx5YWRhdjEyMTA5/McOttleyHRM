@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="leave_usage" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5c4c5480-6c78-4df3-8095-9ef42aac66e5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.jasperserver.reportUnit" value="/mcottleyhrm/leave_usage"/>
+	<property name="ireport.jasperserver.url" value="http://localhost:8080/jasperserver/services/repository"/>
+	<parameter name="staff_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="department" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subsidiary" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="start_date" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="end_date" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="leave_status" class="java.lang.String"/>
+	<parameter name="leave_type" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     leave_schedule.`id` AS leave_schedule_id,
+     leave_schedule.`employee` AS leave_schedule_employee,
+     leave_schedule.`leave_type` AS leave_schedule_leave_type,
+     leave_schedule.`leave_balance` AS leave_schedule_leave_balance,
+     leave_schedule.`number_of_days` AS leave_schedule_number_of_days,
+     leave_schedule.`comment` AS leave_schedule_comment,
+     leave_schedule.`status` AS leave_schedule_status,
+     leave_schedule.`created_on` AS leave_schedule_created_on,
+     leave_schedule.`created_by` AS leave_schedule_created_by,
+     leave_schedule.`approved_on` AS leave_schedule_approved_on,
+     leave_schedule.`approved_by` AS leave_schedule_approved_by,
+     leave_schedule.`leave_from` AS leave_schedule_leave_from,
+     leave_schedule.`leave_to` AS leave_schedule_leave_to,
+     leave_schedule.`name` AS leave_schedule_name,
+     leave_schedule.`department` AS leave_schedule_department,
+     leave_schedule.`subsidiary` AS leave_schedule_subsidiary,
+     leave_schedule.`md_approval_status` AS leave_schedule_md_approval_status,
+     leave_schedule.`md_approval_date` AS leave_schedule_md_approval_date,
+     leave_schedule.`hod_approval_status` AS leave_schedule_hod_approval_status,
+     leave_schedule.`hod_approval_date` AS leave_schedule_hod_approval_date,
+     leave_schedule.`document` AS leave_schedule_document,
+     leave_schedule.`supervisor_id` AS leave_schedule_supervisor_id,
+     leave_schedule.`director_id` AS leave_schedule_director_id,
+     leave_schedule.`reliever` AS leave_schedule_reliever
+FROM
+     `leave_schedule` leave_schedule
+WHERE
+     (leave_schedule.`leave_from` BETWEEN $P{start_date} and $P{end_date})
+     and ($P{staff_id} = 'All' or leave_schedule.`employee` = $P{staff_id})
+     and ($P{leave_type} = 'All' or leave_schedule.`leave_type` = $P{leave_type})
+     and ($P{department} = 'All' or leave_schedule.`department` = $P{department})
+     and ($P{subsidiary} = 'All' or leave_schedule.`subsidiary` = $P{subsidiary})
+     and ($P{leave_status} = 'All' or leave_schedule.`status` = $P{leave_status})]]>
+	</queryString>
+	<field name="leave_schedule_id" class="java.lang.Long"/>
+	<field name="leave_schedule_employee" class="java.lang.String"/>
+	<field name="leave_schedule_leave_type" class="java.lang.String"/>
+	<field name="leave_schedule_leave_balance" class="java.lang.Integer"/>
+	<field name="leave_schedule_number_of_days" class="java.lang.Integer"/>
+	<field name="leave_schedule_comment" class="java.lang.String"/>
+	<field name="leave_schedule_status" class="java.lang.String"/>
+	<field name="leave_schedule_created_on" class="java.sql.Timestamp"/>
+	<field name="leave_schedule_created_by" class="java.lang.String"/>
+	<field name="leave_schedule_approved_on" class="java.sql.Timestamp"/>
+	<field name="leave_schedule_approved_by" class="java.lang.Integer"/>
+	<field name="leave_schedule_leave_from" class="java.sql.Date"/>
+	<field name="leave_schedule_leave_to" class="java.sql.Date"/>
+	<field name="leave_schedule_name" class="java.lang.String"/>
+	<field name="leave_schedule_department" class="java.lang.String"/>
+	<field name="leave_schedule_subsidiary" class="java.lang.String"/>
+	<field name="leave_schedule_md_approval_status" class="java.lang.String"/>
+	<field name="leave_schedule_md_approval_date" class="java.sql.Timestamp"/>
+	<field name="leave_schedule_hod_approval_status" class="java.lang.String"/>
+	<field name="leave_schedule_hod_approval_date" class="java.sql.Timestamp"/>
+	<field name="leave_schedule_document" class="java.lang.String"/>
+	<field name="leave_schedule_supervisor_id" class="java.lang.String"/>
+	<field name="leave_schedule_director_id" class="java.lang.String"/>
+	<field name="leave_schedule_reliever" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="124" splitType="Stretch">
+			<image>
+				<reportElement x="608" y="4" width="189" height="71" uuid="ba44c1c0-3275-42e0-b2c1-c925422190b7"/>
+				<imageExpression><![CDATA["repo:IMG-20160817-WA0003.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="2" y="14" width="276" height="20" uuid="f2d558f2-0522-4215-b7cf-a98282c1ef47"/>
+				<textElement>
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Leave Usage Report]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="96" y="82" width="182" height="20" uuid="5711dcee-975f-42b7-b9bf-989875ff2ec6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{department}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="62" width="47" height="20" uuid="931af67b-dc04-445a-9f8c-aef13bc2e1e5"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[To :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="96" y="62" width="182" height="20" uuid="c8248da6-a8f6-4a16-bfeb-0c7012873765"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{end_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="42" width="47" height="20" uuid="81db8fea-7ef3-480c-b3eb-d4269e0a973a"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[From :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="96" y="42" width="182" height="20" uuid="0ef685c9-21ae-41ef-a73c-f1c125e5d040"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{start_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="82" width="78" height="20" uuid="2ddd71ca-9670-4851-96d7-39e90424e07b"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Department :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="103" width="78" height="18" uuid="28a0cb1d-c24d-4e2c-a542-ab2349e977e9"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Business Entity :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="96" y="101" width="182" height="20" uuid="670ac2f1-f68b-44cc-852c-46c943cc9b5a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{subsidiary}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="41" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="69e06e0c-14df-49b7-8b81-bff775755fe8"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="30" width="802" height="1" uuid="c9a5b7a8-2e1e-481c-9fce-702f27b7aaa9"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="33" y="10" width="100" height="20" uuid="80cf49e3-6c85-4236-bfca-325e42c0f695"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Employee]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="147" y="10" width="100" height="20" uuid="44af0e04-81f8-4674-b103-8bf23b80a4d3"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Leave Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="257" y="10" width="100" height="20" uuid="7583178c-a35f-468f-9010-b6c94a8fb543"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Start Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="373" y="10" width="100" height="20" uuid="81700325-d4e6-4344-9b6f-619678ecc11e"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[End Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="485" y="10" width="100" height="20" uuid="de2e5751-aef0-4855-a922-cdb6f438cbbb"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No. Of Days]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="608" y="10" width="100" height="20" uuid="bf4a1d97-c1bf-4bff-b6b0-82dda05086a3"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Department]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="708" y="10" width="86" height="20" uuid="a76fa73c-9353-4c73-a7d4-9f7829bdb0c1"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<line>
+				<reportElement x="2" y="23" width="802" height="1" uuid="07b2dff5-fdc7-49df-8ee0-f6aeff3983f5"/>
+				<graphicElement>
+					<pen lineStyle="Dashed" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="2" y="3" width="25" height="20" uuid="73cbb417-d0a0-4548-8f80-3305da56d6c3"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="33" y="3" width="100" height="20" uuid="63aea759-7234-4993-bbc4-b07109f03735"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{leave_schedule_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="147" y="3" width="100" height="20" uuid="e7041d25-066c-4329-aea9-843c173a4272"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{leave_schedule_leave_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="257" y="3" width="100" height="20" uuid="4027a9ac-77c0-4915-b8ed-533fabb158d4"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{leave_schedule_leave_from}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="373" y="3" width="100" height="20" uuid="0a57ebee-8679-4b45-8b39-23d18e5c9151"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{leave_schedule_leave_to}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="485" y="3" width="100" height="20" uuid="b7dfa299-7dce-40cc-8ac8-ded8d3926925"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{leave_schedule_number_of_days}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="608" y="3" width="100" height="20" uuid="c8283157-7b22-4e2f-8f15-c8c324709dca"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{leave_schedule_department}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="708" y="3" width="86" height="20" uuid="2999c04e-5457-4c2a-b582-561b796c1d17"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{leave_schedule_status}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement x="674" y="13" width="80" height="20" uuid="68c76b04-7204-41a2-a3cc-b1f9db7d9e6a"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="754" y="13" width="40" height="20" uuid="870a0ae1-4a66-429d-adfa-399921a2b4ca"/>
+				<textElement>
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="105" splitType="Stretch">
+			<textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
+				<reportElement x="5" y="58" width="142" height="17" uuid="90e39d0f-4b82-4836-b858-bfb959d55ace"/>
+				<textElement>
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="77" width="41" height="20" uuid="210d3f1e-6510-449f-9eaf-3511004bab44"/>
+				<textElement>
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<text><![CDATA[Printed By :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="53" width="802" height="1" uuid="1d23dcee-b7a6-4cce-85d3-d05aa33c2d16"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="278" y="85" width="219" height="20" uuid="be544574-7d05-4e38-8c37-8b60f139b1ff"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[End of Report]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

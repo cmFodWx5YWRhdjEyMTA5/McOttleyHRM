@@ -111,6 +111,7 @@
                       </div>
                      
                       <footer class="panel-footer text-right bg-light lter">
-                        <button type="button" onclick="saveEducationDetails()" class="btn btn-success btn-s-xs">Save</button>
+                      <input type="hidden" id="education_id" name="education_id" value="{{ Request::old('education_id') ?: '' }}">
+                        <button type="button" name="btneducation" onclick="saveEducationDetails()" class="btn btn-success btn-s-xs">Save</button>
                       </footer>
                     </section>

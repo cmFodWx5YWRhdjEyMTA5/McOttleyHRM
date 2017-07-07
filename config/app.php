@@ -149,15 +149,16 @@ return [
         Milon\Barcode\BarcodeServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
         Vinkla\Hashids\HashidsServiceProvider::class,
+        Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
         
 
         /*
          * Application Service Providers...
          */
-        OrionMedical\Providers\AppServiceProvider::class,
-        OrionMedical\Providers\AuthServiceProvider::class,
-        OrionMedical\Providers\EventServiceProvider::class,
-        OrionMedical\Providers\RouteServiceProvider::class,
+        McPersona\Providers\AppServiceProvider::class,
+        McPersona\Providers\AuthServiceProvider::class,
+        McPersona\Providers\EventServiceProvider::class,
+        McPersona\Providers\RouteServiceProvider::class,
 
     ],
 
@@ -217,6 +218,7 @@ return [
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
         'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
+        
 
     ],
 

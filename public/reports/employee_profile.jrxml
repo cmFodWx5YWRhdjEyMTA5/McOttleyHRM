@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="employee_profile" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5c4c5480-6c78-4df3-8095-9ef42aac66e5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.jasperserver.reportUnit" value="/mcottleyhrm/employee_department"/>
+	<property name="ireport.jasperserver.url" value="http://localhost:8080/jasperserver/services/repository"/>
+	<parameter name="staff_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/Users/jasonkerr/laravel/McOttleyHRM/public/reports/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     employee.`id` AS employee_id,
+     employee.`staff_id` AS employee_staff_id,
+     employee.`staff_type` AS employee_staff_type,
+     employee.`fullname` AS employee_fullname,
+     employee.`date_of_birth` AS employee_date_of_birth,
+     employee.`gender` AS employee_gender,
+     employee.`ssn` AS employee_ssn,
+     employee.`email` AS employee_email,
+     employee.`mobile_number` AS employee_mobile_number,
+     employee.`residential_address` AS employee_residential_address,
+     employee.`postal_address` AS employee_postal_address,
+     employee.`marital_status` AS employee_marital_status,
+     employee.`id_type` AS employee_id_type,
+     employee.`id_number` AS employee_id_number,
+     employee.`status` AS employee_status,
+     employee.`nationality` AS employee_nationality,
+     employee.`image` AS employee_image,
+     employee.`created_on` AS employee_created_on,
+     employee.`created_by` AS employee_created_by,
+     employee.`last_updated_on` AS employee_last_updated_on,
+     employee.`location` AS employee_location,
+     employee.`department` AS employee_department,
+     employee.`subsidiary` AS employee_subsidiary,
+     employee.`job_title` AS employee_job_title
+FROM
+     `employee` employee
+
+WHERE
+     ($P{staff_id}= 'All'
+     or employee.`staff_id` = $P{staff_id})
+     and (employee.`status` = 'Active')]]>
+	</queryString>
+	<field name="employee_id" class="java.lang.Long"/>
+	<field name="employee_staff_id" class="java.lang.String"/>
+	<field name="employee_staff_type" class="java.lang.String"/>
+	<field name="employee_fullname" class="java.lang.String"/>
+	<field name="employee_date_of_birth" class="java.sql.Date"/>
+	<field name="employee_gender" class="java.lang.String"/>
+	<field name="employee_ssn" class="java.lang.String"/>
+	<field name="employee_email" class="java.lang.String"/>
+	<field name="employee_mobile_number" class="java.lang.Integer"/>
+	<field name="employee_residential_address" class="java.lang.String"/>
+	<field name="employee_postal_address" class="java.lang.String"/>
+	<field name="employee_marital_status" class="java.lang.String"/>
+	<field name="employee_id_type" class="java.lang.String"/>
+	<field name="employee_id_number" class="java.lang.String"/>
+	<field name="employee_status" class="java.lang.String"/>
+	<field name="employee_nationality" class="java.lang.String"/>
+	<field name="employee_image" class="java.lang.String"/>
+	<field name="employee_created_on" class="java.sql.Timestamp"/>
+	<field name="employee_created_by" class="java.lang.String"/>
+	<field name="employee_last_updated_on" class="java.sql.Timestamp"/>
+	<field name="employee_location" class="java.lang.String"/>
+	<field name="employee_department" class="java.lang.String"/>
+	<field name="employee_subsidiary" class="java.lang.String"/>
+	<field name="employee_job_title" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="155" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="265" height="20" uuid="f2d558f2-0522-4215-b7cf-a98282c1ef47"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Employee Profile]]></text>
+			</staticText>
+			<image>
+				<reportElement x="30" y="45" width="90" height="104" uuid="f314f243-a87c-435f-83a8-5287ad2f4add"/>
+				<imageExpression><![CDATA["../images/"+$F{employee_staff_id}+".jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="30" y="20" width="253" height="20" uuid="0b6f0ebd-4546-417d-8c6e-77c19a7c5174"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{employee_fullname}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="134" y="65" width="197" height="20" uuid="28b35006-8fb2-4bb0-bb14-dd0d4af7396b"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{employee_job_title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="134" y="85" width="197" height="20" uuid="a59e42a4-4da2-41a0-aee8-1d6213bd657f"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{employee_email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="134" y="105" width="197" height="20" uuid="e2ccfab1-22f3-4438-bf32-50f9505dce9d"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{employee_mobile_number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="134" y="125" width="197" height="20" uuid="4699ab21-3a2b-45bb-96c4-f05283ade325"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{employee_postal_address}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="341" y="49" width="196" height="100" uuid="ef4fa8fb-49ef-4be6-8956-83c60b2595db"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "job_detail_subreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="2" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="49" splitType="Stretch">
+			<subreport>
+				<reportElement x="6" y="0" width="531" height="48" uuid="0fc694b7-ff43-4012-8007-736cd0b75863"/>
+				<subreportParameter name="staff_id">
+					<subreportParameterExpression><![CDATA[$P{staff_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "work_experience_subreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="45">
+			<subreport>
+				<reportElement x="6" y="0" width="531" height="44" uuid="2f0012d2-6463-4444-a366-d47a712a0b88"/>
+				<subreportParameter name="staff_id">
+					<subreportParameterExpression><![CDATA[$P{staff_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "education_subreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="44">
+			<subreport>
+				<reportElement x="6" y="0" width="532" height="43" uuid="a8958988-1f2d-42da-b880-7f634200d0a5"/>
+				<subreportParameter name="staff_id">
+					<subreportParameterExpression><![CDATA[$P{staff_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "dependent_subreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="13" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="13" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="105" splitType="Stretch">
+			<textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
+				<reportElement x="5" y="58" width="142" height="17" uuid="90e39d0f-4b82-4836-b858-bfb959d55ace"/>
+				<textElement>
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="77" width="41" height="20" uuid="210d3f1e-6510-449f-9eaf-3511004bab44"/>
+				<textElement>
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<text><![CDATA[Printed By :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="6" y="53" width="531" height="1" uuid="1d23dcee-b7a6-4cce-85d3-d05aa33c2d16"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="168" y="85" width="219" height="20" uuid="be544574-7d05-4e38-8c37-8b60f139b1ff"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[End of Report]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="417" y="33" width="80" height="20" uuid="68c76b04-7204-41a2-a3cc-b1f9db7d9e6a"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="497" y="33" width="40" height="20" uuid="870a0ae1-4a66-429d-adfa-399921a2b4ca"/>
+				<textElement>
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

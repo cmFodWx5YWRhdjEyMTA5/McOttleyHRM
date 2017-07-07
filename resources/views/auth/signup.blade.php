@@ -2,7 +2,7 @@
 <html lang="en" class="bg-dark">
 <head>
   <meta charset="utf-8" />
-  <title>Orion HRM | Account Manager</title>
+  <title>McPersona | Account Manager</title>
   <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
   <link rel="stylesheet" href="{{ asset('/css/bootstrap.css')}}" type="text/css" />
@@ -23,7 +23,7 @@
 
   <section id="content" class="m-t-lg wrapper-md animated fadeInDown" >
     <div class="container aside-xxl">
-      <a class="navbar-brand block" href="{{ route('auth.signin') }}">McOttley HRM</a>
+      <a class="navbar-brand block" href="{{ route('auth.signin') }}">McPersona</a>
       <section class="panel panel-default m-t-lg bg-white">
         <header class="panel-heading text-center">
           <strong>Account Management</strong>
@@ -34,7 +34,7 @@
           <div class="form-group">
            <div class="form-group{{ $errors->has('fullname') ? ' has-error' : ''}}">
             <label class="control-label">Name</label> 
-            <input type="text" placeholder="eg. Your name or company" class="form-control input-lg" id="fullname" name="fullname">
+            <input type="text" placeholder="Enter your name" class="form-control input-lg" id="fullname" name="fullname">
              @if ($errors->has('fullname'))
           <span class="help-block">{{ $errors->first('fullname') }}</span>
             @endif

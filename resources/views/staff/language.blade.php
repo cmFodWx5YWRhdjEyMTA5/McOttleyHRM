@@ -66,6 +66,7 @@
                       </div>
                      
                       <footer class="panel-footer text-right bg-light lter">
-                        <button type="button" onclick="saveLanguageDetails()" class="btn btn-success btn-s-xs">Save</button>
+                        <button type="button" onclick="saveLanguageDetails()" name="btnlanguage" class="btn btn-success btn-s-xs">Save</button>
+                          <input type="hidden" name="language_id" id="language_id" value="{{ Request::old('language_id') ?: '' }}">
                       </footer>
                     </section>

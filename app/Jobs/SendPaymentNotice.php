@@ -1,8 +1,8 @@
 <?php
 
-namespace OrionMedical\Jobs;
+namespace McPersona\Jobs;
 
-use OrionMedical\Jobs\Job;
+use McPersona\Jobs\Job;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;

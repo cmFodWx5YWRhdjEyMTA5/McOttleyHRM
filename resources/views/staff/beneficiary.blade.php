@@ -3,11 +3,11 @@
                  
                         <div class="form-group pull-in clearfix">
                           <div class="col-sm-12">
-                          <div class="form-group{{ $errors->has('kin_name') ? ' has-error' : ''}}">
+                          <div class="form-group{{ $errors->has('beneficiary_name') ? ' has-error' : ''}}">
                             <label>Name</label>
-                            <input type="text" rows="3" class="form-control" id="kin_name" name="kin_name" value="{{ Request::old('kin_name') ?: '' }}"> 
-                           @if ($errors->has('kin_name'))
-                          <span class="help-block">{{ $errors->first('kin_name') }}</span>
+                            <input type="text" rows="3" class="form-control" id="beneficiary_name" name="beneficiary_name" value="{{ Request::old('beneficiary_name') ?: '' }}"> 
+                           @if ($errors->has('beneficiary_name'))
+                          <span class="help-block">{{ $errors->first('beneficiary_name') }}</span>
                            @endif    
                           </div>   
                         </div>
@@ -17,15 +17,15 @@
                         <div class="form-group pull-in clearfix">
                           <div class="col-sm-6">
                             <label>Relationship</label> 
-                            <div class="form-group{{ $errors->has('kin_relationship') ? ' has-error' : ''}}">
-                             <select id="kin_relationship" name="kin_relationship" rows="3" tabindex="1" data-placeholder="Select here.." class="form-control m-b">
+                            <div class="form-group{{ $errors->has('beneficiary_relationship') ? ' has-error' : ''}}">
+                             <select id="beneficiary_relationship" name="beneficiary_relationship" rows="3" tabindex="1" data-placeholder="Select here.." class="form-control m-b">
                           <option value="">-- Not set --</option>
                           @foreach($relationships as $relationship)
                             <option value="{{ $relationship->type }}">{{ $relationship->type }}</option>
                           @endforeach
                         </select>            
-                           @if ($errors->has('kin_relationship'))
-                          <span class="help-block">{{ $errors->first('kin_relationship') }}</span>
+                           @if ($errors->has('beneficiary_relationship'))
+                          <span class="help-block">{{ $errors->first('beneficiary_relationship') }}</span>
                            @endif    
                           </div>
                           </div>
@@ -33,17 +33,17 @@
 
                            <div class="form-group pull-in clearfix">
                         <div class="col-sm-6">
-                       <div class="form-group @if($errors->has('kin_dob')) has-error @endif">
-                        <label for="kin_dob">Date of Birth</label>
+                       <div class="form-group @if($errors->has('beneficiary_dob')) has-error @endif">
+                        <label for="beneficiary_dob">Date of Birth</label>
                         <div class="input-group">
-                        <input type="text" class="form-control" name="kin_dob" id="kin_dob" placeholder="Select your time" value="{{ old('kin_dob') }}">
+                        <input type="text" class="form-control" name="beneficiary_dob" id="beneficiary_dob" placeholder="Select your time" value="{{ old('beneficiary_dob') }}">
                          <span class="input-group-addon">
                       <span class="fa fa-calendar"></span>
                       </span>
                       </div>
-                        @if ($errors->has('kin_dob'))
+                        @if ($errors->has('beneficiary_dob'))
                         <p class="help-block"><span class="glyphicon glyphicon-exclamation-sign"></span> 
-                        {{ $errors->first('kin_dob') }}
+                        {{ $errors->first('beneficiary_dob') }}
                        </p>
                         @endif
                       </div>
@@ -55,10 +55,10 @@
                         <div class="form-group pull-in clearfix">
                           <div class="col-sm-6">
                             <label>Postal Address</label> 
-                            <div class="form-group{{ $errors->has('kin_home_phone') ? ' has-error' : ''}}">
-                           <textarea type="text" rows="3" class="form-control" id="kin_home_phone" name="kin_home_phone" value="{{ Request::old('kin_home_phone') ?: '' }}"></textarea>
-                           @if ($errors->has('kin_home_phone'))
-                          <span class="help-block">{{ $errors->first('kin_home_phone') }}</span>
+                            <div class="form-group{{ $errors->has('beneficiary_postal_address') ? ' has-error' : ''}}">
+                           <textarea type="text" rows="3" class="form-control" id="beneficiary_postal_address" name="beneficiary_postal_address" value="{{ Request::old('beneficiary_postal_address') ?: '' }}"></textarea>
+                           @if ($errors->has('beneficiary_postal_address'))
+                          <span class="help-block">{{ $errors->first('beneficiary_postal_address') }}</span>
                            @endif    
                           </div>
                           </div>
@@ -66,10 +66,10 @@
                          
                          <div class="col-sm-6">
                             <label>Residential Address</label> 
-                            <div class="form-group{{ $errors->has('kin_home_phone') ? ' has-error' : ''}}">
-                           <textarea type="text" rows="3" class="form-control" id="kin_home_phone" name="kin_home_phone" value="{{ Request::old('kin_home_phone') ?: '' }}"></textarea>
-                           @if ($errors->has('kin_home_phone'))
-                          <span class="help-block">{{ $errors->first('kin_home_phone') }}</span>
+                            <div class="form-group{{ $errors->has('beneficiary_residential_address') ? ' has-error' : ''}}">
+                           <textarea type="text" rows="3" class="form-control" id="beneficiary_residential_address" name="beneficiary_residential_address" value="{{ Request::old('beneficiary_residential_address') ?: '' }}"></textarea>
+                           @if ($errors->has('beneficiary_residential_address'))
+                          <span class="help-block">{{ $errors->first('beneficiary_residential_address') }}</span>
                            @endif    
                           </div>
                           </div>
@@ -78,20 +78,20 @@
                         <div class="form-group pull-in clearfix">
                           <div class="col-sm-6">
                             <label>Home Telephone</label> 
-                            <div class="form-group{{ $errors->has('kin_home_phone') ? ' has-error' : ''}}">
-                           <input type="text" rows="3" class="form-control" id="kin_home_phone" name="kin_home_phone" value="{{ Request::old('kin_home_phone') ?: '' }}">   
-                           @if ($errors->has('kin_home_phone'))
-                          <span class="help-block">{{ $errors->first('kin_home_phone') }}</span>
+                            <div class="form-group{{ $errors->has('beneficiary_home_phone') ? ' has-error' : ''}}">
+                           <input type="text" rows="3" class="form-control" id="beneficiary_home_phone" name="beneficiary_home_phone" value="{{ Request::old('beneficiary_home_phone') ?: '' }}">   
+                           @if ($errors->has('beneficiary_home_phone'))
+                          <span class="help-block">{{ $errors->first('beneficiary_home_phone') }}</span>
                            @endif    
                           </div>
                           </div>
 
                           <div class="col-sm-6">
-                          <div class="form-group{{ $errors->has('kin_mobile') ? ' has-error' : ''}}">
+                          <div class="form-group{{ $errors->has('beneficiary_mobile') ? ' has-error' : ''}}">
                             <label>Mobile</label>
-                            <input type="number" rows="3" class="form-control" id="kin_mobile" name="kin_mobile" value="{{ Request::old('kin_mobile') ?: '' }}">          
-                           @if ($errors->has('kin_mobile'))
-                          <span class="help-block">{{ $errors->first('kin_mobile') }}</span>
+                            <input type="number" rows="3" class="form-control" id="beneficiary_mobile" name="beneficiary_mobile" value="{{ Request::old('beneficiary_mobile') ?: '' }}">          
+                           @if ($errors->has('beneficiary_mobile'))
+                          <span class="help-block">{{ $errors->first('beneficiary_mobile') }}</span>
                            @endif    
                           </div>   
                         </div>
@@ -101,6 +101,7 @@
                       </div>
                      
                       <footer class="panel-footer text-right bg-light lter">
-                        <button type="button" onclick="saveBeneficiaryDetails()" class="btn btn-success btn-s-xs">Save</button>
+                        <button type="button" name="btnbeneficiary" onclick="saveBeneficiaryDetails()" class="btn btn-success btn-s-xs">Save</button>
+                        <input type="hidden" name="beneficiary_id" id="beneficiary_id" value="{{ Request::old('beneficiary_id') ?: '' }}">
                       </footer>
                     </section>

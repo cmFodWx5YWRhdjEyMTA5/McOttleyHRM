@@ -6,7 +6,7 @@
  * Time: 9:47 PM
  */
 
-namespace OrionMedical\Broker\Notifications\SmsGateways;
+namespace McPersona\Broker\Notifications\SmsGateways;
 
 
 interface SmsGatewayInterface

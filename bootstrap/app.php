@@ -28,17 +28,17 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    OrionMedical\Http\Kernel::class
+    McPersona\Http\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    OrionMedical\Console\Kernel::class
+    McPersona\Console\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    OrionMedical\Exceptions\Handler::class
+    McPersona\Exceptions\Handler::class
 );
 
 

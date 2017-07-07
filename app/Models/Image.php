@@ -1,6 +1,6 @@
 <?php
 
-namespace OrionMedical\Models;
+namespace McPersona\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,12 +9,12 @@ class Image extends Model
 	public $timestamps = false;
 	 protected $table = 'images';
    	 protected $fillable = [
-        'accountnumber',
+        'staff_id',
         'filename',
         'image'
     ];
 
     public function fileowner() {
-    return $this->belongsToMany('\OrionMedical\Models\Customer');
+    return $this->belongsToMany('\McPersona\Models\Customer');
 }
 }

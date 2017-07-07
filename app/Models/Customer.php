@@ -1,6 +1,6 @@
 <?php
 
-namespace OrionMedical\Models;
+namespace McPersona\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Hashids;

@@ -5,14 +5,15 @@
           <aside class="aside-md bg-white b-r" id="subNav">
               <div class="wrapper b-b header">Jobs Manager</div>
               <ul class="nav">
-                <li class="b-b b-light"><a href="#"><i class="fa fa-chevron-right pull-right m-t-xs text-xs icon-muted"></i>Job Titles</a></li>
                 <li class="b-b b-light"><a href="/job-title"><i class="fa fa-chevron-right pull-right m-t-xs text-xs icon-muted"></i>Job Titles</a></li>
                 <li class="b-b b-light"><a href="/salary-component"><i class="fa fa-chevron-right pull-right m-t-xs text-xs icon-muted"></i>Salary Components</a></li>
                 <li class="b-b b-light"><a href="/employment-status"><i class="fa fa-chevron-right pull-right m-t-xs text-xs icon-muted"></i>Employment Status</a></li>
                 <li class="b-b b-light"><a href="/job-category"><i class="fa fa-chevron-right pull-right m-t-xs text-xs icon-muted"></i>Job Categories</a></li>
                 <li class="b-b b-light"><a href="/work-shift"><i class="fa fa-chevron-right pull-right m-t-xs text-xs icon-muted"></i>Work Shifts</a></li>
-                <li class="b-b b-light"><a href="#"><i class="fa fa-chevron-right pull-right m-t-xs text-xs icon-muted"></i>Departments</a></li>
-                <li class="b-b b-light"><a href="/pay-grade"><i class="fa fa-chevron-right pull-right m-t-xs text-xs icon-muted"></i>Pay Grades</a></li>
+                <li class="b-b b-light"><a href="/department"><i class="fa fa-chevron-right pull-right m-t-xs text-xs icon-muted"></i>Departments</a></li>
+                <li class="b-b b-light"><a href="/location"><i class="fa fa-chevron-right pull-right m-t-xs text-xs icon-muted"></i>Branch</a></li>
+                <li class="b-b b-light"><a href="/subsidiary"><i class="fa fa-chevron-right pull-right m-t-xs text-xs icon-muted"></i>Business Entities</a></li>
+                <li class="b-b b-light"><a href="/pay-grade"><i class="fa fa-chevron-right pull-right m-t-xs text-xs icon-muted"></i>Job Grades</a></li>
               </ul>
             </aside>
             <aside>
@@ -20,7 +21,6 @@
                 <header class="header bg-white b-b clearfix">
                   <div class="row m-t-sm">
                     <div class="col-sm-8 m-b-xs">
-                     @include('includes.alert')
                     <a href="#" data-toggle="modal" class="btn btn-sm btn-default"><i class="fa fa-print"></i> Print List</a>
                      <span class="badge badge-info">Record(s) Found :  {{ $items->total() }} {{ str_plural('Shift', $items->total()) }}</span>
                     </div>

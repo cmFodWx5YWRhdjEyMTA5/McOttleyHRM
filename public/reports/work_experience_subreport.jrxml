@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="education_subreport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3197fec0-1af7-4499-b3e7-b2529bde88c3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="staff_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     employee_work_experience.`id` AS employee_work_experience_id,
+     employee_work_experience.`staff_id` AS employee_work_experience_staff_id,
+     employee_work_experience.`company` AS employee_work_experience_company,
+     employee_work_experience.`job_title` AS employee_work_experience_job_title,
+     employee_work_experience.`date_from` AS employee_work_experience_date_from,
+     employee_work_experience.`date_to` AS employee_work_experience_date_to,
+     employee_work_experience.`comment` AS employee_work_experience_comment,
+     employee_work_experience.`created_by` AS employee_work_experience_created_by,
+     employee_work_experience.`created_on` AS employee_work_experience_created_on
+FROM
+     `employee_work_experience` employee_work_experience
+WHERE
+     employee_work_experience.`staff_id` = $P{staff_id}]]>
+	</queryString>
+	<field name="employee_work_experience_id" class="java.lang.Long"/>
+	<field name="employee_work_experience_staff_id" class="java.lang.String"/>
+	<field name="employee_work_experience_company" class="java.lang.String"/>
+	<field name="employee_work_experience_job_title" class="java.lang.String"/>
+	<field name="employee_work_experience_date_from" class="java.sql.Timestamp"/>
+	<field name="employee_work_experience_date_to" class="java.sql.Timestamp"/>
+	<field name="employee_work_experience_comment" class="java.lang.String"/>
+	<field name="employee_work_experience_created_by" class="java.lang.String"/>
+	<field name="employee_work_experience_created_on" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="19" y="-20" width="501" height="20" backcolor="#CCCCCC" uuid="0cea5349-c2f7-40dc-a7bb-3667db457bac"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Work Experience]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="19" y="0" width="136" height="20" uuid="e8784a58-bebb-48bd-8336-3ce6f720656d"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Previous Company]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="132" height="20" uuid="8d8f7255-a040-4e7f-98df-8489714de50b"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Job Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="0" width="71" height="20" uuid="7355a25a-85de-453a-8863-17c80a66a73d"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[To]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="328" y="0" width="100" height="20" uuid="228cc435-410b-457c-9e1d-c7e85eb86622"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[From]]></text>
+			</staticText>
+			<line>
+				<reportElement x="19" y="20" width="501" height="1" uuid="61315519-7cde-4bad-9020-731df29083bb"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<line>
+				<reportElement x="19" y="20" width="501" height="1" uuid="17ed4c02-1776-41b4-a0ee-90f818f5d893"/>
+				<graphicElement>
+					<pen lineStyle="Dotted" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="19" y="0" width="136" height="20" uuid="1add611f-2d2a-4e31-8a73-ed02a104fb63"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{employee_work_experience_company}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="132" height="20" uuid="784be12d-be31-4ad8-b786-6a3fa5ae7262"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{employee_work_experience_job_title}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy">
+				<reportElement x="328" y="0" width="100" height="20" uuid="fd515786-aefe-4aa3-beed-bc8f0b40997c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{employee_work_experience_date_from}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy">
+				<reportElement x="449" y="0" width="71" height="20" uuid="afee9b61-5368-456c-9ec2-2f7e97b8ae69"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{employee_work_experience_date_to}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -74,6 +74,7 @@
                       </div>
                      
                       <footer class="panel-footer text-right bg-light lter">
-                        <button type="button" onclick="saveExperienceDetails()" class="btn btn-success btn-s-xs">Save</button>
+                        <input type="hidden" name="experience_id" id="experience_id" value="{{ Request::old('experience_id') ?: '' }}">
+                        <button type="button" name="experience_button" onclick="saveExperienceDetails()" class="btn btn-success btn-s-xs">Save</button>
                       </footer>
                     </section>

@@ -1,6 +1,6 @@
 <?php
 
-namespace OrionMedical\Events;
+namespace McPersona\Events;
 
 abstract class Event
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace OrionMedical\Http\Controllers;
+namespace McPersona\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

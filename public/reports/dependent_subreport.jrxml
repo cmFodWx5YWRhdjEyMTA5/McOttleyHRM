@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dependent_subreport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3197fec0-1af7-4499-b3e7-b2529bde88c3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="staff_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     employee_dependent.`id` AS employee_dependent_id,
+     employee_dependent.`staff_id` AS employee_dependent_staff_id,
+     employee_dependent.`name` AS employee_dependent_name,
+     employee_dependent.`relationship` AS employee_dependent_relationship,
+     employee_dependent.`dob` AS employee_dependent_dob,
+     employee_dependent.`nationality` AS employee_dependent_nationality,
+     employee_dependent.`created_on` AS employee_dependent_created_on,
+     employee_dependent.`created_by` AS employee_dependent_created_by,
+     employee_dependent.`gender` AS employee_dependent_gender
+FROM
+     `employee_dependent` employee_dependent
+WHERE
+     employee_dependent.`staff_id` = $P{staff_id}]]>
+	</queryString>
+	<field name="employee_dependent_id" class="java.lang.Long"/>
+	<field name="employee_dependent_staff_id" class="java.lang.String"/>
+	<field name="employee_dependent_name" class="java.lang.String"/>
+	<field name="employee_dependent_relationship" class="java.lang.String"/>
+	<field name="employee_dependent_dob" class="java.sql.Timestamp"/>
+	<field name="employee_dependent_nationality" class="java.lang.String"/>
+	<field name="employee_dependent_created_on" class="java.sql.Timestamp"/>
+	<field name="employee_dependent_created_by" class="java.lang.String"/>
+	<field name="employee_dependent_gender" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="24" y="1" width="101" height="20" uuid="8d8f7255-a040-4e7f-98df-8489714de50b"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="232" y="1" width="145" height="20" uuid="f392f37b-6bd8-4a07-84d7-02e957eed61a"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relationship]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="437" y="1" width="86" height="20" uuid="7355a25a-85de-453a-8863-17c80a66a73d"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date Of Birth]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="24" y="-20" width="499" height="20" forecolor="#000000" backcolor="#CCCCCC" uuid="0cea5349-c2f7-40dc-a7bb-3667db457bac"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dependents]]></text>
+			</staticText>
+			<line>
+				<reportElement x="24" y="21" width="499" height="1" uuid="69eae547-8af0-40ae-9404-730a1b5761c5"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="24" y="0" width="185" height="20" uuid="d4ecf648-23e0-4f27-88fb-91b7916098d6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{employee_dependent_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="232" y="0" width="145" height="20" uuid="1bc02ebb-fc21-4fc6-979c-0b8b5c632055"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{employee_dependent_relationship}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy">
+				<reportElement x="437" y="0" width="86" height="20" uuid="adac1230-0819-4198-abaf-460662096a9e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{employee_dependent_dob}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="24" y="20" width="499" height="3" uuid="b87cc0d0-21f0-4d7b-ba35-fcb394b2fb1e"/>
+				<graphicElement>
+					<pen lineStyle="Dotted" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

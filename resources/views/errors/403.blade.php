@@ -2,7 +2,7 @@
 <html lang="en" class="">
 <head>
   <meta charset="utf-8" />
-  <title>OrionMD | Page Not Found</title>
+  <title>McPersona | Page Not Found</title>
   <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
 @include('includes.head')
   <!--[if lt IE 9]>
@@ -20,7 +20,7 @@
         </div>
        
         <div class="list-group m-b-sm bg-white m-b-lg">
-         <a href="#" class="list-group-item">
+         <a href="{{ route('/auth/login') }}" class="list-group-item">
             <i class="fa fa-chevron-right icon-muted"></i>
             <i class="fa fa-fw fa-key icon-muted"></i> You do not have permission to view this page
           </a>

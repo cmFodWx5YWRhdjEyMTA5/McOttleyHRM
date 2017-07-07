@@ -1,6 +1,6 @@
 <?php
 
-namespace OrionMedical\Http;
+namespace McPersona\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -13,11 +13,11 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-        \OrionMedical\Http\Middleware\EncryptCookies::class,
+        \McPersona\Http\Middleware\EncryptCookies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \OrionMedical\Http\Middleware\VerifyCsrfToken::class,
+        \McPersona\Http\Middleware\VerifyCsrfToken::class,
     ];
 
     /**
@@ -26,14 +26,14 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \OrionMedical\Http\Middleware\Authenticate::class,
+        'auth' => \McPersona\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest' => \OrionMedical\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \McPersona\Http\Middleware\RedirectIfAuthenticated::class,
         'role' => \Zizaco\Entrust\Middleware\EntrustRole::class,
         'permission' => \Zizaco\Entrust\Middleware\EntrustPermission::class,
         'ability' => \Zizaco\Entrust\Middleware\EntrustAbility::class,
-        'revalidate' => \OrionMedical\Http\Middleware\RevalidateBackHistory::class,
-        'XSS' => \OrionMedical\Http\Middleware\XSS::class,
+        'revalidate' => \McPersona\Http\Middleware\RevalidateBackHistory::class,
+        'XSS' => \McPersona\Http\Middleware\XSS::class,
     ];
 }
 

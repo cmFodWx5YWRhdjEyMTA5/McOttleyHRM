@@ -1,6 +1,6 @@
 <?php
 
-namespace OrionMedical\Console\Commands;
+namespace McPersona\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;

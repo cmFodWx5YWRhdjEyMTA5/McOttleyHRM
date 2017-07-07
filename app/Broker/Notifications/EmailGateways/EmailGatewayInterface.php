@@ -6,7 +6,7 @@
  * Time: 3:09 AM
  */
 
-namespace OrionMedical\Broker\Notifications\EmailGateways;
+namespace McPersona\Broker\Notifications\EmailGateways;
 
 
 interface EmailGatewayInterface

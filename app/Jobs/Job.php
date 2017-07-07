@@ -1,6 +1,6 @@
 <?php
 
-namespace OrionMedical\Jobs;
+namespace McPersona\Jobs;
 
 use Illuminate\Bus\Queueable;
 

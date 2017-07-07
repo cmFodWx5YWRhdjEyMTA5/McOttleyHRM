@@ -20,7 +20,7 @@
                 <img src="/images/avatar_default.jpg" class="img-circle">
               </a>
               <div class="clear">
-                <a href="#"><span class="text-white font-bold">{{ Auth::user()->getNameOrUsername() }}</a></span>
+                <a href="#"><span class="text-white font-bold">{{ Auth::user()->getNameOrUsername() }}</span></a>
                 <small class="block">{{ Auth::user()->getRole() }}</small>
                 <a href="#" class="btn btn-xs btn-success m-t-xs">Upgrade</a>
               </div>
@@ -29,19 +29,19 @@
               <div class="col-xs-4">
                 <div class="padder-v">
                   <span class="m-b-xs h4 block text-white">245</span>
-                  <small class="text-muted">Pending Approvals</small>
+                  <small class="text-muted">Pending Reviews</small>
                 </div>
               </div>
               <div class="col-xs-4 dk">
                 <div class="padder-v">
                   <span class="m-b-xs h4 block text-white">55</span>
-                  <small class="text-muted">Approved Trades</small>
+                  <small class="text-muted">Approved Leaves</small>
                 </div>
               </div>
               <div class="col-xs-4">
                 <div class="padder-v">
                   <span class="m-b-xs h4 block text-white">2,035</span>
-                  <small class="text-muted">Accounts Created</small>
+                  <small class="text-muted">Employees Created</small>
                 </div>
               </div>
             </div>
@@ -55,29 +55,25 @@
         <li class="hidden-xs">
           <a href="#" class="dropdown-toggle dk" data-toggle="dropdown">
             <i class="fa fa-bell"></i>
-            <span class="badge badge-sm up bg-danger m-l-n-sm count">2</span>
+            <span class="badge badge-sm up bg-danger m-l-n-sm">{{ $notifications->count() }}</span>
           </a>
           <section class="dropdown-menu aside-xl">
             <section class="panel bg-white">
               <header class="panel-heading b-light bg-light">
-                <strong>You have <span class="count">2</span> notifications</strong>
+                <strong>You have <span>{{ $notifications->count() }}</span> notifications</strong>
               </header>
               <div class="list-group list-group-alt animated fadeInRight">
+              @foreach($notifications as $notification)
                 <a href="#" class="media list-group-item">
                   <span class="pull-left thumb-sm">
-                    <img src="/images/avatar.jpg" alt="John said" class="img-circle">
+                    <img src="/images/avatar_default.jpg" alt="John said" class="img-circle">
                   </span>
                   <span class="media-body block m-b-none">
-                    Use awesome animate.css<br>
-                    <small class="text-muted">10 minutes ago</small>
+                    {{ $notification->action }}<br>
+                    <small class="text-muted">{{ Carbon\Carbon::parse($notification->created_on)->diffForHumans() }}</small>
                   </span>
                 </a>
-                <a href="#" class="media list-group-item">
-                  <span class="media-body block m-b-none">
-                    1.0 initial released<br>
-                    <small class="text-muted">1 hour ago</small>
-                  </span>
-                </a>
+                @endforeach
               </div>
               <footer class="panel-footer text-sm">
                 <a href="#" class="pull-right"><i class="fa fa-cog"></i></a>
@@ -114,14 +110,14 @@
           <ul class="dropdown-menu animated fadeInRight">
             <span class="arrow top"></span>
             <li>
-              <a href="#">Settings</a>
+              <a href="{{ url('/password/email') }}">Reset Password</a>
             </li>
             <li>
               <a href="profile.html">Profile</a>
             </li>
             <li>
               <a href="#">
-                <span class="badge bg-danger pull-right">3</span>
+                <span class="badge bg-danger pull-right">{{ $notifications->count() }}</span>
                 Notifications
               </a>
             </li>
@@ -130,7 +126,7 @@
             </li>
             <li class="divider"></li>
             <li>
-              <a href="{{ route('auth.signin') }}" >Logout</a>
+              <a href="/signout" >Logout</a>
             </li>
           </ul>
            @endif

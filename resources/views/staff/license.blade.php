@@ -84,7 +84,8 @@
 
                       </div>
                      
-                      <footer class="panel-footer text-right bg-light lter">
-                        <button type="button" onclick="saveLicenseDetails()" class="btn btn-success btn-s-xs">Save</button>
+                      <footer class="panel-footer text-right bg-light lter"> 
+                        <button type="button" onclick="saveLicenseDetails()" name="btnlicense" class="btn btn-success btn-s-xs">Save</button>
+                          <input type="hidden" name="license_id" id="license_id" value="{{ Request::old('license_id') ?: '' }}">
                       </footer>
                     </section>

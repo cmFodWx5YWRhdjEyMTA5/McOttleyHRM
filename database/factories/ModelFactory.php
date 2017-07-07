@@ -11,7 +11,7 @@
 |
 */
 
-$factory->define(OrionMedical\User::class, function (Faker\Generator $faker) {
+$factory->define(McPersona\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,

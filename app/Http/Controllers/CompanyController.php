@@ -1,11 +1,11 @@
 <?php
 
-namespace OrionMedical\Http\Controllers;
+namespace McPersona\Http\Controllers;
 
 use Illuminate\Http\Request;
-use OrionMedical\Models\Company; 
-use OrionMedical\Http\Requests;
-use OrionMedical\Http\Controllers\Controller;
+use McPersona\Models\Company; 
+use McPersona\Http\Requests;
+use McPersona\Http\Controllers\Controller;
 
 class CompanyController extends Controller
 {

@@ -1,8 +1,9 @@
 <?php
 
-namespace OrionMedical\Providers;
+namespace McPersona\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use McPersona\Models\Notifications;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //its just a dummy data object.
+    $notifications = Notifications::get();
+
+    // Sharing is caring
+    view()->share('notifications', $notifications);
     }
 
     /**

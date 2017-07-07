@@ -1,4 +1,4 @@
-  @role(['System Admin','Billing'])
+
  <aside class="bg-dark lter aside-md hidden-print" id="nav">          
           <section class="vbox">
            <header class="header lter text-center clearfix" style="background-color: #FF9E4A">
@@ -24,6 +24,7 @@
                 <!-- nav -->
                 <nav class="nav-primary hidden-xs">
                   <ul class="nav">
+                  @role(['System Admin','HR Officer','HR Manager','Administrator and CEO'])
                     <li  class="active">
                       <a href="{{ route('dashboard') }}"   class="active">
                         <i class="fa fa-dashboard icon">
@@ -32,10 +33,10 @@
                         <span>Dashboard</span>
                       </a>
                     </li>
-                    
+                      
                     <li >
                       <a href="#layout"  >
-                        <i class="fa fa-user icon">
+                        <i class="fa fa-users icon">
                            <b class="dker" style="background-color: #bc65bd"></b>
                         </i>
                         <span class="pull-right">
@@ -52,27 +53,35 @@
                             <span>Employee List</span>
                           </a>
                         </li>
+                      </ul>
+                    </li>
+
+                     <li >
+                      <a href="#layout"  >
+                        <i class="fa fa-home icon">
+                          <b class="dker" style="background-color: #bc65bd"></b>
+                        </i>
+                        <span class="pull-right">
+                          <i class="fa fa-angle-down text"></i>
+                          <i class="fa fa-angle-up text-active"></i>
+                        </span>
+                        <span>Branch</span>
+                      </a>
+                      <ul class="nav lt">
                         <li >
-                          <a href="/active-customer" >  
-                          <b class="badge bg-info pull-right"></b>                                                           
+                          <a href="/location" >  
+                          <b class="badge bg-gavel pull-right"></b>                                                           
                             <i class="fa fa-angle-right"></i>
-                            <span>Document Templates</span>
-                          </a>
-                        </li>
-                        <li >
-                          <a href="/active-customer" >  
-                          <b class="badge bg-info pull-right"></b>                                                           
-                            <i class="fa fa-angle-right"></i>
-                            <span>Report</span>
+                            <span>Branch List</span>
                           </a>
                         </li>
                        
                       </ul>
                     </li>
-
+                     
                     <li >
                       <a href="#layout"  >
-                        <i class="fa fa-gavel icon">
+                        <i class="fa fa-sitemap icon">
                           <b class="dker" style="background-color: #bc65bd"></b>
                         </i>
                         <span class="pull-right">
@@ -83,7 +92,7 @@
                       </a>
                       <ul class="nav lt">
                         <li >
-                          <a href="/online-policies" >  
+                          <a href="/department" >  
                           <b class="badge bg-gavel pull-right"></b>                                                           
                             <i class="fa fa-angle-right"></i>
                             <span>Department List</span>
@@ -92,29 +101,125 @@
                        
                       </ul>
                     </li>
-                      @role(['Nurse','System Admin'])
                     <li >
-                      <a href="/claims"  >
+                      <a href="#layout"  >
+                        <i class="fa fa-user icon">
+                          <b class="dker" style="background-color: #bc65bd"></b>
+                        </i>
+                        <span class="pull-right">
+                          <i class="fa fa-angle-down text"></i>
+                          <i class="fa fa-angle-up text-active"></i>
+                        </span>
+                        <span>Positions</span>
+                      </a>
+                      <ul class="nav lt">
+                        <li >
+                          <a href="/job-title" >  
+                          <b class="badge bg-gavel pull-right"></b>                                                           
+                            <i class="fa fa-angle-right"></i>
+                            <span>Position List</span>
+                          </a>
+                        </li>
+                       
+                      </ul>
+                    </li>
+                       <li >
+                      <a href="#layout"  >
+                        <i class="fa fa-file-text icon">
+                          <b class="dker" style="background-color: #bc65bd"></b>
+                        </i>
+                        <span class="pull-right">
+                          <i class="fa fa-angle-down text"></i>
+                          <i class="fa fa-angle-up text-active"></i>
+                        </span>
+                        <span>Task</span>
+                      </a>
+                      <ul class="nav lt">
+                        <li >
+                          <a href="/department" >  
+                          <b class="badge bg-gavel pull-right"></b>                                                           
+                            <i class="fa fa-angle-right"></i>
+                            <span>Department Task</span>
+                          </a>
+                        </li>
+                        <li >
+                          <a href="/department" >  
+                          <b class="badge bg-gavel pull-right"></b>                                                           
+                            <i class="fa fa-angle-right"></i>
+                            <span>Company Task</span>
+                          </a>
+                        </li>
+                        <li >
+                          <a href="/department" >  
+                          <b class="badge bg-gavel pull-right"></b>                                                           
+                            <i class="fa fa-angle-right"></i>
+                            <span>Employee Task</span>
+                          </a>
+                        </li>
+                        <li >
+                          <a href="/department" >  
+                          <b class="badge bg-gavel pull-right"></b>                                                           
+                            <i class="fa fa-angle-right"></i>
+                            <span>Task Manage</span>
+                          </a>
+                        </li>
+                       
+                      </ul>
+                    </li>
+                     @endrole
+                      @role(['HR Manager','System Admin','Finance'])
+                    <li >
+                      <a href="/payroll-slips"  >
                         
-                        <i class="fa fa-wheelchair icon">
+                        <i class="fa fa-money icon">
                           <b class="dker" style="background-color: #bc65bd"></b>
                         </i>
                         <span>Payroll</span>
                       </a>
                     </li>
                     @endrole
-                    @role(['Nurse','System Admin'])
+                    @role(['System Admin','HR Officer','HR Manager'])
                     <li >
-                      <a href="/performance-review"  >
-                        
-                        <i class="fa fa-calendar icon">
-                          <b class="dker" style="background-color: #bc65bd"></b>
+                      <a href="#layout"  >
+                        <i class="fa fa-signal icon">
+                           <b class="dker" style="background-color: #bc65bd"></b>
                         </i>
+                        <span class="pull-right">
+                          <i class="fa fa-angle-down text"></i>
+                          <i class="fa fa-angle-up text-active"></i>
+                        </span>
                         <span>Review</span>
                       </a>
+                      <ul class="nav lt">
+                        <li >
+                          <a href="/review-settings" >  
+                          <b class="badge bg-info pull-right"></b>                                                           
+                            <i class="fa fa-angle-right"></i>
+                            <span>Create a Review</span>
+                          </a>
+                        </li>
+                      </ul>
+                      <ul class="nav lt">
+                        <li >
+                          <a href="/reviews" >  
+                          <b class="badge bg-info pull-right"></b>                                                           
+                            <i class="fa fa-angle-right"></i>
+                            <span>View Reviews</span>
+                          </a>
+                        </li>
+                      </ul>
+                      <ul class="nav lt">
+                        <li >
+                          <a href="/review-settings" >  
+                          <b class="badge bg-info pull-right"></b>                                                           
+                            <i class="fa fa-angle-right"></i>
+                            <span>Settings</span>
+                          </a>
+                        </li>
+                      </ul>
                     </li>
-                    @endrole
-                       @role(['Nurse','System Admin'])
+                      @endrole
+                       @role(['HR Manager','System Admin'])
                         <li >
                       <a href="#pages"  >
                         <i class="fa fa-file-text icon">
@@ -129,7 +234,7 @@
                       <ul class="nav lt">
                         
                         <li >
-                          <a href="/invoice" >                                                        
+                          <a href="#" >                                                        
                             <i class="fa fa-angle-right"></i>
                             <span>Entitlement</span>
                           </a>
@@ -143,7 +248,7 @@
                         </li>
 
                         <li >
-                          <a href="/send-invoice" >                                                        
+                          <a href="/manage-holidays" >                                                        
                             <i class="fa fa-angle-right"></i>
                             <span>Configure</span>
                           </a>
@@ -165,42 +270,42 @@
                         </ul>
                     </li>
                     @endrole
-                    @role(['Nurse','System Admin'])
+                    @role(['HR Manager','System Admin'])
                     <li >
                       <a href="/disciplinary-cases"  >
                         
-                        <i class="fa fa-sort-numeric-asc icon">
+                        <i class="fa fa-thumbs-down icon">
                           <b class="dker" style="background-color: #bc65bd"></b>
                         </i>
                         <span>Discipline</span>
                       </a>
                     </li>
                     @endrole
-                       @role(['Nurse','System Admin'])
+                       @role(['HR Manager','HR Officer','System Admin'])
                     <li >
                       <a href="#"  >
                         
-                        <i class="fa fa-sort-numeric-asc icon">
+                        <i class="fa fa-star-o icon">
                           <b class="dker" style="background-color: #bc65bd"></b>
                         </i>
                         <span>Benefits</span>
                       </a>
                     </li>
                     @endrole
-                       @role(['Nurse','System Admin'])
+                       @role(['HR Manager','HR Officer','System Admin'])
                     <li >
-                      <a href="#"  >
+                      <a href="/awards"  >
                         
-                        <i class="fa fa-exchange icon">
+                        <i class="fa fa-trophy icon">
                           <b class="dker" style="background-color: #bc65bd"></b>
                         </i>
                         <span>Awards</span>
                       </a>
                     </li>
                     @endrole
-                      @role(['Nurse','System Admin'])
+                      @role(['HR Manager','HR Officer','System Admin'])
                     <li >
-                      <a href="#"  >
+                      <a href="/published-documents"  >
                         
                         <i class="fa fa-folder-open icon">
                           <b class="dker" style="background-color: #bc65bd"></b>
@@ -209,7 +314,7 @@
                       </a>
                     </li>
                     @endrole
-                    @role(['Nurse','System Admin'])
+                    @role(['HR Manager','System Admin'])
                     <li >
                       <a href="#"  >
                         
@@ -220,7 +325,7 @@
                       </a>
                     </li>
                     @endrole
-                       
+                     @role(['HR Manager','HR Officer','System Admin'])  
                      <li >
                       <a href="#pages"  >
                         <i class="fa fa-file-text icon">
@@ -235,42 +340,16 @@
                       <ul class="nav lt">
                         
                         <li >
-                          <a href="/medical-reports" >                                                        
+                          <a href="/report-list" >                                                        
                             <i class="fa fa-angle-right"></i>
-                            <span>Life</span>
+                            <span>Employee</span>
                           </a>
                         </li>
 
-                        <li >
-                          <a href="/patient-reports" >                                                        
-                            <i class="fa fa-angle-right"></i>
-                            <span>Motor</span>
-                          </a>
-                        </li>
+                       
 
                         <li >
-                          <a href="/financial-reports" >                                                        
-                            <i class="fa fa-angle-right"></i>
-                            <span>Accident</span>
-                          </a>
-                        </li>
-
-                        <li >
-                          <a href="/billing-reports" >                                                        
-                            <i class="fa fa-angle-right"></i>
-                            <span>Billing</span>
-                          </a>
-                        </li>
-
-                        <li >
-                          <a href="/purchases-reports" >                                                        
-                            <i class="fa fa-angle-right"></i>
-                            <span>Purchases</span>
-                          </a>
-                        </li>
-
-                        <li >
-                          <a href="/company-reports" >                                                        
+                          <a href="/report-list" >                                                        
                             <i class="fa fa-angle-right"></i>
                             <span>Company</span>
                           </a>
@@ -278,7 +357,7 @@
                        
                       </ul>
                     </li>
-                    @role('System Admin')
+                   @endrole
                   <li >
                       <a href="#pages"  >
                         <i class="fa fa-wrench icon">
@@ -291,17 +370,25 @@
                         <span>Admin</span>
                       </a>
                       <ul class="nav lt">
-                        
+                      @role(['HR Manager','HR Officer','Staff','System Admin'])
+                        <li >
+                          <a href="{{ url('/password/email') }}" >                                                        
+                            <i class="fa fa-angle-right"></i>
+                            <span>Reset Password</span>
+                          </a>
+                        </li>
+                        <li >
+                          <a href="/signout" >                                                        
+                            <i class="fa fa-angle-right"></i>
+                            <span>Logout</span>
+                          </a>
+                        </li>
+                        @endrole
+                         @role(['HR Manager','HR Officer','System Admin'])
                         <li >
                           <a href="/job-title" >                                                        
                             <i class="fa fa-angle-right"></i>
                             <span>Job</span>
-                          </a>
-                        </li>
-                         <li >
-                          <a href="/reporting" >                                                        
-                            <i class="fa fa-angle-right"></i>
-                            <span>Organization</span>
                           </a>
                         </li>
                          <li >
@@ -310,34 +397,30 @@
                             <span>Qualification</span>
                           </a>
                         </li>
-                        <li >
-                          <a href="/reporting" >                                                        
+                         <li >
+                          <a href="/manage-holidays" >                                                        
                             <i class="fa fa-angle-right"></i>
-                            <span>Nationalities</span>
+                            <span>Miscellaneous</span>
                           </a>
                         </li>
-                        <li >
-                          <a href="/reporting" >                                                        
-                            <i class="fa fa-angle-right"></i>
-                            <span>Annoucements</span>
-                          </a>
-                        </li>
-                        <li >
-                          <a href="/company.index" >                                                        
-                            <i class="fa fa-angle-right"></i>
-                            <span>Company</span>
-                          </a>
-                        </li>
+                        @endrole
+                         @role(['HR Manager','System Admin'])
                         <li >
                           <a href="/manage-users" >                                                        
                             <i class="fa fa-angle-right"></i>
                             <span>User Management</span>
                           </a>
                         </li>
-                       
+                        <li >
+                          <a href="/audit-trails" >                                                        
+                            <i class="fa fa-angle-right"></i>
+                            <span>Audit Trail</span>
+                          </a>
+                        </li>
+                        @endrole
                       </ul>
                     </li>
-                    @endrole
+                   
                     <li >
                   </ul>
                 </nav>
@@ -381,4 +464,3 @@
             </footer>
           </section>
         </aside>
-@endrole  

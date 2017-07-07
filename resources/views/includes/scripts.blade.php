@@ -35,10 +35,13 @@
 <script src="{{ asset('/js/libs/underscore-min.js')}}"></script>
 <script src="{{ asset('/js/prettyphoto/jquery.prettyPhoto.js')}}"></script>  
 <script src="{{ asset('/js/grid/jquery.grid-a-licious.min.js')}}"></script>
+<script src="{{ asset('/js/nestable/jquery.nestable.js')}}"></script>
+<script src="{{ asset('/js/sortable/jquery.sortable.js')}}"></script>
+<script src="{{ asset('/js/nestable/demo.js')}}"></script>
 
 
 
-<script src="{{ asset('/js/apps/notes.js')}}"></script>
+
 
 <script>
 

@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => OrionMedical\Models\User::class,
+    'model' => McPersona\Models\User::class,
 
     /*
     |--------------------------------------------------------------------------

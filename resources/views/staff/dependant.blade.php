@@ -16,15 +16,15 @@
                         <div class="form-group pull-in clearfix">
                           <div class="col-sm-6">
                             <label>Gender</label> 
-                            <div class="form-group{{ $errors->has('dependant_relationship') ? ' has-error' : ''}}">
-                             <select id="dependant_relationship" name="dependant_relationship" rows="3" tabindex="1" data-placeholder="Select here.." class="form-control m-b">
+                            <div class="form-group{{ $errors->has('dependant_gender') ? ' has-error' : ''}}">
+                             <select id="dependant_gender" name="dependant_gender" rows="3" tabindex="1" data-placeholder="Select here.." class="form-control m-b">
                           <option value="">-- Not set --</option>
                           @foreach($genders as $gender)
                             <option value="{{ $gender->type }}">{{ $gender->type }}</option>
                           @endforeach
                         </select>            
-                           @if ($errors->has('dependant_relationship'))
-                          <span class="help-block">{{ $errors->first('dependant_relationship') }}</span>
+                           @if ($errors->has('dependant_gender'))
+                          <span class="help-block">{{ $errors->first('dependant_gender') }}</span>
                            @endif    
                           </div>
                           </div>
@@ -89,6 +89,7 @@
                       </div>
                      
                       <footer class="panel-footer text-right bg-light lter">
-                        <button type="button" onclick="saveDependantDetails()" class="btn btn-success btn-s-xs">Save</button>
+                        <button type="button" onclick="saveDependantDetails()" name="btndependant" class="btn btn-success btn-s-xs">Save</button>
+                        <input type="hidden" name="dependant_id" id="dependant_id" value="{{ Request::old('dependant_id') ?: '' }}">
                       </footer>
                     </section>

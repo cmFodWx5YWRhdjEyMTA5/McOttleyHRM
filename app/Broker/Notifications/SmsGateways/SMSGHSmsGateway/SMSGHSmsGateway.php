@@ -6,10 +6,10 @@
  * Time: 5:13 AM
  */
 
-namespace OrionMedical\Broker\Notifications\SmsGateways\SMSGHSmsGateway;
+namespace McPersona\Broker\Notifications\SmsGateways\SMSGHSmsGateway;
 
 
-use OrionMedical\Broker\Notifications\SmsGateways\SmsGatewayInterface;
+use McPersona\Broker\Notifications\SmsGateways\SmsGatewayInterface;
 
 class SMSGHSmsGateway implements SmsGatewayInterface
 {
@@ -22,7 +22,7 @@ class SMSGHSmsGateway implements SmsGatewayInterface
 
     public function __construct()
     {
-        $apiPath = app_path().'/OrionMedical/Broker/Api/SMSGH/Smsgh/Api.php';
+        $apiPath = app_path().'/McPersona/Broker/Api/SMSGH/Smsgh/Api.php';
 
         if(file_exists($apiPath))
         {

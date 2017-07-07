@@ -7,8 +7,8 @@
  * @license MIT
  * @package Zizaco\Entrust
  */
-use OrionMedical\Models\Permission;
-use OrionMedical\Models\Role;
+use McPersona\Models\Permission;
+use McPersona\Models\Role;
 
 return [
 

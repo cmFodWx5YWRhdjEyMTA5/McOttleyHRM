@@ -1,11 +1,11 @@
 <?php
 
-namespace OrionMedical\Http\Controllers;
+namespace McPersona\Http\Controllers;
 
 use Illuminate\Http\Request;
-use OrionMedical\Models\Event;
-use OrionMedical\Http\Requests;
-use OrionMedical\Http\Controllers\Controller;
+use McPersona\Models\Event;
+use McPersona\Http\Requests;
+use McPersona\Http\Controllers\Controller;
 use DateTime;
 use Input;
 use Response;

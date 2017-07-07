@@ -40,10 +40,10 @@
                         <div class="form-group pull-in clearfix">
                           <div class="col-sm-6">
                             <label>Home Telephone</label> 
-                            <div class="form-group{{ $errors->has('guarantor_home_phone') ? ' has-error' : ''}}">
-                           <input type="text" rows="3" class="form-control" id="guarantor_home_phone" name="guarantor_home_phone" value="{{ Request::old('guarantor_home_phone') ?: '' }}">   
-                           @if ($errors->has('guarantor_home_phone'))
-                          <span class="help-block">{{ $errors->first('guarantor_home_phone') }}</span>
+                            <div class="form-group{{ $errors->has('guarantor_office_phone') ? ' has-error' : ''}}">
+                           <input type="text" rows="3" class="form-control" id="guarantor_office_phone" name="guarantor_office_phone" value="{{ Request::old('guarantor_office_phone') ?: '' }}">   
+                           @if ($errors->has('guarantor_office_phone'))
+                          <span class="help-block">{{ $errors->first('guarantor_office_phone') }}</span>
                            @endif    
                           </div>
                           </div>
@@ -63,6 +63,7 @@
                       </div>
                      
                       <footer class="panel-footer text-right bg-light lter">
-                        <button type="button" onclick="saveGuarantorDetails()" class="btn btn-success btn-s-xs">Save</button>
+                        <button type="button" onclick="saveGuarantorDetails()" name="btnguarantor" class="btn btn-success btn-s-xs">Save</button>
+                          <input type="hidden" name="guarantor_id" id="guarantor_id" value="{{ Request::old('guarantor_id') ?: '' }}">
                       </footer>
                     </section>

@@ -55,10 +55,10 @@
                         <div class="form-group pull-in clearfix">
                           <div class="col-sm-6">
                             <label>Postal Address</label> 
-                            <div class="form-group{{ $errors->has('kin_home_phone') ? ' has-error' : ''}}">
-                           <textarea type="text" rows="3" class="form-control" id="kin_home_phone" name="kin_home_phone" value="{{ Request::old('kin_home_phone') ?: '' }}"></textarea>
-                           @if ($errors->has('kin_home_phone'))
-                          <span class="help-block">{{ $errors->first('kin_home_phone') }}</span>
+                            <div class="form-group{{ $errors->has('kin_postal') ? ' has-error' : ''}}">
+                           <textarea type="text" rows="3" class="form-control" id="kin_postal" name="kin_postal" value="{{ Request::old('kin_postal') ?: '' }}"></textarea>
+                           @if ($errors->has('kin_postal'))
+                          <span class="help-block">{{ $errors->first('kin_postal') }}</span>
                            @endif    
                           </div>
                           </div>
@@ -66,10 +66,10 @@
                          
                          <div class="col-sm-6">
                             <label>Residential Address</label> 
-                            <div class="form-group{{ $errors->has('kin_home_phone') ? ' has-error' : ''}}">
-                           <textarea type="text" rows="3" class="form-control" id="kin_home_phone" name="kin_home_phone" value="{{ Request::old('kin_home_phone') ?: '' }}"></textarea>
-                           @if ($errors->has('kin_home_phone'))
-                          <span class="help-block">{{ $errors->first('kin_home_phone') }}</span>
+                            <div class="form-group{{ $errors->has('kin_residential') ? ' has-error' : ''}}">
+                           <textarea type="text" rows="3" class="form-control" id="kin_residential" name="kin_residential" value="{{ Request::old('kin_residential') ?: '' }}"></textarea>
+                           @if ($errors->has('kin_residential'))
+                          <span class="help-block">{{ $errors->first('kin_residential') }}</span>
                            @endif    
                           </div>
                           </div>
@@ -101,6 +101,7 @@
                       </div>
                      
                       <footer class="panel-footer text-right bg-light lter">
-                        <button type="button" onclick="saveEmergencyDetails()" class="btn btn-success btn-s-xs">Save</button>
+                        <button type="button" onclick="saveEmergencyDetails()" name="btnemergency" class="btn btn-success btn-s-xs">Save</button>
+                          <input type="hidden" name="emergency_id" id="emergency_id" value="{{ Request::old('emergency_id') ?: '' }}">
                       </footer>
                     </section>

@@ -4,13 +4,14 @@
   <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
   <link rel="stylesheet" href="{{ asset('/css/bootstrap.css')}}" type="text/css" />
-  <link rel="stylesheet" href="{{ asset('/css/animate.css')}}" type="text/css" />
-  <link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css')}}" type="text/css" />
+  <link rel="stylesheet" href="{{ asset('/css/animate.css')}}" type="text/css"  />
+  <link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css')}}" type="text/css"  />
   <link rel="stylesheet" href="{{ asset('/css/font.css')}}" type="text/css" />
- <link rel="stylesheet" href="{{ asset('/css/app.css')}}" type="text/css" />
-  <link rel="stylesheet" href="{{ asset('/js/fullcalendar/fullcalendar.css')}}" type="text/css"  />
+ <link rel="stylesheet" href="{{ asset('/css/app.css')}}" type="text/css"  />
+  <link rel="stylesheet" href="{{ asset('/js/fullcalendar/fullcalendar.css')}}" type="text/css" />
   <link rel="stylesheet" href="{{ asset('/js/fullcalendar/theme.css')}}" type="text/css" />
-  <link rel="stylesheet" href="{{ asset('/js/datepicker/datepicker.css')}}" type="text/css">
+  <link rel="stylesheet" href="{{ asset('/js/datepicker/datepicker.css')}}" type="text/css" />
+  <link rel="stylesheet" href="{{ asset('/js/nestable/nestable.css')}}" type="text/css" />
  
 
 
@@ -20,18 +21,41 @@
     <script src="js/ie/excanvas.js"></script>
   <![endif]-->
 
-  <link rel="stylesheet" href="{{ asset('/js/select2/select2.css')}}" type="text/css" /> 
-  <link rel="stylesheet" href="{{ asset('/js/select2/theme.css')}}" type="text/css" />
-  <link rel="stylesheet" href="{{ asset('/js/fuelux/fuelux.css')}}" type="text/css"/>
-  <link rel="stylesheet" href="{{ asset('/js/sweetalert.css')}}" type="text/css"/>
-  <link rel="stylesheet" href="{{ asset('/js/slider/slider.css')}}" type="text/css" />
+  <link rel="stylesheet" href="{{ asset('/js/select2/select2.css')}}" type="text/css"  /> 
+  <link rel="stylesheet" href="{{ asset('/js/select2/theme.css')}}" type="text/css"  />
+  <link rel="stylesheet" href="{{ asset('/js/fuelux/fuelux.css')}}" type="text/css"  />
+  <link rel="stylesheet" href="{{ asset('/js/sweetalert.css')}}" type="text/css" />
+  <link rel="stylesheet" href="{{ asset('/js/slider/slider.css')}}" type="text/css"  />
 
   <link rel="stylesheet" href="{{ asset('/font-awesome/css/font-awesome.min.css')}}" type="text/css" />
   <link rel="stylesheet" href="{{ asset('/fontello/css/fontello.css')}}" type="text/css"  />
-  <link rel="stylesheet" href="{{ asset('/js/daterangepicker.css')}}" type="text/css" />
+  <link rel="stylesheet" href="{{ asset('/js/daterangepicker.css')}}" type="text/css"  />
 
   <link rel="stylesheet" href="{{ asset('/js/prettyphoto/prettyPhoto.css')}}" type="text/css" />
   <link rel="stylesheet" href="{{ asset('/js/grid/gallery.css')}}" type="text/css" />
-  <link rel="stylesheet" href="{{ asset('/js/toastr/toastr.css')}}" type="text/css" />
+  <link rel="stylesheet" href="{{ asset('/js/toastr/toastr.css')}}" type="text/css"  />
+
+
+
+  <style type="text/css">
+  
+  .float{
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:40px;
+  right:40px;
+  background-color:#0C9;
+  color:#FFF;
+  border-radius:50px;
+  text-align:center;
+  box-shadow: 2px 2px 3px #999;
+}
+
+.my-float{
+  margin-top:22px;
+}
+
+</style>
 
 </head>

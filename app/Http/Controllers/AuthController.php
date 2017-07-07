@@ -1,16 +1,22 @@
 <?php
 
-namespace OrionMedical\Http\Controllers;
+namespace McPersona\Http\Controllers;
 
 use Auth;
 use Illuminate\Http\Request;
-use OrionMedical\Models\User;
-use OrionMedical\Http\Requests;
-use OrionMedical\Http\Controllers\Controller;
+use McPersona\Models\User;
+use McPersona\Http\Requests;
+use McPersona\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Contracts\Auth\CanResetPassword;
 use DB;
-use OrionMedical\Models\Role; 
+use Input;
+use Response;
+use McPersona\Models\Role; 
+use McPersona\Models\AuditTrails; 
+use McPersona\Models\Employee; 
+
 
 class AuthController extends Controller
 {
@@ -20,13 +26,6 @@ class AuthController extends Controller
     protected $redirectTo = '/';
 
 
-     
-     public function getSignup()
-    {
-         $roles=Role::get();
-         return view('auth.signup',compact('roles'));
-    }
-   
 
     public function postSignup(Request $request)
     {
@@ -68,10 +67,74 @@ class AuthController extends Controller
     }
 
 
+     public function resetPassword(Request $request)
+    {
+        $this->validate($request, [
+                'email'=> 'required|unique:users|email|max:255',
+                'password' => 'required|same:password_confirmation',
+                'password_confirmation' => 'required',
+            ]);
+
+         
+            
+            $affectedRows = User::where('email', $request->input('email'))->update(array('password' =>  bcrypt($request->input('password'))));
+
+            if($affectedRows > 0)
+            {
+               
+                return redirect()
+            ->route('/signin')
+            ->with('info','Password has successfully been updated!, User can now sign in');
+            }
+            else
+            {
+                return redirect()
+            ->route('/signin')
+            ->with('Warning','Password failed to update');
+            }
+
+    }
+
+
+    public function findUser(Request $request)
+    {
+      
+
+        $this->validate($request, [
+            'search' => 'required'
+        ]);
+
+        $search = $request->get('search');
+
+        $users =            User::where('fullname', 'like', "%$search%")
+            ->orderBy('fullname')
+            ->paginate(30)
+            ->appends(['search' => $search])
+        ;
+     return view('auth.user',compact('users'));
+  
+    }
+
+
+    Public function getAudit()
+    {
+        $audits = AuditTrails::paginate(30);
+        
+        return view('auth.audit',compact('audits'));
+
+    }
+
+
+
 
     public function getSignin()
     {
         return view('auth.signin');
+    }
+
+ public function resetnotice()
+    {
+        return view('auth.notice');
     }
 
     public function postSignin(Request $request)
@@ -92,11 +155,25 @@ class AuthController extends Controller
                     ->with('error','Invalid Username/Password combination. Please try again');
         }
 
-        if(Auth::user()->usertype == 'Guest')
+        //dd(Auth::user()->usertype);
+
+
+        if(Auth::user()->usertype == 'Staff')
         {
-        return redirect()
-            ->route('patient-profile',Auth::user()->location)
+            if(Auth::user()->created_at != Auth::user()->updated_at)
+            {
+            
+            $staffobsid = Employee::where('staff_id',Auth::user()->ref_Code)->first();
+            return redirect()
+            ->route('employee-profile',$staffobsid->obsid)
             ->with('info','You are now signed in');
+
+            }
+
+            return redirect()
+            ->route('reset-password-notice')
+            ->with('info','First time login, Please reset your passowrd!!!');
+
         }
 
          return redirect()
@@ -106,14 +183,44 @@ class AuthController extends Controller
     }
 
     
+public function deleteUser()
+    {
+
+        if(Input::get("ID"))
+        {
+            $ID = Input::get("ID");
+            $affectedRows = User::where('id', '=', $ID)->delete();
+
+            if($affectedRows > 0)
+            {
+                $ini   = array('OK'=>'OK');
+                return  Response::json($ini);
+            }
+            else
+            {
+                $ini   = array('No Data'=>$ID);
+                return  Response::json($ini);
+            }
+        }
+        else
+        {
+           $ini   = array('No Data'=>'No Data');
+           return  Response::json($ini);
+        }
+
+    }
 
 
 
+        public function edit() 
+        {
+        return view('auth.reset');
+        }
 
      public function getUsers()
     {
-
-        $users =  User::paginate(30);
+        
+    $users =  User::paginate(30);
        return view('auth.user', compact('users'));
     }
 

@@ -4,7 +4,7 @@
 <body>
   <section id="content" class="m-t-lg wrapper-md animated fadeInUp">    
     <div class="container aside-xxl">
-      <a class="navbar-brand block" href="#">Orion HRM Login</a>
+      <a class="navbar-brand block" href="#">McPersona</a>
       <section class="panel panel-default bg-white m-t-lg">
         <header class="panel-heading text-center">
           <strong>Sign in</strong>
@@ -35,14 +35,14 @@
             </label>
           </div>
           <input type="hidden" name="_token" value="{{ Session::token() }}">
-          <a href="#" class="pull-right m-t-xs"><small>Forgot password?</small></a>
+          <a href="{{ url('/password/email') }}" class="pull-right m-t-xs"><small>Forgot password?</small></a>
           <button class="btn btn-lg btn-login btn-block" id="login" name="login" value="Login" type="submit">Sign in</button>
          
 
         </form>
       </section>
     </div>
-  </section>
+  
   <!-- footer -->
   <footer id="footer">
     <div class="text-center padder">
@@ -51,6 +51,7 @@
       </p>
     </div>
   </footer>
+  </section>
   <!-- / footer -->
   <script src="{{ asset('/js/jquery.min.js')}}"></script>
   <!-- Bootstrap -->
@@ -61,7 +62,7 @@
   <script src="{{ asset('/js/slimscroll/jquery.slimscroll.min.js')}}"></script>
   <script type="text/javascript" src="{{ asset('/js/jquery.backstretch.min.js')}}"></script>
    <script>
-          $.backstretch("{{ asset('images/WDF_1620903.jpg')}}", {speed: 500});
+          $.backstretch("{{ asset('images/lock-screen.jpg')}}", {speed: 500});
       </script>
 
 

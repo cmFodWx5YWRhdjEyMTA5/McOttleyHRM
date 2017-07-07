@@ -4,8 +4,13 @@
                         <div class="form-group pull-in clearfix">
                           <div class="col-sm-12">
                           <div class="form-group{{ $errors->has('reportto_name') ? ' has-error' : ''}}">
-                            <label>Name</label>
-                            <input type="text" rows="3" class="form-control" id="reportto_name" name="reportto_name" value="{{ Request::old('reportto_name') ?: '' }}"> 
+                            <label>Employee Name</label>
+                            <select id="reportto_name" name="reportto_name" data-required="true" rows="3" tabindex="1" data-placeholder="Select here.." style="width:100%" >
+                         <option value="">-- Select an employee --</option>
+                              @foreach($reportto as $reportto)
+                        <option value="{{ $reportto->fullname }}">{{ $reportto->fullname }}</option>
+                          @endforeach  
+                         </select>         
                            @if ($errors->has('reportto_name'))
                           <span class="help-block">{{ $errors->first('reportto_name') }}</span>
                            @endif    

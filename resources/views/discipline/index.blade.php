@@ -11,10 +11,10 @@
                      
                       <a href="#subNav" data-toggle="class:hide" class="btn btn-sm btn-default active"><i class="fa fa-caret-right text fa-lg"></i><i class="fa fa-caret-left text-active fa-lg"></i></a>
                       <a href="#" data-toggle="modal" class="btn btn-sm btn-default"><i class="fa fa-upload"></i> Upload</a>
-                      <a href="#" data-toggle="modal" class="btn btn-sm btn-default"><i class="fa fa-file"></i> File</a>
-                      <a href="#new-disciplinary-case"  data-toggle="modal" class="btn btn-sm btn-dark bootstrap-modal-form-open"><i class="fa fa-group"></i> Create New Case</a>
+                      <a href="#" data-toggle="modal" class="btn btn-sm btn-default"><i class="fa fa-file"></i> Discipline Template</a>
+                      <a href="#new-disciplinary-case"  data-toggle="modal" class="btn btn-sm btn-info bootstrap-modal-form-open"><i class="fa fa-group"></i> Create New Case</a>
                     <a href="#" data-toggle="modal" class="btn btn-sm btn-default"><i class="fa fa-print"></i> Print List</a>
-                     <span class="badge badge-info">Record(s) Found : {{ $cases->total() }} {{ str_plural('Leave', $cases->total()) }}</span>
+                     <span class="badge badge-info">Record(s) Found : {{ $cases->total() }} {{ str_plural('Disciplinary Case', $cases->total()) }}</span>
                     </div>
 
                   <form action="/find-leave" method="GET">
@@ -28,7 +28,6 @@
                     </div>
                      </form>
                   </div>
-                  </div>
                 </header>
                 <section class="scrollable wrapper w-f">
                   <section class="panel panel-default">
@@ -36,47 +35,48 @@
                       <table class="table table-striped m-b-none text-sm" width="100%">
                         <thead>
                           <tr>
+                          <th>#</th>
                             <th>Employee</th>
                             <th>Case Name</th>
                             <th>Description</th>
                             <th>Created By</th>
                             <th>Created On</th>
                             <th>Disciplanary Action</th>
-                            <th>Status</th>
+                            <th>Comment</th>
+                            <th></th>
+                            <th></th>
                             <th></th>
                             <th></th>
                           </tr>
                         </thead>
                         <tbody>
-                      {{--  @foreach( $schedules as $employee )
+                       @foreach( $cases as $key => $case )
                           <tr>
-                            <td><a href="/customer-profile/{{ $employee->id }}" class="text-default">{{ $employee->name }}</a></td>
-                             <td>{{ $employee->leave_from }} to {{ $employee->leave_to }}</td>
-                            <td>{{ $employee->leave_type }}</td>
-                            <td>0</td>
-                            <td>0</td>
-
-                            <td>{{ $employee->status }}</td>
+                            <td>{{ ++$key }}</td>
+                            <td>{{ $case->staff_id }}</td>
+                            <td>{{ $case->case }}</td>
+                            <td>{{ $case->description }}</td>
+                            <td>{{ $case->created_by }}</td>
+                            <td>{{ $case->created_on }}</td>
                             <td>
-                            <div class="input-group-btn">
-                            @if($employee->status==="Approved")
-                            <button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
-                            @elseif($employee->status==="Rejected")
-                            <button type="button" class="btn btn-danger btn-xs dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
-                            @else
-                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
-                            @endif
+                           <div class="input-group-btn">
+                           
+                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">@if($case->action==null) Waiting for action @else{{ $case->action }} @endif <span class="caret"></span></button>
+
                             <ul class="dropdown-menu pull-right">
-                            <li><a onclick="approve('{{ $employee->id }}','{{ $employee->id }}')">Approve</a></li>
-                            <li><a href="/laboratory-drug-alcohol/{{ $employee->id }}">Cancel</a></li>
-                            <li><a onclick="reject('{{ $employee->id }}','{{ $employee->id }}')">Reject</a></li>
+                            @foreach($actions as $action)
+                            <li><a onclick="process('{{$case->id}}','{{$case->case}}','{{ $action->action }}')">{{ $action->action }}</a></li>
+                            @endforeach
                             </ul>
                             </div>
                             </td>
-                            <td><a class="bootstrap-modal-form-open" onclick="setAccountNo('{{ $employee->id }}')"  id="edit" name="edit" data-toggle="modal" alt="edit"><i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="" data-original-title="Details"></i></a></td>
-                            <td><a class="bootstrap-modal-form-open" onclick="saveComment('{{ $employee->id }}')"  id="edit" name="edit" data-toggle="modal" alt="edit"><i class="fa fa-comment" data-toggle="tooltip" data-placement="top" title="" data-original-title="Comment"></i></a></td>
+                           <td>{{ $case->status }}</td>
+                            <td><a href="/'{{ $action->route }}'" data-toggle="modal" ><i class="fa fa-print"></i></a></td>
+                            <td><a href="#" onclick="saveComment('{{$case->id}}')" ><i class="fa fa-comment"></i></a></td>
+                            <td><a href="#" onclick="deleteCase('{{$case->id}}')"><i class="fa fa-trash"></i></a></td>
+                             <td><a href="#new-document"  data-toggle="modal" class="bootstrap-modal-form-open"><i class="fa fa-plus"></i></a></td>
                           </tr>
-                         @endforeach  --}}
+                         @endforeach 
                         </tbody>
  
                       </table>
@@ -105,6 +105,39 @@
         </section>
 @stop
 
+ <div class="modal fade" id="new-document" size="600">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Attach Document</h4>
+        </div>
+
+        <div class="modal-body">
+         <div class="fallback">
+          <form method="post"  enctype="multipart/form-data" action="/create-document">
+          <input type="text" class="form-control" width="1000px" height="40px" name="filename" id="filename" placeholder="Enter file name" /><br>
+          <input type="file" class="form-control dropbox" width="500px" height="40px" name="image" /><br>
+          <input type="submit" name="submit"  class="btn btn-success btn-s-xs" value="upload" />
+          <input type="hidden" name="_token" value="{{ Session::token() }}">
+        </form>
+        </div>
+          <br>
+          <br>
+          <br>
+              <div class="jumbotron how-to-create">
+                <ul>
+                    <li>Documents/Images are uploaded as soon as you drop them</li>
+                    <li>Maximum allowed size of image is 8MB</li>
+                </ul>
+
+            </div>
+
+      </div>
+      </div>
+      </div>
+      </div>
+
  <div class="modal fade" id="new-disciplinary-case" style="height:700px">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -118,7 +151,7 @@
                     <section class="scrollable">
                       <div class="tab-content">
                         <div class="tab-pane active" id="individual">
-                           <form  class="bootstrap-modal-form" method="post" action="/assign-leave" class="panel-body wrapper-lg">
+                           <form  class="bootstrap-modal-form"  method="post" data-validate="parsley" action="/add-case" class="panel-body wrapper-lg">
                            @include('discipline/new')
                         <input type="hidden" name="_token" value="{{ Session::token() }}">
                       </form>
@@ -132,75 +165,38 @@
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 
-<script >
-function approve(id,name)
-  {
 
-         
-      swal({   
-        title: "Are you sure?",   
-        text: "Do you want to approve "+name+" ?",   
-        type: "warning",   
-        showCancelButton: true,   
-        confirmButtonColor: "#DD6B55",   
-        confirmButtonText: "Yes, approve it!",   
-        cancelButtonText: "No, cancel !",   
-        closeOnConfirm: false,   
-        closeOnCancel: false }, 
-        function(isConfirm){   
-          if (isConfirm) 
-          { 
-          $.get('/approve-leave',
-          {
-             "ID": id 
-          },
-          function(data)
-          { 
-            
-            $.each(data, function (key, value) 
-            {
-            if(value == "OK")
-            {
-              swal("Deleted!", name +" was successfully approved.", "success"); 
-              location.reload(true);
-             }
-            else
-            { 
-              swal("Cancelled", name +" failed to approve.", "error");
-              
-            }
-           
-        });
-                                          
-          },'json');    
-           
-             } 
-        else {     
-          swal("Cancelled", name +" failed to approve.", "error");   
-        } });
+ <script src="{{ asset('/event_components/jquery.min.js')}}"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#staff_id').select2();
 
-  }
+  });
+</script>
 
-  function reject(id,name)
+
+<script type="text/javascript">
+  function process(id,name,action)
   {
 
         //alert(id,name);
       swal({   
-        title: "Are you sure?",   
-        text: "Do you want to reject "+name+" ?",   
+        title: "Are you sure",   
+        text: "You want to "+action+" for "+name+" ?",   
         type: "warning",   
         showCancelButton: true,   
         confirmButtonColor: "#DD6B55",   
-        confirmButtonText: "Yes, reject it!",   
+        confirmButtonText: "Yes, action it!",   
         cancelButtonText: "No, cancel !",   
         closeOnConfirm: false,   
         closeOnCancel: false }, 
         function(isConfirm){   
           if (isConfirm) 
           { 
-          $.get('/reject-leave',
+          $.get('/action-case',
           {
-             "ID": id 
+             "ID": id, 
+             "action":action
           },
           function(data)
           { 
@@ -209,7 +205,7 @@ function approve(id,name)
             {
             if(value == "OK")
             {
-              swal("Deleted!", name +" was rejected successully.", "success"); 
+              swal("Actioned!", name +" has been actioned.", "success"); 
               location.reload(true);
              }
             else
@@ -229,100 +225,6 @@ function approve(id,name)
 
   }
 
-function saveLeaveRequest()
-{
-
- // alert($('#staff_id').val());
-if($('#staff_id').val()!= "")
-{
-
-    $.get('/save-leave-request',
-        {
-          "staff_id":           $('#staff_id').val(),
-           "leave_type":        $('#leave_type').val(),
-           "leave_from":        $('#leave_from').val(),
-           "leave_to":          $('#leave_to').val(),
-          "comment":            $('#comment').val()
-        },
-
-
-        function(data)
-        { 
-          
-          $.each(data, function (key, value) {
-        if(data["OK"])
-        {
-        
-        swal("Leave request saved!");
-        
-        location.reload(true);
-
-        }
-        else
-        {
-          toastr.error("Leave request failed to save!");
-        }
-      });
-                                        
-        },'json');
-  }
-  else
-    {
-      sweetAlert("Please select an employee!");
-    }
-}
-
-
-function loadPendingLeave()
-   {
-         
-        
-        $.get('/load-pending-leave')
-  }
-
-</script>
-
-
-
- <script src="{{ asset('/event_components/jquery.min.js')}}"></script>
-
-<script type="text/javascript">
-$(function () {
-  $('#leave_from').daterangepicker({
-     "minDate": moment(),
-    "singleDatePicker":true,
-    "autoApply": true,
-    "showDropdowns": true,
-    "locale": {
-      "format": "DD/MM/YYYY",
-      "separator": " - ",
-    }
-  });
-});
-</script>
-
-<script type="text/javascript">
-$(function () {
-  $('#leave_to').daterangepicker({
-     "minDate": moment(),
-    "singleDatePicker":true,
-    "autoApply": true,
-    "showDropdowns": true,
-    "locale": {
-      "format": "DD/MM/YYYY",
-      "separator": " - ",
-    }
-  });
-});
-</script>
-
-
-
-<script type="text/javascript">
-$(document).ready(function () {
-    $('#staff_id').select2();
-
-  });
 </script>
 
 
@@ -332,8 +234,8 @@ $(document).ready(function () {
   {
 
   swal({
-  title: "Comment on leave status!",
-  text: "Enter leave comment:",
+  title: "Comment on case status!",
+  text: "Enter disciplinary comment:",
   type: "input",
   showCancelButton: true,
   closeOnConfirm: false,
@@ -350,10 +252,10 @@ function(inputValue){
   
   else
   {
-    $.get('/process-leave-comment',
+    $.get('/add-case-comment',
           {
              "ID": id,
-             "amountpaid": inputValue  
+             "comment": inputValue  
           },
           function(data)
           { 
@@ -362,7 +264,7 @@ function(inputValue){
             {
             if(value == "OK")
             {
-              swal("Paid!", name +" was successfully processed.", "success"); 
+              swal("Saved!", name +" was successfully processed.", "success"); 
               location.reload(true);
              }
             else
@@ -380,7 +282,57 @@ function(inputValue){
 }
 
 
+ function deleteCase(id)
+   {
+      swal({   
+        title: "Are you sure?",   
+        text: "Do you want to remove this case from list?",   
+        type: "warning",   
+        showCancelButton: true,   
+        confirmButtonColor: "#DD6B55",   
+        confirmButtonText: "Yes, delete it!",   
+        cancelButtonText: "No, cancel plx!",   
+        closeOnConfirm: false,   
+        closeOnCancel: false }, 
+        function(isConfirm){   
+          if (isConfirm) 
+          { 
+          $.get('/delete-case',
+          {
+             "ID": id 
+          },
+          function(data)
+          { 
+            
+            $.each(data, function (key, value) 
+            {
+            if(value == "OK")
+            {
+              swal("Deleted!", "Case was removed from list.", "success"); 
+               location.reload(true);
+             }
+            else
+            { 
+              swal("Cancelled","Failed to be removed from list.", "error");
+              
+            }
+           
+        });
+                                          
+          },'json');    
+           
+             } 
+        else {     
+          swal("Cancelled","Failed to be removed from list.", "error");   
+        } });
+
+   }
+
+
+
 </script>
+
+
 
 
 

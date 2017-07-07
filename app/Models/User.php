@@ -1,22 +1,21 @@
 <?php
 
-namespace OrionMedical\Models;
+namespace McPersona\Models;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-
+use Zizaco\Entrust\Traits\EntrustUserTrait;
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-use Zizaco\Entrust\Traits\EntrustUserTrait;
-
-
-
-class User extends Model implements AuthenticatableContract
-                                    
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-
-    use Authenticatable ;
-    use EntrustUserTrait ;
+    use Authenticatable;
+    use CanResetPassword;
+    use EntrustUserTrait;
+        
         
 
     protected $table = 'users';
@@ -30,6 +29,7 @@ class User extends Model implements AuthenticatableContract
     'usertype'
     ];
 
+    protected $dates = ['password_updated_at','created_at','updated_at'] ;
     protected $hidden = [ 
     'password', 
     'remember_token'];
@@ -44,6 +44,11 @@ class User extends Model implements AuthenticatableContract
         
         return null;
 
+    }
+
+    public function hasOldPassword()
+    {
+        return $this->password_updated_at->lt(Carbon::now()->subMonth(3));
     }
 
      public function getNameOrUsername()

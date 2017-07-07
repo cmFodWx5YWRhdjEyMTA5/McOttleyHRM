@@ -1,6 +1,6 @@
 <?php
 
-namespace OrionMedical\Http\Requests;
+namespace McPersona\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

@@ -32,7 +32,9 @@
         "captcha-com/laravel-captcha": "^4.1",
         "maknz/slack": "^1.7",
         "spatie/laravel-backup": "^3.9",
-        "hashids/hashids": "^1.0"
+        "hashids/hashids": "^1.0",
+        "fx3costa/laravelchartjs": "^2.2",
+        "consoletvs/charts": "^4.5"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
@@ -44,7 +46,7 @@
             "database"
         ],
         "psr-4": {
-            "OrionMedical\\": "app/"
+            "McPersona\\": "app/"
         }
     },
     "autoload-dev": {

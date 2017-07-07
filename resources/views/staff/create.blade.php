@@ -24,10 +24,12 @@
 
                           <div class="col-sm-6">
                           <div class="form-group{{ $errors->has('staff_type') ? ' has-error' : ''}}">
-                            <label>Customer Type</label>
-                            <select id="staff_type" name="staff_type" rows="3" tabindex="1" data-placeholder="Select here.." class="form-control m-b">
+                            <label>Staff Type</label>
+                            <select id="staff_type" name="staff_type" rows="3" data-required="true" tabindex="1" data-placeholder="Select here.." class="form-control m-b" data-toggle="tooltip" data-placement="top" title="" data-original-title="Your employees can be classified in different ways based on their compensation and the type of work they do.">
                           <option value="">-- Select an account --</option>
-                          
+                          @foreach($employeestatus as $employeestatus)
+                        <option value="{{ $employeestatus->type }}">{{ $employeestatus->type }}</option>
+                        @endforeach
                         </select>         
                            @if ($errors->has('staff_type'))
                           <span class="help-block">{{ $errors->first('staff_type') }}</span>
@@ -42,9 +44,21 @@
                           <div class="col-sm-12">
                          <div class="form-group{{ $errors->has('fullname') ? ' has-error' : ''}}">
                           <label>Name </label>
-                          <input type="text" class="form-control" id="fullname" value="{{ Request::old('fullname') ?: '' }}"  name="fullname">
+                          <input type="text" class="form-control" data-required="true" id="fullname" value="{{ Request::old('fullname') ?: '' }}"  name="fullname">
                           @if ($errors->has('fullname'))
                           <span class="help-block">{{ $errors->first('fullname') }}</span>
+                           @endif                        
+                        </div>
+                        </div>
+                        </div>
+  
+                        <div class="form-group pull-in clearfix">
+                          <div class="col-sm-12">
+                         <div class="form-group{{ $errors->has('email') ? ' has-error' : ''}}">
+                          <label>Work Email </label>
+                          <input type="email" class="form-control" data-required="true" id="email" value="{{ Request::old('email') ?: '' }}"  name="email" data-toggle="tooltip" data-placement="top" title="" data-original-title="Please be extra careful typing the address. We use it to grant access to the employee's sensitive information.">
+                          @if ($errors->has('email'))
+                          <span class="help-block">{{ $errors->first('email') }}</span>
                            @endif                        
                         </div>
                         </div>
@@ -58,7 +72,7 @@
                           <div class="col-sm-6">
                             <div class="form-group{{ $errors->has('location') ? ' has-error' : ''}}"> 
                             <label>Location</label>
-                            <select id="location" name="location" rows="3" tabindex="1" data-placeholder="Select here.." class="form-control m-b">
+                            <select id="location" name="location" rows="3"  data-required="true" tabindex="1" data-placeholder="Select here.." class="form-control m-b" data-toggle="tooltip" data-placement="top" title="" data-original-title="The primary location where the employee works.">
                          @foreach($locations as $location)
                         <option value="{{ $location->name }}">{{ $location->name }}</option>
                           @endforeach
@@ -69,6 +83,37 @@
                             </div>
                           </div>
                         </div>
+
+
+                        <section class="panel panel-default">
+                     <header class="panel-heading font-bold">                  
+                      Login Details
+                    </header>
+                      <div class="panel-body">
+                        <div class="form-group pull-in clearfix">
+                          <div class="col-sm-6">
+                            <label>Username</label> 
+                            <div class="form-group{{ $errors->has('username') ? ' has-error' : ''}}">
+                            <input type="text" rows="3" class="form-control" data-required="true" id="username" name="username" value="">   
+                           @if ($errors->has('username'))
+                          <span class="help-block">{{ $errors->first('username') }}</span>
+                           @endif    
+                          </div>
+                          </div>
+
+                          <div class="col-sm-6">
+                          <div class="form-group{{ $errors->has('password') ? ' has-error' : ''}}">
+                            <label>Password</label>
+                         <input type="text" rows="3" class="form-control" data-required="true" id="password" name="password" value="">   
+                      
+                           @if ($errors->has('password'))
+                          <span class="help-block">{{ $errors->first('password') }}</span>
+                           @endif    
+                          </div>   
+                        </div>
+                        </div>
+                        </div>
+                        </section>
 
    
                       </div>

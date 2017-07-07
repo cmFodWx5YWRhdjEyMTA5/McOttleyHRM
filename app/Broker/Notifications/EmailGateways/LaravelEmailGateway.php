@@ -6,7 +6,7 @@
  * Time: 3:10 AM
  */
 
-namespace OrionMedical\Broker\Notifications\EmailGateways;
+namespace McPersona\Broker\Notifications\EmailGateways;
 
 
 use Illuminate\Support\Facades\Mail;

@@ -1,11 +1,12 @@
 <?php
 
-namespace OrionMedical\Http\Controllers;
+namespace McPersona\Http\Controllers;
 
 use Illuminate\Http\Request;
-use OrionMedical\Models\Image;
-use OrionMedical\Http\Requests;
-use OrionMedical\Http\Controllers\Controller;
+use McPersona\Models\Image;
+use McPersona\Models\Employee;
+use McPersona\Http\Requests;
+use McPersona\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Response;
 use Carbon\carbon;
@@ -14,10 +15,59 @@ use Auth;
 
 class ImageController extends Controller
 {
+    public static function bytesToHuman($bytes)
+    {
+        $units = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB'];
+
+        for ($i = 0; $bytes > 1024; $i++) {
+            $bytes /= 1024;
+        }
+
+        return round($bytes, 2) . ' ' . $units[$i];
+    }
+
+    public function updatePicture(Request $request)
+    {
+
+            //dd($request->input('selectedid'));
+
+          if($request->hasFile('image'))
+           {
+
+
+           $image = $request->file('image');
+           $profile = $request->input('selectedid');
+           $filename = $profile. '.jpg';
+           $file = $image->move(public_path().'/images',$filename);
+           //Image::make($image->getRealPath())->resize(200, 200)->save($path);
+
+            $affectedRows = Employee::where('staff_id','=',$profile)->update(array('image' =>  $filename));
+
+           if($affectedRows > 0)
+          {
+              return redirect()
+            ->route('new-employee', $profile )
+            ->with('info','Photo uploaded successfully!');
+          }
+
+            else
+            {
+              return redirect()
+            ->route('new-employee',$profile )
+            ->with('error','Photo failed to upload!');
+            
+            }
+
+            }
+
+           
+    }
+
+
     public function postUpload(Request $request)
     {
 
-         try
+          try
         {
         
 
@@ -29,18 +79,21 @@ class ImageController extends Controller
 
        // dd(Input::get('selectedid'));
     
-        $image->accountnumber=Input::get('selectedid');
+        $image->staff_id=Input::get('selectedid');
         $image->filename = Input::get('filename');
+        $image->created_on = Carbon::now();
 
-        if($request->hasFile('image')) {
+        //dd(Input::file('image'));
+        if($request->hasFile('image')) 
+        {
             $file = Input::file('image');
 
             //getting timestamp
             $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
            
             $name = $timestamp. '-' .$file->getClientOriginalName();
-           
-            $image->filePath = $name;
+            $image->original_name = $file->getClientOriginalName();
+            $image->filepath = $name;
             $image->created_by=Auth::user()->getNameOrUsername();
            $file = $file->move(public_path().'/uploads/images', $name);
             //Image::make($image->getRealPath())->resize(200, 200)->save($name); 
@@ -48,7 +101,7 @@ class ImageController extends Controller
 
         $image->save();
         return redirect()
-            ->route('opd-consultation')
+            ->back()
             ->with('info','Document has successfully been uploaded!');
         }
 

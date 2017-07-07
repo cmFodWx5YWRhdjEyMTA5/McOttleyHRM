@@ -1,6 +1,6 @@
 <?php
 
-namespace OrionMedical;
+namespace McPersona;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace OrionMedical\Exceptions;
+namespace McPersona\Exceptions;
 
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

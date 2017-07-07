@@ -1,6 +1,6 @@
 <?php
 
-namespace OrionMedical\Providers;
+namespace McPersona\Providers;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'OrionMedical\Model' => 'OrionMedical\Policies\ModelPolicy',
+        'McPersona\Model' => 'McPersona\Policies\ModelPolicy',
     ];
 
     /**
