@@ -314,17 +314,6 @@
                       </a>
                     </li>
                     @endrole
-                    @role(['HR Manager','System Admin'])
-                    <li >
-                      <a href="#"  >
-                        
-                        <i class="fa fa-gears icon">
-                          <b class="dker" style="background-color: #bc65bd"></b>
-                        </i>
-                        <span>Policies</span>
-                      </a>
-                    </li>
-                    @endrole
                      @role(['HR Manager','HR Officer','System Admin'])  
                      <li >
                       <a href="#pages"  >

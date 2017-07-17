@@ -30,6 +30,7 @@
                             <th></th>
                             <th>Appraisal Name</th>
                             <th>Period</th>
+                             <th>Employee</th>
                             <th>Business</th>
                             <th>Department</th>
                             <th>Job Title</th>
@@ -44,6 +45,7 @@
                           <td>{{ ++$keys }}</td>
                           <td>{{ $cycle->title }}</td>
                           <td>{{ $cycle->cycle_start->format('l, jS F') }} - {{ $cycle->cycle_end->format('l, jS F')  }} </td>
+                           <td>{{ $cycle->employee }}</td>
                           <td>{{ $cycle->business }}</td>
                           <td>{{ $cycle->department }}</td>
                           <td>{{ $cycle->role }}</td>
@@ -199,7 +201,7 @@
     </div><!-- /.modal-dialog -->
 
 
- <div class="modal fade" id="new-kpa" style="height:700px">
+ <div class="modal fade" id="new-kpa" style="height:900px">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -239,6 +241,7 @@
     $('#subsidiary').select2();
      $('#department').select2();
       $('#jobtitle').select2();
+       $('#employee').select2();
 
 
 

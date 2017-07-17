@@ -54,16 +54,19 @@ class ProfileController extends Controller
     $reviews  =  ReviewDocuments::where('staff_id',$id)->orwhere('supervisor_id',$id)->orwhere('director_id',$id)->orderby('created_on','desc')->get();
     
 
-    $leaves  =  LeaveSchedule::where('employee',$id)->orwhere('supervisor_id',$id)->orwhere('director_id',$id)->get();
+    $leaves  =  LeaveSchedule::where('employee',$id)->where('status','Pending Approval')->get();
     $employee =  Employee::where('staff_id' ,'=', $id)->first();
 
 
     //dd($employee );
-    $reviewcycles = ReviewCycle::where('department','like', "%$employee->department%" )->orwhere('business','like', "%$employee->subsidiary%" )->orwhere('role','like',"%$employee->job_title%")->orwhere('role','All')->orwhere('department','All')->orwhere('business','All')->get();
+    $reviewcycles = ReviewCycle::where('department','like', "%$employee->department%" )->orwhere('employee','like', "%$employee->email%" )->orwhere('business','like', "%$employee->subsidiary%" )->orwhere('role','like',"%$employee->job_title%")->orwhere('role','All')->orwhere('employee','All')->orwhere('department','All')->orwhere('business','All')->orderby('created_on','desc')->get();
+
 
 
     $payrolls = Payroll::where('staffid' ,'=', $id)->get();
     
+    //dd($payrolls);
+
     $relievers = Employee::get();
     $supervisors = Employee::get();
     $directors = Employee::get();

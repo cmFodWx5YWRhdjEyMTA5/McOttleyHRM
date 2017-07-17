@@ -116,7 +116,6 @@
                             <th>Effective To</th>
                             <th>Job Title</th>
                             <th>Employment Status</th>
-                            <th>Job Category</th>
                             <th>Department</th>
                             <th>Location</th>
                             <th></th>
@@ -511,7 +510,7 @@
 
   @stop
 
- <div class="modal fade" id="new-leave-request" style="height:900px">
+  <div class="modal fade" id="new-leave-request" size="height:900px">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -524,16 +523,24 @@
                     <section class="scrollable">
                       <div class="tab-content">
                         <div class="tab-pane active" id="individual">
-                           <form  class="bootstrap-modal-form"  data-validate="parsley" method="post" action="/save-leave-request" class="panel-body wrapper-lg" enctype="multipart/form-data">
-                           @include('leave/new')
+                           <form  class="bootstrap-modal-form" data-validate="parsley" method="post" action="/save-leave-request" class="panel-body wrapper-lg" enctype="multipart/form-data">
+                            @include('leave/new')
                         <input type="hidden" name="_token" value="{{ Session::token() }}">
                       </form>
-                        </div>                  
+                        </div>
+                  
+                  
                         </div>
                         </section>
-                </section>
-         </div>        
+                        </section>
+                      </div>
+                    
         </div>
+        
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+
+
         
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -751,7 +758,7 @@ function hodapprove(id,name)
             $('#JobTable tbody').empty();
             $.each(data, function (key, value) 
             {           
-            $('#JobTable tbody').append('<tr><td>1</td><td>'+ value['permanency_date'] +'</td><td>Present</td><td>'+ value['job_title'] +'</td><td>'+ value['employment_status'] +'</td><td>'+ value['job_category'] +'</td><td>'+ value['department'] +'</td><td>Main</td><td><a a href="#"><i onclick="deleteJob(\''+value['id']+'\',\''+value['job_title']+'\')" class="fa fa-trash-o"></i></a></td></tr>');
+            $('#JobTable tbody').append('<tr><td>1</td><td>'+ value['permanency_date'] +'</td><td>Present</td><td>'+ value['job_title'] +'</td><td>'+ value['employment_status'] +'</td><td>'+ value['department'] +'</td><td>'+ value['subsidiary'] +'</td><td><a a href="#"><i onclick="deleteJob(\''+value['id']+'\',\''+value['job_title']+'\')" class="fa fa-trash-o"></i></a></td></tr>');
             });
                                           
          },'json');      

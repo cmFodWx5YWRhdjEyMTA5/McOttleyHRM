@@ -49,7 +49,7 @@
                       <i class="fa fa-circle fa-stack-2x text-dark"></i>
                       <i class="fa fa-sign-out fa-stack-1x text-white"></i>
                     </span>
-                    <a class="clear" href="#">
+                    <a class="clear" href="/manage-leave">
                       <span class="h3 block m-t-xs"><strong>0</strong></span>
                       <small class="text-muted text-uc">Leaves</small>
                     </a>

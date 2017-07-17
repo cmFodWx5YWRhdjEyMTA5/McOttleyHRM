@@ -2,7 +2,7 @@
 @section('content')
 
             <header class="header bg-white b-b b-light">
-              <p>{{ $employee->fullname }}'s Profile</p>
+              <p><span class="label label-success">{{ $employee->fullname }}'s Profile - {{ $reviewtitle }}</span></p>
             </header>
             <section class="scrollable">
               <section class="hbox stretch">
@@ -44,13 +44,7 @@
                             </div>
                           </div>
                         </div>
-{{--                         <div class="btn-group btn-group-justified m-b">
-                          <a href="#" class="btn btn-primary btn-rounded">
-                            
-                              <i class="fa fa-sign-in"></i> 
-                           
-                            </a>
-                        </div> --}}
+
                         <div>
                           <small class="text-uc text-xs text-muted">about me</small>
                           <p>{{ $employee->job_title }}</p>
@@ -74,19 +68,11 @@
                   <section class="vbox">
                     <header class="header bg-light bg-gradient">
                       <ul class="nav nav-tabs nav-white">
-                                       <li class="active"><a href="#goals" data-toggle="tab"><i class="fa fa-signal text-default"></i> Performance Goals </a></li>
 
-                                     <li ><a href="#kpa" data-toggle="tab"><i class="fa fa-briefcase text-default"></i> Key Result Area </a></li>
-
-                                       <li><a href="#skillset" data-toggle="tab"><i class="fa fa-trophy text-default"></i> Skill Set </a></li>
-                                       
-                                       <li><a href="#audit" data-toggle="tab"><i class="fa fa-bars text-default"></i> Job Audit </a></li>
-
-
-                                      <li><a href="#feedback" data-toggle="tab"><i class="fa fa-star-o text-default"></i> Feedback </a></li>
-
-                                       <li><a href="#initiate" data-toggle="tab"><i class="fa fa-user text-default"></i> Self Appraisal </a></li>
-                                       
+                                   
+                                         <li class="active"><a href="#goals" data-toggle="tab"><i class="fa fa-briefcase text-default"></i> {{ $reviewtitle }} </a></li>
+                                     <li class="active"><a href="#goals" data-toggle="tab"> <span class="badge bg-primary"> Manager's Rating : {{ $managerfinal }}%   </span></a></li>
+                                       <li class="active"><a href="#goals" data-toggle="tab"> <span class="badge bg-danger"> Employee's Rating : {{ $employeefinal }}%  </span></a></li>
                                         
                       </ul>
                     </header>
@@ -101,14 +87,282 @@
 
                     <div class="tab-pane active" id="goals">
                       <ul class="list-group no-radius m-b-none m-t-n-xxs list-group-lg no-border">
-                       <form  method="post"  data-validate="parsley" action="/save-ratings-performance-review" >
-                        <section class="panel panel-warning">
-                                <header class="panel-heading font-bold">Goals
-                                <a href="#new-performancegoal" class="bootstrap-modal-form-open" data-toggle="modal"><span class="badge bg-info pull-right">+</span></a>
-                                </header>
-                                <div class="panel-body">
-                                      <div class="table-responsive">
-                      
+                       <form id="performance"  method="post"  data-validate="parsley" action="/save-ratings-performance-review" >
+                        
+
+                    <!-- Start for Probabtion New Entry -->
+                    @if(strpos($reviewtitle, 'Probation') !== false)
+                    
+                                <section class="panel panel-default">
+                                 <header class="panel-heading font-bold">Discussion Points
+                                      </header>
+                                            <div class="panel-body">
+
+                                    <div class="form-group pull-in clearfix">
+                                      <div class="col-sm-12">
+                                        <label>State your understanding of your main duties and responsibilities. </label> 
+                                        <div class="form-group{{ $errors->has('prob_1') ? ' has-error' : ''}}">
+                                        <textarea type="text" rows="6" class="form-control" id="prob_1" name="prob_1" value="{{ Request::old('prob_1') ?: '' }}"></textarea>   
+                                       @if ($errors->has('prob_1'))
+                                      <span class="help-block">{{ $errors->first('prob_1') }}</span>
+                                       @endif    
+                                      </div>
+                                      </div>
+                                    </div>
+
+
+                                      <div class="form-group pull-in clearfix">
+                                      <div class="col-sm-12">
+                                        <label>How long have you been in the position for which you are being assessed? Has the period been good/bad/satisfactory or otherwise for you, and why? </label> 
+                                        <div class="form-group{{ $errors->has('prob_2') ? ' has-error' : ''}}">
+                                        <textarea type="text" rows="6" class="form-control" id="prob_2" name="prob_2" value="{{ Request::old('prob_2') ?: '' }}"></textarea>   
+                                       @if ($errors->has('prob_2'))
+                                      <span class="help-block">{{ $errors->first('prob_2') }}</span>
+                                       @endif    
+                                      </div>
+                                      </div>
+                                    </div>
+
+
+
+                                      <div class="form-group pull-in clearfix">
+                                      <div class="col-sm-12">
+                                        <label>What do you consider to be your most important achievements during the period? </label> 
+                                        <div class="form-group{{ $errors->has('prob_3') ? ' has-error' : ''}}">
+                                        <textarea type="text" rows="6" class="form-control" id="prob_3" name="prob_3" value="{{ Request::old('prob_3') ?: '' }}"></textarea>   
+                                       @if ($errors->has('prob_3'))
+                                      <span class="help-block">{{ $errors->first('prob_3') }}</span>
+                                       @endif    
+                                      </div>
+                                      </div>
+                                    </div>
+
+
+
+                                     <div class="form-group pull-in clearfix">
+                                      <div class="col-sm-12">
+                                        <label>What elements of the job did you find most difficult? </label> 
+                                        <div class="form-group{{ $errors->has('prob_4') ? ' has-error' : ''}}">
+                                        <textarea type="text" rows="6" class="form-control" id="prob_4" name="prob_4" value="{{ Request::old('prob_4') ?: '' }}"></textarea>   
+                                       @if ($errors->has('prob_4'))
+                                      <span class="help-block">{{ $errors->first('prob_4') }}</span>
+                                       @endif    
+                                      </div>
+                                      </div>
+                                    </div>
+
+
+
+                                       <div class="form-group pull-in clearfix">
+                                        <div class="col-sm-12">
+                                          <label>What elements of the job interest you the most, and least? </label> 
+                                          <div class="form-group{{ $errors->has('prob_5') ? ' has-error' : ''}}">
+                                          <textarea type="text" rows="6" class="form-control" id="prob_5" name="prob_5" value="{{ Request::old('prob_5') ?: '' }}"></textarea>   
+                                         @if ($errors->has('prob_5'))
+                                        <span class="help-block">{{ $errors->first('prob_5') }}</span>
+                                         @endif    
+                                        </div>
+                                        </div>
+                                      </div>
+
+
+
+                                       <div class="form-group pull-in clearfix">
+                                        <div class="col-sm-12">
+                                          <label>What do you consider to be your most important aims and tasks in the next six months?</label>
+                                          <div class="form-group{{ $errors->has('prob_6') ? ' has-error' : ''}}">
+                                          <textarea type="text" rows="6" class="form-control"  id="prob_6" name="prob_6" value="{{ Request::old('prob_6') ?: '' }}"></textarea>   
+                                         @if ($errors->has('prob_6'))
+                                        <span class="help-block">{{ $errors->first('prob_6') }}</span>
+                                         @endif    
+                                        </div>
+                                        </div>
+                                      </div>
+
+
+                                       <div class="form-group pull-in clearfix">
+                                        <div class="col-sm-12">
+                                          <label>What action could be taken to improve your performance in your current position by you, and your boss?</label>
+                                          <div class="form-group{{ $errors->has('prob_6') ? ' has-error' : ''}}">
+                                          <textarea type="text" rows="6" class="form-control" id="prob_6" name="prob_6" value="{{ Request::old('prob_6') ?: '' }}"></textarea>   
+                                         @if ($errors->has('prob_6'))
+                                        <span class="help-block">{{ $errors->first('prob_6') }}</span>
+                                         @endif    
+                                        </div>
+                                        </div>
+                                      </div>
+
+
+                                       <div class="form-group pull-in clearfix">
+                                        <div class="col-sm-12">
+                                          <label>What kind of work or job would you like to be doing in one/two/five years’ time?</label>
+                                          <div class="form-group{{ $errors->has('prob_7') ? ' has-error' : ''}}">
+                                          <textarea type="text" rows="6" class="form-control" id="prob_7" name="prob_7" value="{{ Request::old('prob_7') ?: '' }}"></textarea>   
+                                         @if ($errors->has('prob_7'))
+                                        <span class="help-block">{{ $errors->first('prob_7') }}</span>
+                                         @endif    
+                                        </div>
+                                        </div>
+                                      </div>
+
+
+                                       <div class="form-group pull-in clearfix">
+                                        <div class="col-sm-12">
+                                          <label>What sort of training/experiences would benefit you in the next year? Not just job-skills - also your natural strengths and personal passions you would like to develop - you and your work can benefit from these.</label>
+                                          <div class="form-group{{ $errors->has('prob_8') ? ' has-error' : ''}}">
+                                          <textarea type="text" rows="6" class="form-control" id="prob_8" name="prob_8" value="{{ Request::old('prob_8') ?: '' }}"></textarea>   
+                                         @if ($errors->has('prob_8'))
+                                        <span class="help-block">{{ $errors->first('prob_8') }}</span>
+                                         @endif    
+                                        </div>
+                                        </div>
+                                      </div>
+                                              
+
+                                      <section class="panel panel-warning">
+                                        <header class="panel-heading font-bold">Part C
+                                        <a href="#new-performancegoal" class="bootstrap-modal-form-open" data-toggle="modal"><span class="badge bg-info pull-right">+</span></a>
+                                        </header>
+                                          <div class="panel-body">
+                                            <div class="table-responsive">
+                                    @if($goals->count() > 0)
+                                    <table id="leaveTable" cellpadding="0" cellspacing="0" border="0" class="table table-striped m-b-none text-sm" width="100%">
+                                        <thead>
+                                          <tr>
+                                          <th width="100">Performance Goal</th>
+                                          <th>Weightage %</th>
+                                          <th>Manager's Rating</th>
+                                          <th>Employee's Rating</th>
+                                          <th>Comment</th>
+                                          <th></th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          @foreach( $goals as $key => $goal )
+                                        <tr>
+                                          <td ><input name="question[]" id="question" readonly="true" value="{{ $goal->question }}" class="btn btn-rounded btn-sm btn-default" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{ $goal->tooltip }}"></td>
+                                          <td><input name="weight[]" id="weight" readonly="true" value="{{ $goal->weightage }}" class="btn btn-rounded btn-sm xs btn-default"></td>
+                                          <td><input type="text" id="managerscrore" data-max="5" readonly="true" name="managerscrore[]" value="" placeholder="1 of 5" class="form-control rounded"></td> 
+                                           <td><input type="text" id="userscore" data-max="5" data-required="true" name="userscore[]" value="" placeholder="1 of 5" class="form-control rounded" data-toggle="tooltip" data-placement="left" title="" data-original-title="
+                                            (1 = Failed to meet expectations; 2 = Met some but not all expectations; 3 = Met all expectations; 4 = Exceeded expectations; 5 = Outstanding) Please refer to performance rating guidelines on Page 5."></td> 
+                                            <td><input name="comment[]" id="comment" value="" class="form-control rounded"></td>
+                                             <td><a href="#" onclick="deleteDetails('{{ $goal->id }}','{{ $goal->question }}')" id="edit" name="edit" data-toggle="modal" alt="edit"><i class="fa fa-trash"></i></a></td> 
+                                        </tr>
+                                       @endforeach
+                                        </tbody>
+                                          
+                                      </table>
+                                    @else
+                                     <div class="panel-body">
+                                          
+                                     <div class="h3 m-t-xs m-b-xs">No performance goal found.</div> 
+                                  </div>
+                                  @endif
+
+                                    </div>           
+                                      </div>
+                                      </section>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <div class="form-group pull-in clearfix">
+                                          <div class="col-sm-12">
+                                           <label>Should the employee be confirmed in his/her present position? </label> 
+                                       <select id="employee_reason" name="employee_reason" rows="3" readonly="true" tabindex="1" data-placeholder="Select here.." class="form-control">
+                                         <option value="">-- Select option --</option>
+                                        
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                        
+                                         </select>
+                                         </div>
+                                         </div>
+                                        
+
+                                        <div class="form-group pull-in clearfix">
+                                        <div class="col-sm-12">
+                                          <label>Please give three reasons why the employee should be confirmed/ not confirmed after the probationary period. </label> 
+                                          <div class="form-group{{ $errors->has('sup_comment_reason') ? ' has-error' : ''}}">
+                                          <textarea type="text" rows="6" class="form-control" readonly="true" id="sup_comment_reason" name="sup_comment_reason" value="{{ Request::old('sup_comment_reason') ?: '' }}"></textarea>   
+                                         @if ($errors->has('sup_comment_reason'))
+                                        <span class="help-block">{{ $errors->first('sup_comment_reason') }}</span>
+                                         @endif    
+                                        </div>
+                                        </div>
+                                      </div>
+
+
+                                       <div class="form-group pull-in clearfix">
+                                        <div class="col-sm-12">
+                                          <label>Head of Department's Comments</label> 
+                                          <div class="form-group{{ $errors->has('manager_feedback') ? ' has-error' : ''}}">
+                                          <textarea type="text" rows="3" class="form-control" readonly="true" id="manager_feedback" name="manager_feedback" value="{{ Request::old('manager_feedback') ?: '' }}"></textarea>   
+                                         @if ($errors->has('manager_feedback'))
+                                        <span class="help-block">{{ $errors->first('manager_feedback') }}</span>
+                                         @endif    
+                                        </div>
+                                        </div>
+                                      </div>
+
+
+
+                                        <div class="form-group pull-in clearfix">
+                                        <div class="col-sm-12">
+                                          <label>MD’s Comments</label> 
+                                          <div class="form-group{{ $errors->has('director_feedback') ? ' has-error' : ''}}">
+                                          <textarea type="text" rows="3" class="form-control" readonly="true" id="director_feedback" name="director_feedback" value="{{ Request::old('director_feedback') ?: '' }}"></textarea>   
+                                         @if ($errors->has('director_feedback'))
+                                        <span class="help-block">{{ $errors->first('director_feedback') }}</span>
+                                         @endif    
+                                        </div>
+                                        </div>
+                                      </div>
+                                      </div>
+                                
+                                </section>
+                                 <section>
+                                  <footer>
+                                       <div class="form-group pull-in clearfix">
+                                       <div class="col-sm-10">
+                                
+                                <div class="form-group">    
+                                    <div class="form-group{{ $errors->has('supervisor') ? ' has-error' : ''}}">
+                                     <select name="supervisor[]" id="supervisor" data-required="true" style="width:100%" multiple data-placeholder="Select Supervisor / Reviewer"  >
+                                    @foreach($supervisors as $supervisor)
+                                  <option  value="{{ $supervisor->email }}">{{ $supervisor->fullname }}</option>
+                                    @endforeach
+                                      </select>         
+                                    @if ($errors->has('supervisor'))
+                                    <span class="help-block">{{ $errors->first('supervisor') }}</span>
+                                     @endif                           
+                                  </div>
+                                  </div>
+                                  </div>
+
+                                  <div class="form-group">    
+                                          <p>   
+                                            <button type="submit" class="btn btn-rounded btn-sm btn-info"><i class="fa fa-fw fa-download"></i>Save & Forward Appraisal</button> 
+                                            <input type="hidden" name="_token" value="{{ Session::token() }}">
+                                              <input type="hidden" name="reviewid" id="reviewid" value="{{ $active_token }}">
+                                              <input type="hidden" name="reviewtype" id="reviewtype" value="goal">
+                                               <input type="hidden" name="staff_id" id="staff_id" value="{{ $employee->obsid  }}">
+                                               <input type="hidden" name="staff_id_raw" id="staff_id_raw" value="{{ $employee->staff_id  }}">
+                                               
+                                      </p>
+                                      </div>
+                                  </div>
+                                 </footer>
+                                  </section>
+
+                  
+                    @else
+                    <section class="panel panel-warning">
+                          <header class="panel-heading font-bold">Goals
+                          <a href="#new-performancegoal" class="bootstrap-modal-form-open" data-toggle="modal"><span class="badge bg-info pull-right">+</span></a>
+                          </header>
+                            <div class="panel-body">
+                              <div class="table-responsive">
                       @if($goals->count() > 0)
                       <table id="leaveTable" cellpadding="0" cellspacing="0" border="0" class="table table-striped m-b-none text-sm" width="100%">
                           <thead>
@@ -134,45 +388,7 @@
                           </tr>
                          @endforeach
                           </tbody>
-                            <footer>
-
-
-
-                             <div class="form-group pull-in clearfix">
-                             <div class="col-sm-6">
-                                  <div class="form-group">
-                             
-                          <div class="form-group{{ $errors->has('supervisor') ? ' has-error' : ''}}">
-                           <select name="supervisor[]" id="supervisor" data-required="true" style="width:100%" multiple data-placeholder="Select Supervisor / Reviewer"  >
-                          @foreach($supervisors as $supervisor)
-                        <option  value="{{ $supervisor->email }}">{{ $supervisor->fullname }}</option>
-                          @endforeach
-                            </select>         
-                          @if ($errors->has('supervisor'))
-                          <span class="help-block">{{ $errors->first('supervisor') }}</span>
-                           @endif                           
-                        </div>
-                        </div>
-                        </div>
-
-                        <div class="form-group pull-right">
-                                   
-                                <p>   
-                                  <button type="submit" class="btn btn-rounded btn-sm btn-info"><i class="fa fa-fw fa-download"></i>Save & Forward Appraisal</button> 
-                                  <input type="hidden" name="_token" value="{{ Session::token() }}">
-                                    <input type="hidden" name="reviewid" id="reviewid" value="{{ $active_token }}">
-                                    <input type="hidden" name="reviewtype" id="reviewtype" value="goal">
-                                     <input type="hidden" name="staff_id" id="staff_id" value="{{ $employee->obsid  }}">
-                                     <input type="hidden" name="staff_id_raw" id="staff_id_raw" value="{{ $employee->staff_id  }}">
-                                     
-                            </p>
-                            </div>
-                        </div>
-
-
-
-                          
-                        </footer>
+                            
                         </table>
                       @else
                        <div class="panel-body">
@@ -184,7 +400,6 @@
                     </div>           
                 </div>
                 </section>
-
 
                      <section class="panel panel-default">
                     <header class="panel-heading font-bold"></header>
@@ -242,22 +457,151 @@
                         </div>     
                                 </div>
                               </section>
-
+                      @endif
                           
                           </ul>
                           </div>
+
+                              <!-- End for Probabtion New Entry -->
 
 
 
 
                           @else
                           <div class="tab-pane active" id="goals">
-                             <section class="panel panel-warning">
+                          
+                  @if(strpos($reviewtitle, 'Probation') !== false)
+                      
+                  <section class="panel panel-default">
+                          <div class="panel-body">
+ <form  method="post"  data-validate="parsley" action="/save-ratings-performance-review" >
+                      <div class="form-group pull-in clearfix">
+                                      <div class="col-sm-12">
+                                        <label>State your understanding of your main duties and responsibilities. </label> 
+                                        <div class="form-group{{ $errors->has('prob_1') ? ' has-error' : ''}}">
+                                        <textarea type="text" rows="6" class="form-control" id="prob_1" name="prob_1" value="{{ Request::old('prob_1') ?: '' }}">{{ $kpas[0]->prob_1 }}</textarea>   
+                                       @if ($errors->has('prob_1'))
+                                      <span class="help-block">{{ $errors->first('prob_1') }}</span>
+                                       @endif    
+                                      </div>
+                                      </div>
+                                    </div>
+
+
+                                      <div class="form-group pull-in clearfix">
+                                      <div class="col-sm-12">
+                                        <label>How long have you been in the position for which you are being assessed? Has the period been good/bad/satisfactory or otherwise for you, and why? </label> 
+                                        <div class="form-group{{ $errors->has('prob_2') ? ' has-error' : ''}}">
+                                        <textarea type="text" rows="6" class="form-control" id="prob_2" name="prob_2" value="{{ Request::old('prob_2') ?: '' }}">{{ $kpas[0]->prob_2 }}</textarea>   
+                                       @if ($errors->has('prob_2'))
+                                      <span class="help-block">{{ $errors->first('prob_2') }}</span>
+                                       @endif    
+                                      </div>
+                                      </div>
+                                    </div>
+
+
+
+                                      <div class="form-group pull-in clearfix">
+                                      <div class="col-sm-12">
+                                        <label>What do you consider to be your most important achievements during the period? </label> 
+                                        <div class="form-group{{ $errors->has('prob_3') ? ' has-error' : ''}}">
+                                        <textarea type="text" rows="6" class="form-control" id="prob_3" name="prob_3" value="{{ Request::old('prob_3') ?: '' }}">{{ $kpas[0]->prob_3 }}</textarea>   
+                                       @if ($errors->has('prob_3'))
+                                      <span class="help-block">{{ $errors->first('prob_3') }}</span>
+                                       @endif    
+                                      </div>
+                                      </div>
+                                    </div>
+
+
+
+                                     <div class="form-group pull-in clearfix">
+                                      <div class="col-sm-12">
+                                        <label>What elements of the job did you find most difficult? </label> 
+                                        <div class="form-group{{ $errors->has('prob_4') ? ' has-error' : ''}}">
+                                        <textarea type="text" rows="6" class="form-control" id="prob_4" name="prob_4" value="{{ Request::old('prob_4') ?: '' }}">{{ $kpas[0]->prob_4 }}</textarea>   
+                                       @if ($errors->has('prob_4'))
+                                      <span class="help-block">{{ $errors->first('prob_4') }}</span>
+                                       @endif    
+                                      </div>
+                                      </div>
+                                    </div>
+
+
+
+                                       <div class="form-group pull-in clearfix">
+                                        <div class="col-sm-12">
+                                          <label>What elements of the job interest you the most, and least? </label> 
+                                          <div class="form-group{{ $errors->has('prob_5') ? ' has-error' : ''}}">
+                                          <textarea type="text" rows="6" class="form-control" id="prob_5" name="prob_5" value="{{ Request::old('prob_5') ?: '' }}">{{ $kpas[0]->prob_5 }}</textarea>   
+                                         @if ($errors->has('prob_5'))
+                                        <span class="help-block">{{ $errors->first('prob_5') }}</span>
+                                         @endif    
+                                        </div>
+                                        </div>
+                                      </div>
+
+
+
+                                       <div class="form-group pull-in clearfix">
+                                        <div class="col-sm-12">
+                                          <label>What do you consider to be your most important aims and tasks in the next six months?</label>
+                                          <div class="form-group{{ $errors->has('prob_6') ? ' has-error' : ''}}">
+                                          <textarea type="text" rows="6" class="form-control"  id="prob_6" name="prob_6" value="{{ Request::old('prob_6') ?: '' }}">{{ $kpas[0]->prob_6 }}</textarea>   
+                                         @if ($errors->has('prob_6'))
+                                        <span class="help-block">{{ $errors->first('prob_6') }}</span>
+                                         @endif    
+                                        </div>
+                                        </div>
+                                      </div>
+
+
+                                       <div class="form-group pull-in clearfix">
+                                        <div class="col-sm-12">
+                                          <label>What action could be taken to improve your performance in your current position by you, and your boss?</label>
+                                          <div class="form-group{{ $errors->has('prob_9') ? ' has-error' : ''}}">
+                                          <textarea type="text" rows="6" class="form-control" id="prob_9" name="prob_9" value="{{ Request::old('prob_9') ?: '' }}">{{ $kpas[0]->prob_9 }}</textarea>   
+                                         @if ($errors->has('prob_9'))
+                                        <span class="help-block">{{ $errors->first('prob_9') }}</span>
+                                         @endif    
+                                        </div>
+                                        </div>
+                                      </div>
+
+
+                                       <div class="form-group pull-in clearfix">
+                                        <div class="col-sm-12">
+                                          <label>What kind of work or job would you like to be doing in one/two/five years’ time?</label>
+                                          <div class="form-group{{ $errors->has('prob_7') ? ' has-error' : ''}}">
+                                          <textarea type="text" rows="6" class="form-control" id="prob_7" name="prob_7" value="{{ Request::old('prob_7') ?: '' }}">{{ $kpas[0]->prob_7 }}</textarea>   
+                                         @if ($errors->has('prob_7'))
+                                        <span class="help-block">{{ $errors->first('prob_7') }}</span>
+                                         @endif    
+                                        </div>
+                                        </div>
+                                      </div>
+
+
+                                       <div class="form-group pull-in clearfix">
+                                        <div class="col-sm-12">
+                                          <label>What sort of training/experiences would benefit you in the next year? Not just job-skills - also your natural strengths and personal passions you would like to develop - you and your work can benefit from these.</label>
+                                          <div class="form-group{{ $errors->has('prob_8') ? ' has-error' : ''}}">
+                                          <textarea type="text" rows="6" class="form-control" id="prob_8" name="prob_8" value="{{ Request::old('prob_8') ?: '' }}">{{ $kpas[0]->prob_8 }}</textarea>   
+                                         @if ($errors->has('prob_8'))
+                                        <span class="help-block">{{ $errors->first('prob_8') }}</span>
+                                         @endif    
+                                        </div>
+                                        </div>
+                                        </div>
+                                              
+
+                         <section class="panel panel-warning">
                                   <header class="panel-heading font-bold"> Performance Goal <a href="#new-performancegoal" class="bootstrap-modal-form-open" data-toggle="modal"><span class="badge bg-info pull-right">+</span></a></header>
                                 <div class="panel-body">
                                       <div class="table-responsive">
 
-                        <form  method="post"  data-validate="parsley" action="/save-ratings-performance-review" >
+                       
                        <table id="JobTable" cellpadding="0" cellspacing="0" border="0" class="table table-striped m-b-none text-sm" width="100%">
                          <thead>
                             <tr>
@@ -284,14 +628,161 @@
                           </tr>
                          @endforeach
                           </tbody>
+                        </table>
+                       
+                    </div>           
+                  </div>
+                </section>
 
-                           <footer>
+                      
+                        <div class="form-group pull-in clearfix">
+                          <div class="col-sm-12">
+                           <label>Should the employee be confirmed in his/her present position? </label> 
+                       <select id="employee_reason" name="employee_reason" rows="3" readonly="true" tabindex="1" data-placeholder="Select here.." class="form-control">
+                         <option value="{{ $kpas[0]->employee_reason }}">{{ $kpas[0]->employee_reason }}</option>
+                        
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        
+                         </select>
+                         </div>
+                         </div>
                         
 
+                          <div class="form-group pull-in clearfix">
+                          <div class="col-sm-12">
+                            <label>Please give three reasons why the employee should be confirmed/ not confirmed after the probationary period. </label> 
+                            <div class="form-group{{ $errors->has('sup_comment_reason') ? ' has-error' : ''}}">
+                            <textarea type="text" rows="6" class="form-control" readonly="true" id="sup_comment_reason" name="sup_comment_reason" value="{{ Request::old('sup_comment_reason') ?: '' }}">{{ $kpas[0]->sup_comment_reason }}</textarea>   
+                           @if ($errors->has('sup_comment_reason'))
+                          <span class="help-block">{{ $errors->first('sup_comment_reason') }}</span>
+                           @endif    
+                          </div>
+                          </div>
+                        </div>
 
 
                          <div class="form-group pull-in clearfix">
-                          <div class="col-sm-3">
+                          <div class="col-sm-12">
+                            <label>Head of Department's Comments</label> 
+                            <div class="form-group{{ $errors->has('manager_feedback') ? ' has-error' : ''}}">
+                            <textarea type="text" rows="3" class="form-control" readonly="true" id="manager_feedback" name="manager_feedback" value="{{ Request::old('manager_feedback') ?: '' }}">{{ $kpas[0]->manager_feedback }}</textarea>   
+                           @if ($errors->has('manager_feedback'))
+                          <span class="help-block">{{ $errors->first('manager_feedback') }}</span>
+                           @endif    
+                          </div>
+                          </div>
+                        </div>
+
+
+
+                          <div class="form-group pull-in clearfix">
+                          <div class="col-sm-12">
+                            <label>MD’s Comments</label> 
+                            <div class="form-group{{ $errors->has('director_feedback') ? ' has-error' : ''}}">
+                            <textarea type="text" rows="3" class="form-control" readonly="true" id="director_feedback" name="director_feedback" value="{{ Request::old('director_feedback') ?: '' }}">{{ $kpas[0]->director_feedback }}</textarea>   
+                           @if ($errors->has('director_feedback'))
+                          <span class="help-block">{{ $errors->first('director_feedback') }}</span>
+                           @endif    
+                          </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group pull-in clearfix">
+                          <div class="col-sm-12">
+                            <label>HR’s Comments</label> 
+                            <div class="form-group{{ $errors->has('hr_feedback') ? ' has-error' : ''}}">
+                            <textarea type="text" rows="3" class="form-control" id="hr_feedback" readonly="true" name="hr_feedback" value="{{ Request::old('hr_feedback') ?: '' }}">{{ $kpas[0]->hr_feedback }}</textarea>   
+                           @if ($errors->has('hr_feedback'))
+                          <span class="help-block">{{ $errors->first('hr_feedback') }}</span>
+                           @endif    
+                          </div>
+                          </div>
+                        </div> 
+                        </div>
+                </section>
+
+                <footer>
+                         <div class="form-group pull-in clearfix">
+                          
+                             <div class="col-sm-10 form-group">
+                                  <div class="form-group">
+                             
+                          <div class="form-group{{ $errors->has('supervisor') ? ' has-error' : ''}}">
+                           <select name="supervisor[]" id="supervisor" data-required="true" style="width:100%" multiple data-placeholder="Select Supervisor / Manager"  >
+                          @foreach($supervisors as $supervisor)
+                        <option  value="{{ $supervisor->email }}">{{ $supervisor->fullname  }} ---------- {{ $supervisor->job_title  }}</option>
+                          @endforeach
+                            </select>         
+                          @if ($errors->has('supervisor'))
+                          <span class="help-block">{{ $errors->first('supervisor') }}</span>
+                           @endif                           
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="form-group">
+                                   
+                                <p>   
+                                   <button type="submit" class="btn btn-rounded btn-sm btn-info"><i class="fa fa-fw fa-download"></i>Save & Re-Forward Appraisal</button> 
+                                  <input type="hidden" name="_token" value="{{ Session::token() }}">
+                                    <input type="hidden" name="reviewid" id="reviewid" value="{{ $kpa->review_token }}">
+                                    <input type="hidden" name="reviewtype" id="reviewtype" value="goal">
+                                     <input type="hidden" name="staff_id" id="staff_id" value="{{ $employee->obsid  }}">
+                                      <input type="hidden" name="staff_id_raw" id="staff_id_raw" value="{{ $employee->staff_id  }}">
+                                       <input type="hidden" name="employee_mark" id="employee_mark" value="{{ $employeefinal }}">
+                                     <input type="hidden" name="manager_mark" id="manager_mark" value="{{ $managerfinal }}">
+                            </p>
+                            </div>
+                        </div>
+
+
+                        </footer>
+
+                  @else
+                    
+                    <section class="panel panel-warning">
+                                  <header class="panel-heading font-bold"> Performance Goal <a href="#new-performancegoal" class="bootstrap-modal-form-open" data-toggle="modal"><span class="badge bg-info pull-right">+</span></a></header>
+                                <div class="panel-body">
+                                      <div class="table-responsive">
+
+                        <form  method="post"  data-validate="parsley" action="/save-ratings-performance-review" >
+                       <table id="JobTable" cellpadding="0" cellspacing="0" border="0" class="table table-striped m-b-none text-sm" width="100%">
+                         <thead>
+                            <tr>
+                             <th></th>
+                             <th>KRA</th>
+                            <th>Weightage %</th>
+                            <th>Manager's Rating</th>
+                            <th>Employee's Rating</th>
+                            <th>Comment</th>
+                            <th></th>
+                            <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            @foreach( $kpas as $key => $kpa )
+                          <tr>
+                            <td>{{ ++$key }}</td>
+                            <td><input name="question[]" id="question" readonly="true" value="{{ $kpa->kra }}" class="btn btn-rounded btn-sm btn-default" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{ $kpa->kra }}"></td>
+
+                            <td><input type="text" id="weight" data-max="100" name="weight[]" value="{{ $kpa->weightage }}" placeholder="%" class="form-control rounded"></td>
+
+                            <td><input type="text" id="managerscrore" data-max="5" readonly="true" name="managerscrore[]" value="{{ $kpa->manager }}" placeholder="1 of 5" class="form-control rounded"></td> 
+                             <td><input type="text" id="userscore" data-max="5"  name="userscore[]" value="{{ $kpa->employee }}" placeholder="1 of 5" class="form-control rounded"></td> 
+                              <td><input name="comment[]" id="comment" value="{{ $kpa->comment }}" class="form-control rounded"></td>
+          
+                             
+
+                               <td><a href="#" onclick="deleteDetails('{{ $kpa->id }}','{{ $kpa->kra }}')" id="edit" name="edit" data-toggle="modal" alt="edit"><i class="fa fa-trash"></i></a></td> 
+                          </tr>
+                         @endforeach
+                          </tbody>
+
+                           <footer>
+
+                           <div class="form-group pull-in clearfix">
+                           <div class="col-sm-3">
                            <p>
                           <span class="badge bg-primary"> Manager's Rating : {{ $managerfinal }}%   </span>
                           </p>
@@ -318,17 +809,21 @@
                         <div class="form-group pull-right">
                                    
                                 <p>   
-                                   <button type="submit" class="btn btn-rounded btn-sm btn-info"><i class="fa fa-fw fa-download"></i>Save & Re-Forward Appraisal</button> 
+                                  <button type="submit" class="btn btn-rounded btn-sm btn-info"><i class="fa fa-fw fa-download"></i>Save Review</button> 
                                   <input type="hidden" name="_token" value="{{ Session::token() }}">
                                     <input type="hidden" name="reviewid" id="reviewid" value="{{ $kpa->review_token }}">
                                     <input type="hidden" name="reviewtype" id="reviewtype" value="goal">
                                      <input type="hidden" name="staff_id" id="staff_id" value="{{ $employee->obsid  }}">
-                                      <input type="hidden" name="staff_id_raw" id="staff_id_raw" value="{{ $employee->staff_id  }}">
-                                       <input type="hidden" name="employee_mark" id="employee_mark" value="{{ $employeefinal }}">
+                                     <input type="hidden" name="staff_id_raw" id="staff_id_raw" value="{{ $employee->staff_id  }}">
+
+                                      <input type="hidden" name="employee_mark" id="employee_mark" value="{{ $employeefinal }}">
                                      <input type="hidden" name="manager_mark" id="manager_mark" value="{{ $managerfinal }}">
+                                     
                             </p>
                             </div>
                         </div>
+
+
 
 
                         </footer>
@@ -338,7 +833,9 @@
                   </div>
                 </section>
 
-                <section class="panel panel-default">
+
+                    
+                    <section class="panel panel-default">
                     <header class="panel-heading font-bold"></header>
                         <div class="panel-body">
                                  
@@ -407,12 +904,12 @@
                           </div>
                         </div> 
                                    
-                                   
-                                  
-                                </div>
-                              </section>
+                         </div>
+                      </section>
+
+                      @endif
                         </div>
-                          </form>
+                      </form>
                        @endif
 
 
@@ -424,131 +921,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-{{--                           Job Audit --}}
-
-
-<div class="tab-pane" id="kpa">
-                             <section class="panel panel-warning">
-                                  <header class="panel-heading font-bold"> KRA vrs Goal - Probabtion</header>
-                                <div class="panel-body">
-                                      <div class="table-responsive">
-
-                        <form  method="post"  data-validate="parsley" action="/save-ratings" >
-                       <table id="JobTable" cellpadding="0" cellspacing="0" border="0" class="table table-striped m-b-none text-sm" width="100%">
-                         <thead>
-                            <tr>
-                             <th></th>
-                             <th>KRA</th>
-                            <th>Weightage %</th>
-                            <th>Manager's Rating</th>
-                            <th>Employee's Rating</th>
-                            <th>Comment</th>
-                            <th></th>
-                            <th></th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            @foreach( $probation as $key => $probation )
-                          <tr>
-                            <td>{{ ++$key }}</td>
-                            <td><input name="question[]" id="question" readonly="true" value="{{ $probation->question }}" class="btn btn-rounded btn-sm btn-default" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{ $probation->tooltip }}"></td>
-                            <td><input name="weight[]" id="weight" readonly="true" value="{{ $probation->weightage }}" class="btn btn-rounded btn-sm xs btn-default"></td>
-                            <td><input type="text" id="managerscrore" data-max="5" readonly="true" name="managerscrore[]" value="" placeholder="0 of 5" class="form-control rounded"></td> 
-                             <td><input type="text" id="userscore" data-max="5" name="userscore[]" value="" placeholder="0 of 5" class="form-control rounded"></td> 
-                              <td><input name="comment[]" id="comment" value="" class="form-control rounded"></td>
-                          </tr>
-                         @endforeach
-                          </tbody>
-
-                           <footer>
-                          <div class="btn-group pull-right">
-                            <p>
-                                  <button type="submit" class="btn btn-rounded btn-sm btn-info"><i class="fa fa-fw fa-download"></i>Save</button> 
-                                  <input type="hidden" name="_token" value="{{ Session::token() }}">
-                                    <input type="hidden" name="reviewid" id="reviewid" value="{{ Session::token() }}">
-                                    <input type="hidden" name="staff_id" id="staff_id" value="{{ $employee->obsid  }}">
-                                       <input type="hidden" name="reviewtype" id="reviewtype" value="probation">
-                                  <a href="#" class="btn btn-rounded btn-sm btn-danger"><i class="fa fa-fw fa-trash"></i> Cancel</a>
-                                  <a href="#" class="btn btn-rounded btn-sm btn-default"><i class="fa fa-fw fa-print"></i> Print </a>
-                            </p>
-                            </div>
-                        </footer>
-                        </table>
-                          <br>
-                          <br>
-                          <br>
-                        <section class="panel panel-default">
-                                <div class="panel-body">
-
-                        <div class="form-group pull-in clearfix">
-                          <div class="col-sm-12">
-                           <label>Should the employee be confirmed in his/her present position? </label> 
-                       <select id="staff_id" name="staff_id" rows="3" readonly="true" tabindex="1" data-placeholder="Select here.." style="width:100%">
-                         <option value="">-- Select option --</option>
-                        
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                        
-                         </select>
-                         </div>
-                         </div>
-                        
-
-                          <div class="form-group pull-in clearfix">
-                          <div class="col-sm-12">
-                            <label>Please give three reasons why the employee should be confirmed/ not confirmed after the probationary period. </label> 
-                            <div class="form-group{{ $errors->has('comment') ? ' has-error' : ''}}">
-                            <textarea type="text" rows="6" class="form-control" readonly="true" id="comment" name="comment" value="{{ Request::old('comment') ?: '' }}"></textarea>   
-                           @if ($errors->has('comment'))
-                          <span class="help-block">{{ $errors->first('comment') }}</span>
-                           @endif    
-                          </div>
-                          </div>
-                        </div>
-
-
-                         <div class="form-group pull-in clearfix">
-                          <div class="col-sm-12">
-                            <label>Head of Department's Comments</label> 
-                            <div class="form-group{{ $errors->has('manager_feedback') ? ' has-error' : ''}}">
-                            <textarea type="text" rows="3" class="form-control" readonly="true" id="manager_feedback" name="manager_feedback" value="{{ Request::old('manager_feedback') ?: '' }}"></textarea>   
-                           @if ($errors->has('manager_feedback'))
-                          <span class="help-block">{{ $errors->first('manager_feedback') }}</span>
-                           @endif    
-                          </div>
-                          </div>
-                        </div>
-
-
-
-                          <div class="form-group pull-in clearfix">
-                          <div class="col-sm-12">
-                            <label>MD’s Comments</label> 
-                            <div class="form-group{{ $errors->has('director_feedback') ? ' has-error' : ''}}">
-                            <textarea type="text" rows="3" class="form-control" readonly="true" id="director_feedback" name="director_feedback" value="{{ Request::old('director_feedback') ?: '' }}"></textarea>   
-                           @if ($errors->has('director_feedback'))
-                          <span class="help-block">{{ $errors->first('director_feedback') }}</span>
-                           @endif    
-                          </div>
-                          </div>
-                        </div>
-                        </div>
-                </section>
-                        </form>
-                    </div>           
-                  </div>
-                </section>
-              </div>
 
               <div class="tab-pane" id="skillset">
                           <ul class="list-group no-radius m-b-none m-t-n-xxs list-group-lg no-border">
@@ -564,8 +936,8 @@
                    <table id="SkillTable" cellpadding="0" cellspacing="0" border="0" class="table table-striped m-b-none text-sm" width="100%">
                           <thead>
                             <tr>
-                              <th> Domain </th>
-                             <th>Skill</th>
+                            <th> Domain </th>
+                            <th>Skill</th>
                             <th>Description</th>
                             <th></th>
                             </tr>

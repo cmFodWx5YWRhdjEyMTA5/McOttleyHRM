@@ -15,7 +15,7 @@
                      <span class="badge badge-info">Record(s) Found : {{ $reviews->total() }} {{ str_plural('Review Submission', $reviews->total()) }}</span>
                     </div>
 
-                  <form action="#" method="GET">
+                  <form action="/find-review" method="GET">
                     <div class="col-sm-4 m-b-xs">
                       <div class="input-group">
                         <input type="text" name='search' id='search' class="input-sm form-control" placeholder="Search ...">

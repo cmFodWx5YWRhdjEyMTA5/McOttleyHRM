@@ -26,7 +26,7 @@ class PayrollController extends Controller
 
    public function __construct()
     {
-        $this->middleware('role:HR Manager');
+        $this->middleware('role:HR Manager|');
         $this->middleware('auth');
 
     }
@@ -69,12 +69,13 @@ class PayrollController extends Controller
 
         $search = $request->get('search');
 
-    $employees = Employee::where('status','Active')->get();
+    $employees = Employee::where('status','Active')->orderby('fullname','asc')->get();
     $paygrades = PayGrade::get();
     $currency  = Currency::get();
     //$salaryevents = SalaryEvent::get();
     $payrolls  = PayrollList::where('fullname', 'like', "%$search%")
             ->orWhere('staff_id', 'like', "%$search%")
+             ->orWhere('staff_id', 'like', "%$search%")
             ->orderBy('fullname')
             ->paginate(30)
             ->appends(['search' => $search]);
@@ -91,7 +92,7 @@ class PayrollController extends Controller
     $paygrades = PayGrade::get();
     $currency  = Currency::get();
     //$salaryevents = SalaryEvent::get();
-    $payrolls  = Payroll::orderBy('createdon', 'DESC')->paginate(30);
+    $payrolls  = Payroll::orderBy('createdon', 'DESC')->paginate(500);
     return view('payroll.index', compact('payrolls','employees','paygrades','currency','salaryevents'));
      
     }
@@ -99,10 +100,10 @@ class PayrollController extends Controller
     public function masterfile()
     {
    
-    $employees = Employee::where('status','Active')->get();
+    $employees = Employee::orderby('fullname','desc')->where('status','Active')->get();
     $paygrades = PayGrade::get();
     $currency  = Currency::get();
-    $payrolls  = PayrollList::orderBy('fullname', 'DESC')->paginate(30);
+    $payrolls  = PayrollList::orderBy('fullname', 'asc')->paginate(500);
     return view('payroll.master', compact('payrolls','employees','paygrades','currency','salaryevents'));
      
     }
@@ -385,7 +386,7 @@ class PayrollController extends Controller
        $bankdetail = EmployeeBank::where('staff_id','=',$request->input('staff_id'))->orderBy('created_on', 'desc')->first(); 
        $bank = $bankdetail->bank_name;
        $accountnumber = $bankdetail->bank_account_number;
-
+       $branch =$bankdetail->bank_location; 
        $staffname = Employee::where('staff_id','=',$request->input('staff_id'))->orderBy('created_on', 'desc')->first(); 
        $payid = uniqid();
 
@@ -393,6 +394,7 @@ class PayrollController extends Controller
        $payroll->trasactionid   = $payid;
        $payroll->staffid        = $request->input('staff_id');
        $payroll->name           = $staffname->fullname;
+       $payroll->subsidiary     = $staffname->subsidiary;
        $payroll->basic_annual          = $request->input('basic_annual');
        $payroll->car_allowance      = $request->input('car_allowance');
        $payroll->living_allowance   = $request->input('living_allowance');
@@ -406,7 +408,7 @@ class PayrollController extends Controller
        $payroll->mctrust        = $request->input('mctrust');
        $payroll->pension_fund_percent        = $request->input('pension_fund_percent');
        $payroll->bank           = $bank;
-       $payroll->accountnumber  = $accountnumber;
+       $payroll->branch  = $branch;
        $payroll->payperiod      = $this->change_date_format($request->input('salary_start_date'));
        $payroll->employer_ssf   = $request->input('employer_ssf');
        $payroll->createdon     = Carbon::now();
@@ -519,6 +521,7 @@ class PayrollController extends Controller
       $bankdetail = EmployeeBank::where('staff_id','=',$salary_checked)->orderBy('created_on', 'desc')->first();
        $bank = $bankdetail->bank_name;
        $accountnumber = $bankdetail->bank_account_number;
+        $branch =$bankdetail->bank_location; 
 
        $staffname = Employee::where('staff_id','=',$salary_checked)->first();
 
@@ -538,6 +541,8 @@ class PayrollController extends Controller
        $payroll->trasactionid   = $payid;
        $payroll->staffid        = $salary_checked;
        $payroll->name           = $staffname->fullname;
+       $payroll->subsidiary     = $staffname->subsidiary;
+       $payroll->job_title      = $staffname->job_title;
        $payroll->basic_annual       = $pay_details->basic_annual;
        $payroll->car_allowance      = $pay_details->car_allowance;
        $payroll->living_allowance   = $pay_details->living_allowance;
@@ -550,8 +555,9 @@ class PayrollController extends Controller
        $payroll->mcfund         = $pay_details->mcfund;
        $payroll->mctrust        = $pay_details->mctrust;
        $payroll->pension_fund_percent  = $pay_details->basic_annual  * ($pension_fund_percent/100);
-       $payroll->bank           = $bank;
+       $payroll->bank           = ucwords(strtolower($bank));
        $payroll->accountnumber  = $accountnumber;
+       $payroll->branch  = $branch;
        $payroll->payperiod      = date('MY');;
        $payroll->employer_ssf   = $pay_details->basic_annual * 13/100; 
        $payroll->createdon     = Carbon::now();

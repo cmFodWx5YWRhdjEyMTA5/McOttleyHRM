@@ -56,7 +56,7 @@
                           <div class="col-sm-12">
                          <div class="form-group{{ $errors->has('email') ? ' has-error' : ''}}">
                           <label>Work Email </label>
-                          <input type="email" class="form-control" data-required="true" id="email" value="{{ Request::old('email') ?: '' }}"  name="email" data-toggle="tooltip" data-placement="top" title="" data-original-title="Please be extra careful typing the address. We use it to grant access to the employee's sensitive information.">
+                          <input type="email" class="form-control" data-required="true" id="email" value="{{ Request::old('email') ?: '' }}"  name="email" data-type="email" data-toggle="tooltip" data-placement="top" title="" data-original-title="Please be extra careful typing the address. We use it to grant access to the employee's sensitive information.">
                           @if ($errors->has('email'))
                           <span class="help-block">{{ $errors->first('email') }}</span>
                            @endif                        

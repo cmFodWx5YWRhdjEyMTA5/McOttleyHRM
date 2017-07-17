@@ -2335,7 +2335,7 @@ function deleteDependent(id,name)
 function saveSalaryDetails()
 {
 
- // alert($('#staff_id').val());
+ //alert($('#staff_id').val());
 if($('#staff_id').val()!= "")
 {
 
@@ -2351,6 +2351,7 @@ if($('#staff_id').val()!= "")
           "housing_allowance":        $('#housing_allowance').val(),
           "epf_deducation_percent":   $('#epf_deducation_percent').val(),
           "pension_fund_percent":     $('#pension_fund_percent').val(),
+           "transport_allowance":     $('#transport_allowance').val(),
           "loan_repayment":           $('#loan_repayment').val(),
           "mcfund_plus":              $('#mcfund_plus').val(),
           "mcfund":                   $('#mcfund').val(),

@@ -184,6 +184,7 @@
               </section>
               </div>
 
+  @role(['HR Manager'])
                <div class="col-sm-3 portlet ui-sortable">
               <section class="panel panel-warning portlet-item">
                 <header class="panel-heading">
@@ -191,13 +192,16 @@
                Canned Reports
                 </header>
                 <div class="list-group bg-white">
-                  <a href="#" class="list-group-item">
+                  <a href="/payroll-report" class="list-group-item">
                     <i class="fa fa-fw fa-file"></i> Job Salary Reports
+                  </a>
+                  <a href="/bank-report" class="list-group-item">
+                    <i class="fa fa-fw fa-file"></i> Bank Advice
                   </a>
                 </div>
               </section>
               </div>
-               
+       @endrole        
                
 
               </div>

@@ -924,6 +924,10 @@ Route::get('/reviews',
 	['uses' => '\McPersona\Http\Controllers\PerformanceController@index',
 	 'as' => 'reviews', ]);
 
+Route::get('/find-review', 
+	['uses' => '\McPersona\Http\Controllers\PerformanceController@findReview', 
+	'as' => 'find-review', ]);
+
 Route::get('/review-settings',
 	['uses' => '\McPersona\Http\Controllers\PerformanceController@settings',
 	 'as' => 'review-settings', ]);
@@ -1040,6 +1044,16 @@ Route::get('/qualification-report',
 Route::get('/branch-report',
 	['uses' => '\McPersona\Http\Controllers\ReportController@getbranch',
 	 'as' => '/branch-report', ]);
+
+Route::get('/payroll-report',
+	['uses' => '\McPersona\Http\Controllers\ReportController@getpayroll',
+	 'as' => '/payroll-report', ]);
+
+
+Route::get('/bank-report',
+	['uses' => '\McPersona\Http\Controllers\ReportController@getbankadvice',
+	 'as' => '/bank-report', ]);
+
 
 
 Route::get('/report-list',

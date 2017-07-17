@@ -75,6 +75,19 @@ class ReportController extends Controller
         return view('reporting.employee.birth');
     }
 
+
+      public function getbankadvice()
+    {
+        return view('reporting.employee.bankadvice');
+    }
+
+     public function getpayroll()
+    {
+        return view('reporting.employee.payroll');
+    }
+
+
+
     public function getmarital()
     {
       $chartjs = app()->chartjs

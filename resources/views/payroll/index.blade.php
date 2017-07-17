@@ -17,7 +17,7 @@
                       <i class="fa fa-money fa-stack-1x text-white"></i>
                     </span>
                     <a class="clear" href="/payroll-master"  data-toggle="modal" class="btn btn-sm btn-default bootstrap-modal-form-open">
-                      <span class="h3 block m-t-xs"><strong>0</strong></span>
+                      <span class="h3 block m-t-xs"><strong>{{$payrolls->count()}}</strong></span>
                       <small class="text-muted text-uc">Generate Bulk Payroll</small>
                     </a>
                   </div>

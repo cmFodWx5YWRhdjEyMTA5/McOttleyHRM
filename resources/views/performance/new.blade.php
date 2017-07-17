@@ -84,7 +84,7 @@
 
 
   
-                        <div class="form-group pull-in clearfix">
+                       {{--  <div class="form-group pull-in clearfix">
                           <div class="col-sm-12">
                          <div class="form-group{{ $errors->has('email') ? ' has-error' : ''}}">
                           <label>Appraisal Form Template </label>
@@ -96,15 +96,34 @@
                         </div>
                         </div>
 
-                       
+                        --}}
                         
 
                      <div class="form-group pull-in clearfix">
-                         <div class="col-sm-4">
+                     <div class="col-sm-6">
+                         <div class="form-group">
+                          <label>Employee</label>
+                          <div class="form-group{{ $errors->has('employee') ? ' has-error' : ''}}">
+                           <select name="employee[]" id="employee"  style="width:100%" multiple data-placeholder=""  >
+                             <option  value="All">All</option>
+                          @foreach($employees as $employee)
+                        <option  value="{{ $employee->email }}">{{ $employee->fullname }}</option>
+                          @endforeach
+                            </select>       
+                          @if ($errors->has('employee'))
+                          <span class="help-block">{{ $errors->first('employee') }}</span>
+                           @endif                           
+                        </div>
+                        </div>
+                        </div>
+
+
+                         <div class="col-sm-6">
                          <div class="form-group">
                           <label>Business</label>
                           <div class="form-group{{ $errors->has('subsidiary') ? ' has-error' : ''}}">
                            <select name="subsidiary[]" id="subsidiary"  style="width:100%" multiple data-placeholder=""  >
+                            <option  value="All">All</option>
                           @foreach($subsidiaries as $subsidiary)
                         <option  value="{{ $subsidiary->name }}">{{ $subsidiary->name }}</option>
                           @endforeach
@@ -115,11 +134,15 @@
                         </div>
                         </div>
                         </div>
-                        <div class="col-sm-4">
+                        </div>
+
+                        <div class="form-group pull-in clearfix">
+                        <div class="col-sm-6">
                          <div class="form-group">
                           <label>Role</label>
                           <div class="form-group{{ $errors->has('jobtitle') ? ' has-error' : ''}}">
                          <select name="jobtitle[]" id="jobtitle"  style="width:100%" multiple data-placeholder=""  >
+                           <option  value="All">All</option>
                           @foreach($jobtitles as $jobtitle)
                         <option  value="{{ $jobtitle->type }}">{{ $jobtitle->type }}</option>
                           @endforeach
@@ -130,11 +153,12 @@
                         </div>
                         </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                          <div class="form-group">
                           <label>Department</label>
                           <div class="form-group{{ $errors->has('department') ? ' has-error' : ''}}">
                            <select name="department[]" id="department"   style="width:100%" multiple data-placeholder=""  >
+                             <option  value="All">All</option>
                           @foreach($departments as $department)
                         <option  value="{{ $department->name }}">{{ $department->name }}</option>
                           @endforeach

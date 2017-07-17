@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="payroll" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4b9ab9b4-63aa-47f5-9f8f-33ecd48ad034">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="24"/>
+	<property name="ireport.jasperserver.reportUnit" value="/mcottleyhrm/payroll"/>
+	<property name="ireport.jasperserver.url" value="http://localhost:8080/jasperserver/services/repository"/>
+	<parameter name="subsidiary" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="pay_period" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     payroll.`id` AS payroll_id,
+     payroll.`trasactionid` AS payroll_trasactionid,
+     payroll.`staffid` AS payroll_staffid,
+     payroll.`name` AS payroll_name,
+     payroll.`basic_annual` AS payroll_basic_annual,
+     payroll.`car_allowance` AS payroll_car_allowance,
+     payroll.`living_allowance` AS payroll_living_allowance,
+     payroll.`housing_allowance` AS payroll_housing_allowance,
+     payroll.`clothing_allowance` AS payroll_clothing_allowance,
+     payroll.`employee_ssf` AS payroll_employee_ssf,
+     payroll.`employer_ssf` AS payroll_employer_ssf,
+     payroll.`income_tax` AS payroll_income_tax,
+     payroll.`pension_fund_percent` AS payroll_pension_fund_percent,
+     payroll.`loan_repayment` AS payroll_loan_repayment,
+     payroll.`mcfund_plus` AS payroll_mcfund_plus,
+     payroll.`mcfund` AS payroll_mcfund,
+     payroll.`mctrust` AS payroll_mctrust,
+     payroll.`bank` AS payroll_bank,
+     payroll.`accountnumber` AS payroll_accountnumber,
+     payroll.`createdby` AS payroll_createdby,
+     payroll.`createdon` AS payroll_createdon,
+     payroll.`payperiod` AS payroll_payperiod,
+     payroll.`subsidiary` AS payroll_subsidiary,
+     payroll.`job_title` AS payroll_job_title
+FROM
+     `payroll` payroll
+ where
+ (payroll.`payperiod` = $P{pay_period})
+ and ( $P{subsidiary}= 'All'
+     or payroll.`subsidiary` = $P{subsidiary})
+order by  payroll.`subsidiary` asc]]>
+	</queryString>
+	<field name="payroll_id" class="java.lang.Integer"/>
+	<field name="payroll_trasactionid" class="java.lang.String"/>
+	<field name="payroll_staffid" class="java.lang.String"/>
+	<field name="payroll_name" class="java.lang.String"/>
+	<field name="payroll_basic_annual" class="java.math.BigDecimal"/>
+	<field name="payroll_car_allowance" class="java.math.BigDecimal"/>
+	<field name="payroll_living_allowance" class="java.math.BigDecimal"/>
+	<field name="payroll_housing_allowance" class="java.math.BigDecimal"/>
+	<field name="payroll_clothing_allowance" class="java.math.BigDecimal"/>
+	<field name="payroll_employee_ssf" class="java.math.BigDecimal"/>
+	<field name="payroll_employer_ssf" class="java.math.BigDecimal"/>
+	<field name="payroll_income_tax" class="java.math.BigDecimal"/>
+	<field name="payroll_pension_fund_percent" class="java.math.BigDecimal"/>
+	<field name="payroll_loan_repayment" class="java.math.BigDecimal"/>
+	<field name="payroll_mcfund_plus" class="java.math.BigDecimal"/>
+	<field name="payroll_mcfund" class="java.math.BigDecimal"/>
+	<field name="payroll_mctrust" class="java.math.BigDecimal"/>
+	<field name="payroll_bank" class="java.lang.String"/>
+	<field name="payroll_accountnumber" class="java.lang.String"/>
+	<field name="payroll_createdby" class="java.lang.String"/>
+	<field name="payroll_createdon" class="java.sql.Timestamp"/>
+	<field name="payroll_payperiod" class="java.lang.String"/>
+	<field name="payroll_subsidiary" class="java.lang.String"/>
+	<field name="payroll_job_title" class="java.lang.String"/>
+	<variable name="gross_allowance" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{payroll_basic_annual} + $F{payroll_car_allowance} + $F{payroll_living_allowance} + $F{payroll_housing_allowance} + $F{payroll_clothing_allowance}]]></variableExpression>
+	</variable>
+	<variable name="net_income" class="java.lang.Double">
+		<variableExpression><![CDATA[($F{payroll_basic_annual} + $F{payroll_living_allowance} + $F{payroll_car_allowance} + $F{payroll_housing_allowance} + $F{payroll_clothing_allowance})-($F{payroll_employee_ssf}+  $F{payroll_pension_fund_percent} + $F{payroll_income_tax} + $F{payroll_loan_repayment} + $F{payroll_mcfund_plus} + $F{payroll_mcfund} + $F{payroll_mctrust})]]></variableExpression>
+	</variable>
+	<variable name="payroll_subsidiary_1" class="java.lang.Integer" resetType="Group" resetGroup="mysubsidiary" calculation="Count">
+		<variableExpression><![CDATA[$F{payroll_subsidiary}]]></variableExpression>
+	</variable>
+	<variable name="totalnet" class="java.lang.Double" resetType="Group" resetGroup="mysubsidiary" calculation="Sum">
+		<variableExpression><![CDATA[$V{net_income}]]></variableExpression>
+	</variable>
+	<variable name="totalbasic" class="java.lang.Double" resetType="Group" resetGroup="mysubsidiary" calculation="Sum">
+		<variableExpression><![CDATA[$F{payroll_basic_annual}]]></variableExpression>
+	</variable>
+	<variable name="totalutility" class="java.lang.Double" resetType="Group" resetGroup="mysubsidiary" calculation="Sum">
+		<variableExpression><![CDATA[$F{payroll_living_allowance}]]></variableExpression>
+	</variable>
+	<variable name="totalcar" class="java.lang.Double" resetType="Group" resetGroup="mysubsidiary" calculation="Sum">
+		<variableExpression><![CDATA[$F{payroll_car_allowance}]]></variableExpression>
+	</variable>
+	<variable name="totalhouse" class="java.lang.Double" resetType="Group" resetGroup="mysubsidiary" calculation="Sum">
+		<variableExpression><![CDATA[$F{payroll_housing_allowance}]]></variableExpression>
+	</variable>
+	<variable name="totalclothing" class="java.lang.Double" resetType="Group" resetGroup="mysubsidiary" calculation="Sum">
+		<variableExpression><![CDATA[$F{payroll_clothing_allowance}]]></variableExpression>
+	</variable>
+	<variable name="totalgross" class="java.lang.Double" resetType="Group" resetGroup="mysubsidiary" calculation="Sum">
+		<variableExpression><![CDATA[$V{gross_allowance}]]></variableExpression>
+	</variable>
+	<variable name="totalssf" class="java.lang.Double" resetType="Group" resetGroup="mysubsidiary" calculation="Sum">
+		<variableExpression><![CDATA[$F{payroll_employee_ssf}]]></variableExpression>
+	</variable>
+	<variable name="totalpf" class="java.lang.Double" resetType="Group" resetGroup="mysubsidiary" calculation="Sum">
+		<variableExpression><![CDATA[$F{payroll_pension_fund_percent}]]></variableExpression>
+	</variable>
+	<variable name="totalpaye" class="java.lang.Double" resetType="Group" resetGroup="mysubsidiary" calculation="Sum">
+		<variableExpression><![CDATA[$F{payroll_income_tax}]]></variableExpression>
+	</variable>
+	<variable name="totalloan" class="java.lang.Double" resetType="Group" resetGroup="mysubsidiary" calculation="Sum">
+		<variableExpression><![CDATA[$F{payroll_loan_repayment}]]></variableExpression>
+	</variable>
+	<variable name="totalmcfundplus" class="java.lang.Double" resetType="Group" resetGroup="mysubsidiary" calculation="Sum">
+		<variableExpression><![CDATA[$F{payroll_mcfund_plus}]]></variableExpression>
+	</variable>
+	<variable name="totalmctrust" class="java.lang.Double" resetType="Group" resetGroup="mysubsidiary" calculation="Sum">
+		<variableExpression><![CDATA[$F{payroll_mctrust}]]></variableExpression>
+	</variable>
+	<variable name="totalmcfund" class="java.lang.Double" resetType="Group" resetGroup="mysubsidiary" calculation="Sum">
+		<variableExpression><![CDATA[$F{payroll_mcfund}]]></variableExpression>
+	</variable>
+	<group name="mysubsidiary" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{payroll_subsidiary}]]></groupExpression>
+		<groupHeader>
+			<band height="7"/>
+		</groupHeader>
+		<groupFooter>
+			<band height="34">
+				<textField pattern="#,##0.00">
+					<reportElement x="741" y="0" width="61" height="20" uuid="521ef852-822e-4ff7-b73f-2bea2bd2cdde"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalnet}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="149" y="0" width="40" height="20" uuid="46e3b258-0f87-4a62-bf59-9951c4d2c8cd"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalbasic}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="192" y="0" width="44" height="20" uuid="81bd83f0-cd43-437c-bb60-9d5c72370b48"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalutility}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="239" y="0" width="45" height="20" uuid="6a85b1b0-4757-42a4-8fd4-8daad3236a9e"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalcar}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="287" y="0" width="48" height="20" uuid="617789f7-80da-4775-b196-07cb607c905c"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalhouse}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="339" y="0" width="41" height="20" uuid="78437c8f-a981-4643-8eb6-685faf36a05b"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalclothing}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="383" y="0" width="41" height="20" uuid="8a3b5b56-3c0b-4d7e-8189-bfba0ea1f718"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalgross}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="426" y="0" width="39" height="20" uuid="95a6530a-109a-49d6-8a06-35917628ab20"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalssf}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="469" y="0" width="41" height="20" uuid="979976ba-1358-4717-b986-852c7ebde6ec"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalpf}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="515" y="0" width="39" height="20" uuid="2c2fc749-4e1b-4219-9852-46e2f9a82ddf"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalpaye}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="558" y="0" width="47" height="20" uuid="a18c1371-7798-4ba9-baef-4f5749e247ce"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalloan}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="611" y="0" width="42" height="20" uuid="91043d80-41f1-4f9f-911c-c0c5b8b726f4"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalmcfundplus}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="658" y="0" width="39" height="20" uuid="bdff2ea0-4520-4e7c-8a45-9da99fba1691"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalmctrust}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="702" y="0" width="39" height="20" uuid="5c7a7975-6ae0-4c43-9bb6-b8bf0a1e1f53"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalmcfund}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="42" width="216" height="20" uuid="bf964891-f609-41a6-a1d2-8fbfb125cb80"/>
+				<textElement>
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[McOttley Limited Payroll for]]></text>
+			</staticText>
+			<image>
+				<reportElement x="592" y="8" width="189" height="71" uuid="ef162139-723a-4199-b3d0-b322c707cc62"/>
+				<imageExpression><![CDATA["repo:IMG-20160817-WA0003.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="216" y="42" width="239" height="20" uuid="84c54d3b-d316-4369-a007-219d53162307"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pay_period}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="25" y="31" width="58" height="20" uuid="20959f48-fb74-4ead-b3d9-331d8f409ad5"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name of Employee]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="96" y="31" width="53" height="20" uuid="05431dc8-a98d-4ff3-a57f-ef2a5fdf389a"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Designation]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="149" y="31" width="40" height="20" uuid="5fa93d2d-de53-4162-99cd-ca5355588c33"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Basic Pay]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="192" y="31" width="44" height="20" uuid="dbc95b26-c494-4c4a-8bce-624c06576a87"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Utility]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="239" y="31" width="45" height="20" uuid="ef312589-7a83-4a74-907a-76b8e5bb1992"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Car Maint. Allow]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="287" y="31" width="48" height="20" uuid="1570ccdd-6527-478f-b21a-b7258c7bf409"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Housing Allow]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="339" y="31" width="41" height="20" uuid="69bdd85f-5ff2-473d-bf4b-d803910d0029"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clothing]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="426" y="31" width="39" height="20" uuid="d5b341ea-74f9-4ad9-a9d3-2222ec7af8ae"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SSF - 5.5%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="469" y="31" width="41" height="20" uuid="6c7ba328-d0a0-4490-a5d5-24aa115227b6"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PF - 5%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="515" y="31" width="39" height="20" uuid="db3d6695-9acc-46d9-bc4e-d5feda9c52b0"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PAYE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="558" y="31" width="47" height="20" uuid="c12ac37f-3591-43bc-a578-90858281d37c"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Loan Repayment]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="611" y="31" width="42" height="20" uuid="6132d451-1df5-4626-b50e-f5a8e86d8833"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[McFund Plus]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="658" y="31" width="39" height="20" uuid="8cf4cbbc-4017-49d3-9bac-6db1c2ab3164"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[McTrust]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="700" y="31" width="41" height="20" uuid="adf1e319-fbaa-4f6a-95a2-4e19cf3b5b72"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[McFund]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="383" y="31" width="41" height="20" uuid="f291f7b3-8553-4a9e-a28f-88a5c288a0ef"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gross Earning]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="741" y="31" width="61" height="20" uuid="cdeba91d-213b-40d3-93ad-f60d979d45f7"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Net Pay]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="57" width="802" height="1" uuid="788eb8dc-e278-4687-a803-868fcaff2667"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="5" y="4" width="282" height="20" uuid="0be770fa-c09e-496d-b95d-1730291e3f48"/>
+				<textFieldExpression><![CDATA[$F{payroll_subsidiary}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="37" splitType="Stretch">
+			<textField>
+				<reportElement x="25" y="3" width="58" height="20" uuid="98c9bfed-99b6-4ddb-8a08-97f2e8e013ca"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payroll_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="96" y="3" width="53" height="20" uuid="051929f3-7cad-4eb9-9f44-33ab906d79fb"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payroll_job_title}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="149" y="3" width="40" height="20" uuid="8009179e-d0d2-4aee-a41a-d60eefdb22fe"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payroll_basic_annual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="192" y="3" width="44" height="20" uuid="d24ce45f-73f8-4dc1-b9bd-b36c4ebcc0b4"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payroll_living_allowance}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="239" y="3" width="45" height="20" uuid="48543edb-3236-476f-8b2a-bebb17ddb694"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payroll_car_allowance}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="287" y="3" width="48" height="20" uuid="a9e8e50b-4586-4b0a-903d-3adfa1c1bea9"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payroll_housing_allowance}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="339" y="3" width="41" height="20" uuid="1149ec5a-782a-4e61-8dae-39928a112834"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payroll_clothing_allowance}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="383" y="3" width="41" height="20" uuid="f2cc7292-24e1-4b81-844a-1018a31a2782"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{gross_allowance}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="426" y="3" width="39" height="20" uuid="3a78c0ac-7ea4-42ac-b4db-4f1bd8d52ff8"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payroll_employee_ssf}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="469" y="3" width="41" height="20" uuid="cda46ded-8100-4953-abd2-21a9f9f6a215"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payroll_pension_fund_percent}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="515" y="3" width="39" height="20" uuid="17261e1b-7af7-45cb-94ef-3d590a246cab"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payroll_income_tax}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="558" y="3" width="47" height="20" uuid="fcb7bb69-1546-4c49-af08-7dedf2de31ed"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payroll_loan_repayment}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="611" y="3" width="42" height="20" uuid="19d4e91f-013d-4c9b-9060-8579a4170169"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payroll_mcfund_plus}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="658" y="3" width="39" height="20" uuid="00a8be22-cd9e-4701-912c-8e6ea65eda63"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payroll_mcfund}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="700" y="3" width="41" height="20" uuid="1462dc1e-1e8e-457e-9394-79dec1c244f2"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payroll_mctrust}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="741" y="3" width="61" height="20" uuid="aa4db75e-4b90-4dd9-96b3-807ab3cea5cb"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{net_income}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="28" width="802" height="1" uuid="759cb76d-fb78-43e3-ab54-5bf1270a898d"/>
+				<graphicElement>
+					<pen lineStyle="Dashed" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="5" y="3" width="20" height="20" uuid="3ca11e0d-7799-4887-a0c4-42bb315ecb46"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{mysubsidiary_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="9" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="661" y="4" width="80" height="20" uuid="ee185c0d-941a-48a1-922a-9065a615f3cf"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="741" y="4" width="40" height="20" uuid="92beded3-c06f-48be-b783-a61ff9a23b75"/>
+				<textElement>
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement x="6" y="57" width="41" height="20" uuid="76038f71-d7f0-4c9e-8ef5-f114280cdfad"/>
+				<textElement>
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<text><![CDATA[Printed By :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="33" width="802" height="1" uuid="8be6bb1d-75dd-47a9-ac63-2866dff54676"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="278" y="65" width="219" height="20" uuid="6f15ad7c-883e-445e-b58b-98529b0d9bf2"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[End of Report]]></text>
+			</staticText>
+			<textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
+				<reportElement x="5" y="38" width="142" height="17" uuid="726b68e9-7995-4c95-adf6-67c6515ef69a"/>
+				<textElement>
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

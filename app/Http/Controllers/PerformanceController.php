@@ -51,13 +51,13 @@ class PerformanceController extends Controller
             $summaries   = AppraisalSummary::get();
             $pontentials = AppraisalPotential::get();
 
-
+            $employees = Employee::where('status','Active')->get();
             $jobtitles = JobTitle::get();
             $departments = Department::get();
             $subsidiaries = Subsidiary::get();
             $kpa            = Questions::get();
             $cycles         = ReviewCycle::get();
-            return view('performance.settings',compact('pontentials','cycles','kpa','summaries','jobtitles','departments','subsidiaries'));
+            return view('performance.settings',compact('employees','pontentials','cycles','kpa','summaries','jobtitles','departments','subsidiaries'));
     }
 
 
@@ -92,8 +92,39 @@ class PerformanceController extends Controller
         $cycles         = ReviewCycle::get();
         $departments = Department::get();
         $locations   = Location::get();
-        $reviews     = ReviewDocuments::groupby('content')->orderby('created_on','desc')->paginate(20);
+        $reviews     = ReviewDocuments::groupby('content','staff_id')->orderby('created_on','desc')->paginate(20);
         $employees   = Employee::get();
+        return view('performance.index', compact('reviews','employees','departments','locations','jobtitles','subsidiaries','departments'));
+    }
+
+
+    public function findReview(Request $request)
+    {
+
+
+        $this->validate($request, [
+            'search' => 'required'
+        ]);
+
+        $search = $request->get('search');
+
+
+        $jobtitles      = JobTitle::get();
+        $departments    = Department::get();
+        $subsidiaries   = Subsidiary::get();
+        $kpa            = Questions::get();
+        $cycles         = ReviewCycle::get();
+        $departments    = Department::get();
+        $locations      = Location::get();
+        $reviews        = ReviewDocuments::where('fullname', 'like', "%$search%")          
+        ->groupby('content')
+        ->orderby('created_on','desc')
+        ->paginate(20)
+        ->appends(['search' => $search]);
+
+
+
+        $employees      = Employee::get();
         return view('performance.index', compact('reviews','employees','departments','locations','jobtitles','subsidiaries','departments'));
     }
 
@@ -105,16 +136,29 @@ class PerformanceController extends Controller
     $token          = $review;
     $active_token    = $token; 
     //dd($token);
+    $reviewtitle = ReviewCycle::where('review_token', $token)->pluck('title');
+
     
 
+      if (strpos($reviewtitle, 'Probation') !== false) 
+      {
+    $rating         = ReviewRatings::where('review_token' ,'=',$token )->where('staff_id' ,'=',$id)->where('reviewtype','goal')->count();
+    $kpas           = ReviewRatings::where('review_token' ,'=',$token )->where('staff_id' ,'=',$id)->where('reviewtype','goal')->get();
+
+    $probation      = Questions::get();
+    $goals          =  $probation;
+    $tasks          = PerformanceGoals::where('review_token' ,'=',$token )->where('staff_id' ,'=',$id)->where('reviewtype','goal')->get();
+      }
+      else
+      {
     $rating         = ReviewRatings::where('review_token' ,'=',$token )->where('staff_id' ,'=',$id)->where('reviewtype','goal')->count();
     $kpas           = ReviewRatings::where('review_token' ,'=',$token )->where('staff_id' ,'=',$id)->where('reviewtype','goal')->get();
 
     $probation      = Questions::get();
     $goals          = PerformanceGoals::where('review_token' ,'=',$token )->where('staff_id' ,'=',$id)->where('reviewtype','goal')->get();
     $tasks          = PerformanceGoals::where('review_token' ,'=',$token )->where('staff_id' ,'=',$id)->where('reviewtype','goal')->get();
-
-
+      }
+   
     
      if (!$token) 
      {
@@ -155,7 +199,7 @@ class PerformanceController extends Controller
     $employee =  Employee::where('obsid' ,'=', $id)->first();
     $supervisors =  Employee::where('job_title','like','%Manager%')->orwhere('job_title','like','%Head%')->orwhere('job_title','like','%Managing%')->where('status','Active')->orderby('fullname','asc')->get();
    
-    return view('performance.profile', compact('employee','supervisors','kpas','probation','employeerating','managerfinal','employeefinal','managerrating','cycles','goals','active_token','tasks','rating'));
+    return view('performance.profile', compact('reviewtitle','employee','supervisors','kpas','probation','employeerating','managerfinal','employeefinal','managerrating','cycles','goals','active_token','tasks','rating'));
    }
 
     public function appraisalManager($id,$review)
@@ -164,8 +208,10 @@ class PerformanceController extends Controller
     $token          = $review;
     $active_token    = $token;
 
+    $reviewtitle = ReviewCycle::where('review_token', $token)->pluck('title');
+
     $employee_id    = $id;
-    $kpa            = ReviewRatings::where('review_token' ,'=',$token )->where('staff_id' ,'=',$id)->where('reviewtype','goal')->get();
+    $kpas            = ReviewRatings::where('review_token' ,'=',$token )->where('staff_id' ,'=',$id)->where('reviewtype','goal')->get();
     $cycles         = ReviewCycle::get();
     $employee       = Employee::where('obsid' ,'=', $employee_id)->first();
     $supervisors =  Employee::where('job_title','like','%Manager%')->orwhere('job_title','like','%Head%')->orwhere('job_title','like','%Managing%')->where('status','Active')->orderby('fullname','asc')->get();
@@ -205,17 +251,21 @@ class PerformanceController extends Controller
      $employeefinal = ($employeescore * 100);
    }
 
-    return view('performance.manager', compact('employee','supervisors','kpa','cycles','managerrating','employeerating','managerfinal','employeefinal'));
+    return view('performance.manager', compact('reviewtitle','employee','supervisors','kpas','cycles','managerrating','employeerating','managerfinal','employeefinal'));
    }
 
 
    public function appraisalView($id,$review)
    {
+
+
      $token          = $review;
     $active_token    = $token;
 
+    $reviewtitle = ReviewCycle::where('review_token', $token)->pluck('title');
+
     $employee_id    = $id;
-    $kpa            = ReviewRatings::where('review_token' ,'=',$token )->where('staff_id' ,'=',$id)->where('reviewtype','goal')->get();
+    $kpas            = ReviewRatings::where('review_token' ,'=',$token )->where('staff_id' ,'=',$id)->where('reviewtype','goal')->get();
     $cycles         = ReviewCycle::get();
     $employee       = Employee::where('obsid' ,'=', $employee_id)->first();
     $supervisors =  Employee::where('status','Active')->orderby('fullname','asc')->get();
@@ -255,7 +305,7 @@ class PerformanceController extends Controller
      $employeefinal = ($employeescore * 100);
    }
 
-    return view('performance.view', compact('employee','kpa','cycles','managerrating','employeerating','managerfinal','employeefinal'));
+    return view('performance.view', compact('reviewtitle','supervisors','employee','kpas','cycles','managerrating','employeerating','managerfinal','employeefinal'));
    }
 
 
@@ -348,11 +398,12 @@ class PerformanceController extends Controller
           $time1 = explode(" - ", Input::get('appraisal_period')); 
           $time2 = explode(" - ", Input::get('review_period')); 
           $time3 = explode(" - ", Input::get('self_period')); 
+          //$employee = "echo.jasonkerr7@gmail.com";
 
-
-          if(Input::get("department")){$department =  implode('|', Input::get("department"));} else {$department = 'All';}
-          if(Input::get("subsidiary")){$business =  implode('|', Input::get("subsidiary"));} else {$business = 'All';}
-          if(Input::get("jobtitle")){$role =  implode('|', Input::get("jobtitle"));} else {$role = 'All';}
+          if(Input::get("department")){$department =  implode('|', Input::get("department"));} else {$department = '-';}
+          if(Input::get("subsidiary")){$business =  implode('|', Input::get("subsidiary"));} else {$business = '-';}
+          if(Input::get("jobtitle")){$role =  implode('|', Input::get("jobtitle"));} else {$role = '-';}
+          if(Input::get("employee")){$employee =  implode('|', Input::get("employee"));} else {$employee = '-';}
          
             
 
@@ -368,19 +419,17 @@ class PerformanceController extends Controller
            $cycle->department       = $department;
            $cycle->business         = $business;
            $cycle->role             = $role;
+           $cycle->employee         = $employee;
                                       
                                       
                                        
            $cycle->review_token     = Input::get("_token");
            $cycle->created_on       = Carbon::now();
            $cycle->create_by        = Auth::user()->getNameOrUsername();
+           $cycle->save();
            
-
-
-
-
-         if($cycle->save())
-          {
+          if($cycle->save())
+            {
 
             return redirect()
             ->back()
@@ -515,7 +564,7 @@ public function deleteSubmission()
      public function ratingSave(Request $request)
     {
 
-           // dd($request->all());
+          //dd($request->all());
 
             $count = ReviewRatings::where('review_token',$request->input('reviewid'))->count();
 
@@ -549,6 +598,15 @@ public function deleteSubmission()
             'manager_feedback'  => $request->input('manager_feedback'),
             'director_feedback' => $request->input('director_feedback'),
             'hr_feedback' => $request->input('hr_feedback'),
+            'prob_1' => $request->input('prob_1'),
+            'prob_2' => $request->input('prob_2'),
+            'prob_3' => $request->input('prob_3'),
+            'prob_4' => $request->input('prob_4'),
+            'prob_5' => $request->input('prob_5'),
+            'prob_6' => $request->input('prob_6'),
+            'prob_7' => $request->input('prob_7'),
+            'prob_8' => $request->input('prob_8'),
+             'prob_8' => $request->input('prob_9'),
             'created_on' => Carbon::now(),
             'created_by' => Auth::user()->getNameOrUsername()
           ];
@@ -559,6 +617,8 @@ public function deleteSubmission()
 
            $reviewee = Employee::where('staff_id',$request->input('staff_id_raw'))->first();
            $reviewname = ReviewCycle::where('review_token',$request->input('reviewid'))->first();
+
+
            if(Input::get("supervisor")){$supervisor =  implode('|', Input::get("supervisor"));} else {$supervisor = 'echo.jasonkerr7@gmail.com';}
 
 
@@ -571,7 +631,7 @@ public function deleteSubmission()
             }
 
            $cycle = new ReviewDocuments;
-           //dd($request->all());
+           //dd($request->input('reviewid'));
            $cycle->review_type      = $reviewname->title;
            $cycle->content          = $request->input('reviewid');
            $cycle->staff_id         = Input::get("staff_id");
@@ -607,6 +667,8 @@ public function deleteSubmission()
 
 
     }
+
+
 
     public function forwardToHR($id)
     {

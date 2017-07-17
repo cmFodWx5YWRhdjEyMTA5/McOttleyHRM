@@ -186,12 +186,7 @@
 
 
 
-
-
-
-
-
- <div class="modal fade" id="new-leave-request" style="height:900px">
+     <div class="modal fade" id="new-leave-request" size="height:900px">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -204,15 +199,18 @@
                     <section class="scrollable">
                       <div class="tab-content">
                         <div class="tab-pane active" id="individual">
-                           <form  class="bootstrap-modal-form"  data-validate="parsley" method="post" action="/save-leave-request" class="panel-body wrapper-lg" enctype="multipart/form-data">
-                           @include('leave/new')
+                           <form  class="bootstrap-modal-form" data-validate="parsley" method="post" action="/save-leave-request" class="panel-body wrapper-lg" enctype="multipart/form-data">
+                            @include('leave/new')
                         <input type="hidden" name="_token" value="{{ Session::token() }}">
                       </form>
-                        </div>                  
+                        </div>
+                  
+                  
                         </div>
                         </section>
-                </section>
-         </div>        
+                        </section>
+                      </div>
+                    
         </div>
         
       </div><!-- /.modal-content -->

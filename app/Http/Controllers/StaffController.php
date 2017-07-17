@@ -254,7 +254,7 @@ class StaffController extends Controller
         $activestaff = Employee::where('status','Active')->count();
         $pendingstaff = Employee::where('status','Pending')->count();
         $inactivestaff = Employee::where('status','Deactive')->count();
-        $resignedretiredstaff = Employee::where('status','like','Re%')->count();
+        $resignedretiredstaff = Employee::where('status','like','Re%')->orwhere('status','')->count();
 
         $employeestatus =       EmploymentStatus::get();
         $locations =            Location::get();
